@@ -231,7 +231,7 @@ const Login = props => {
 
                     <Box sx={{mt: 3, display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
                       <Divider sx={{...style.divider}}/>
-                      <Typography component='span' sx={{...style.span}}>on</Typography>
+                      <Typography component='span' sx={{...style.span}}>or</Typography>
                       <Divider sx={{...style.divider}}/>
                     </Box>
 
@@ -243,7 +243,7 @@ const Login = props => {
                <Typography component='p'
                 >
                   Don't have account?  
-                  <Link to='/home'>Sign Up</Link> 
+                  <Link to='/signup'>Sign Up</Link> 
                 </Typography>
                 <Typography component='p'
                 >
