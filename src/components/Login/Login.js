@@ -16,7 +16,9 @@ import IconButton from '@mui/material/IconButton';
 import { Button, Divider } from '@mui/material';
 import GoogleProvider from './GoogleProvider';
 import FacebookProvider from './FacebookProvider';
-import { BrowserRouter as Router, Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { auth, logInWithEmailAndPassword } from '../../firebase'
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 const style = {
   modal: {
@@ -76,6 +78,20 @@ const Login = props => {
   });
 
   const [email, setEmail] = React.useState('');
+  const [user, loading, error] = useAuthState(auth); // listener(observer) for auth state
+  const navigate = useNavigate();
+
+  React.useEffect( () => {
+    if (loading) {
+      // maybe trigger a loading screen
+      return;
+    }
+    if(error){
+      // navigate('/')
+      // return;
+    } 
+    if (user) navigate("/home");
+  },[user, loading, error])
   
   const handleEmail = () => {
     if(email.trim().length === 0 ){
@@ -119,6 +135,7 @@ const Login = props => {
       handleEmail()
     else if(!values.password)
       handlePwd()
+    else logInWithEmailAndPassword(email, values.password);
   }
 
   const [formValid, setFormValid] =  React.useState({
@@ -152,7 +169,6 @@ const Login = props => {
         aria-describedby="modal-modal-description"
       >
             <Box sx={{...style.modal}}>
-              <Router>
                 <Box sx={{textAlign: 'center'}}>
                     <Typography variant="h5" component="h2" sx={{color: '#2c3546', fontWeight: '600', lineHeight: '3.4rem'}}>
                         Welcome To Ecommerce
@@ -227,7 +243,7 @@ const Login = props => {
                <Typography component='p'
                 >
                   Don't have account?  
-                  <Link to='/signup'>Sign Up</Link> 
+                  <Link to='/home'>Sign Up</Link> 
                 </Typography>
                 <Typography component='p'
                 >
@@ -236,7 +252,6 @@ const Login = props => {
                 </Typography>
                </Box>
 
-              </Router>
             </Box>
       </Modal>
   )

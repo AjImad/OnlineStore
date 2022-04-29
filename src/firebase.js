@@ -5,8 +5,9 @@ import {
   signInWithPopup,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
-​​  sendPasswordResetEmail,
-​​  signOut,
+  sendPasswordResetEmail,
+  signOut,
+  FacebookAuthProvider
 } from "firebase/auth";
 import {
   getFirestore,
@@ -36,6 +37,7 @@ const googleProvider = new GoogleAuthProvider();
 const signInWithGoogle = async () => {
   try{
     const res = await signInWithPopup(auth, googleProvider);
+    console.log(res)
     const user = res.user;
     const q = query(collection(db,"users"), where("uid", "==", user.uid));
     const docs = await getDocs(q);
@@ -53,12 +55,33 @@ const signInWithGoogle = async () => {
   }
 };
 
+const facebookProvider = new FacebookAuthProvider();
+const signInWithFacebook = async () => {
+  try {
+    const res = await signInWithPopup(auth, facebookProvider);
+    const user = res.user;
+    console.log(res)
+    const q = query( collection(db, "users"), where("uid", "==", user.uid));
+    const docs = await getDocs(q);
+    if(docs.docs.length === 0){
+      await addDoc(collection(db, "users"), {
+        uid: user.uid,
+        name: user.displayName,
+        authProvider: 'facebook',
+      });
+    }
+  } catch (err) {
+    console.error(err);
+    alert(err.message)
+  }
+}
+
 // function for signin using an email and password
 const logInWithEmailAndPassword = async (email, password) => {
   try {
     await signInWithEmailAndPassword(auth, email, password);
   } catch (err) {
-    console.err(err);
+    console.error(err);
     alert(err.message);
   }
 };
@@ -75,7 +98,7 @@ const registerWithEmailAndPassword = async (name, email, password) => {
       email,
     });
   } catch (err) {
-    console.err(err);
+    console.error(err);
     alert(err.message);
   }
 }
@@ -99,6 +122,7 @@ const logout = () => {
 export {
   auth,
   signInWithGoogle,
+  signInWithFacebook,
   logInWithEmailAndPassword,
   registerWithEmailAndPassword,
   sendPasswordReset,

@@ -1,6 +1,9 @@
 import React from 'react';
 import { Button } from '@mui/material';
 import GoogleIcon from '@mui/icons-material/Google';
+import { auth, signInWithGoogle } from '../../firebase';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { useNavigate } from 'react-router-dom';
 
 const style = {
     button: {
@@ -18,12 +21,26 @@ const style = {
 }
 
 const GoogleProvider = props => {
+
+    const [user, loading, error] = useAuthState(auth);
+    const navigate = useNavigate();
+
+    React.useEffect( () => {
+        if(loading){
+            return;
+        }
+        if(user){
+            navigate('/home')
+        }
+    },[user, loading])    
+
     return (
         <Button 
             variant='contained' 
             size='small'
             sx={{...style.button}}
             startIcon={ <GoogleIcon />}
+            onClick={signInWithGoogle}
         >
                 Continue with Google
         </Button>
