@@ -6,6 +6,7 @@ import Login from './components/Login/Login';
 import Header from "./components/Header/Header";
 import Signup from './components/Register/Signup';
 import './App.css';
+import Resetpwd from './components/Resetpwd/Resetpwd';
 
 function App() {
 
@@ -18,7 +19,7 @@ function App() {
   return (
     <div className="App">
         {
-          location.pathname === '/signup' ?
+          location.pathname === '/signup' || location.pathname === '/resetpwd' ?
           <></>
           :
           <Header openModal={handleOpen}/>
@@ -26,7 +27,8 @@ function App() {
           <Routes>
               <Route exact path="/home" element={<Home />} />
               <Route exact path='/' element={open && <Login closeModal={handleClose} open={open}/>} />
-              <Route exact path='/signup' element={<Signup />} />    
+              <Route exact path='/signup' element={<Signup />} /> 
+              <Route exact path='/resetpwd' element={<Resetpwd />} />   
           </Routes>
     </div>
   );

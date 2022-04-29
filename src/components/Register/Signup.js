@@ -260,13 +260,13 @@ function Signup() {
                     <Box sx={{...style.footerModal}}>
                     <Typography component='p'
                         >
-                        Don't have account?  
-                        <Link to='/signup'>Sign Up</Link> 
+                        Have an account?  
+                        <Link to='/'>Log In</Link> 
                         </Typography>
                         <Typography component='p'
                         >
                         Forgot your password?  
-                        <Link to='/signup'>Reset It</Link> 
+                        <Link to='/resetpwd'>Reset It</Link> 
                         </Typography>
                     </Box>
                 </Item>
