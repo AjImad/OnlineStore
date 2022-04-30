@@ -3,9 +3,10 @@ import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
-import { Button, TextField, Typography } from '@mui/material';
+import { Button, Divider, TextField, Typography } from '@mui/material';
 import isEmail from 'validator/lib/isEmail';
 import { sendPasswordReset } from '../../firebase';
+import { Link } from 'react-router-dom';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -28,6 +29,24 @@ const style = {
           backgroundColor: '#d23f57',
         }
     },
+    divider: {
+        width: '40%'
+    }, 
+    span: {
+        padding: '0px 15px'
+    },
+    footerModal: {
+        mb: 4,
+        textAlign: 'center',
+        '& .MuiTypography-root':{
+          fontSize: '15px',
+          '& a': {
+            color: '#2f3748',
+            fontWeight: 500,
+            textDecoration: 'none',
+          }
+        }
+    }
 }
 
 function Resetpwd() {
@@ -77,10 +96,10 @@ function Resetpwd() {
             justifyContent="center"
             style={{ minHeight: '100vh' }}
         >
-            <Grid item md={4} sm={6} xs={12} >            
+            <Grid item md={4} sm={5} xs={10} >            
                 <Item>
-                    <img src='/images/forgetPwd.png' alt='' />
-                    <Typography component="p" sx={{color: '#656b79', fontSize: '.8rem', letterSpacing: '1.2px'}}>
+                    <img src='/images/forgetPwd.png' alt='' width='40%'/>
+                    <Typography component="p" sx={{color: '#656b79', fontSize: '.8rem', letterSpacing: '1.2px', mt: 1}}>
                             Enter your email address, and we'll send you a link to recover your account.
                     </Typography>
                     <TextField
@@ -91,7 +110,7 @@ function Resetpwd() {
                         placeholder="example@mail.com"
                         color="error"
                         size='small'
-                        sx={{width: '100%'}}
+                        sx={{width: '100%', mt: 2}}
                         type="email"
                     />
                     <Button 
@@ -102,7 +121,40 @@ function Resetpwd() {
                     >
                       Send Login Link
                     </Button>
+
+                    <Box sx={{mt: 3, mb: 2, display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                      <Divider sx={{...style.divider}}/>
+                      <Typography component='span' sx={{...style.span}}>or</Typography>
+                      <Divider sx={{...style.divider}}/>
+                    </Box>
+
+                    <Box sx={{...style.footerModal}}>
+                        <Typography component='p'>
+                        <Link to='/signup'>Create an Account</Link> 
+                        </Typography>
+                       
+                    </Box>
+
                 </Item>
+                <Box >
+                    <Typography component='p'
+                        sx={{
+                            background: '#0f3460',
+                            textAlign: 'center',
+                            border: '2px solid transparent',
+                            borderBottomLeftRadius: '4px',
+                            borderBottomRightRadius: '4px',
+                            p: 1,
+                            fontSize: '15px',
+                            '& a': {
+                                color: 'white',
+                                textDecoration: 'none'
+                            },
+                        }}
+                        >
+                            <Link to='/login' >Login Screen</Link> 
+                    </Typography>
+                </Box>
             </Grid>
         </Grid>
   </Box>

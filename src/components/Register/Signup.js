@@ -14,12 +14,11 @@ import GoogleProvider from '../Login/GoogleProvider';
 import FacebookProvider from '../Login/FacebookProvider';
 import TextField from '@mui/material/TextField';
 import IconButton from '@mui/material/IconButton';
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputAdornment from '@mui/material/InputAdornment';
 import FormControl from '@mui/material/FormControl';
-import { auth, registerWithEmailAndPassword } from '../../firebase'
-import { useAuthState } from 'react-firebase-hooks/auth';
+import { registerWithEmailAndPassword } from '../../firebase'
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -261,7 +260,7 @@ function Signup() {
                     <Typography component='p'
                         >
                         Have an account?  
-                        <Link to='/'>Log In</Link> 
+                        <Link to='/login'>Log In</Link> 
                         </Typography>
                         <Typography component='p'
                         >

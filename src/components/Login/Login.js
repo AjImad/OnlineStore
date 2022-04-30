@@ -46,7 +46,7 @@ const style = {
     }
   },
   divider: {
-    width: '20%'
+    width: '40%'
   }, 
   span: {
     padding: '0px 15px'
