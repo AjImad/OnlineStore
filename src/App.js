@@ -7,6 +7,7 @@ import Header from "./components/Header/Header";
 import Signup from './components/Register/Signup';
 import './App.css';
 import Resetpwd from './components/Resetpwd/Resetpwd';
+import BottomNavbar from './components/Header/BottomNavbar';
 
 function App() {
 
@@ -22,7 +23,10 @@ function App() {
           location.pathname === '/signup' || location.pathname === '/resetpwd' ?
           <></>
           :
+          <>
           <Header openModal={handleOpen}/>
+          <BottomNavbar />
+          </>
         }
           <Routes>
               <Route exact path="/home" element={<Home />} />
