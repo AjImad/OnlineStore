@@ -1,11 +1,11 @@
-import Card from "../UI/Card";
+import React, { useRef, useState } from "react";
+import Slider from "./SwiperSlider/Slider";
 
-const Home = () => {
-    return(
-        <Card> 
-            <h2>WELCOME TO THE HOME PAGE !</h2>
-        </Card>
-    )
+
+export default function App() {
+  return (
+    <>
+      <Slider />
+    </>
+  );
 }
-
-export default Home;

@@ -20,7 +20,7 @@ function App() {
   return (
     <div className="App">
         {
-          location.pathname === '/signup' || location.pathname === '/resetpwd' ?
+          location.pathname === '/signup' || location.pathname === '/resetpwd'  ?
           <></>
           :
           <>

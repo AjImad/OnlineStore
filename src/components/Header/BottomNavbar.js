@@ -24,7 +24,7 @@ const Search = styled('div')(({ theme }) => ({
         width: '50%'
     },
     [theme.breakpoints.down('sm')]: {
-      marginLeft: theme.spacing(1),
+      marginLeft: theme.spacing(2),
       width: 'auto',
     },
   }));
@@ -88,7 +88,7 @@ function BottomNavbar() {
         </AppBar>
    
 
-        <Box sx={{ width: '100%', display: {md: 'none', sm: 'inline-block'}, position: 'fixed', left: 0, bottom: 0 }}>
+        <Box sx={{ width: '100%', display: {md: 'none', sm: 'inline-block'}, position: 'absolute', left: 0, bottom: 0, zIndex: 1 }}>
             <BottomNavigation
                 showLabels
                 value={value}
