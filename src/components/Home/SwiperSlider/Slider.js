@@ -65,7 +65,7 @@ function Slider() {
                     <Typography component='div' variant='h3' sx={{color: '#2b3445', fontWeight: 800, fontSize: {sm: '40px', xs: '35px'} }}>
                         50% Off For Your First Shopping
                     </Typography>
-                    <Typography wrap component='p' variant='div' sx={{color: '#536e8d',pt: 2, pb: 2, fontSize: {md: '16px', sm: '14px'} }}>
+                    <Typography component='p' variant='div' sx={{color: '#536e8d',pt: 2, pb: 2, fontSize: {md: '16px', sm: '14px'} }}>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quis lobortis consequat eu, quam etiam at quis ut convalliss.
                     </Typography>
                     <Button sx={{background: '#d23f57', '&:hover':{background: '#d23f57'}, color: '#fff', textTransform: 'none', pr:2, pl: 2}}>

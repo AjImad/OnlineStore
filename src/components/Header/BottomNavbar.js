@@ -88,7 +88,15 @@ function BottomNavbar() {
         </AppBar>
    
 
-        <Box sx={{ width: '100%', display: {md: 'none', sm: 'inline-block'}, position: 'absolute', left: 0, bottom: 0, zIndex: 1 }}>
+        <Box 
+          sx={{
+             width: '100%',
+            display: {md: 'none', sm: 'inline-block'},
+            position: 'fixed', left: 0, bottom: 0,
+            zIndex: 1 ,
+            boxShadow: '0px -1px 5px rgba(150, 150, 150, 0.75)'
+            }}
+        >
             <BottomNavigation
                 showLabels
                 value={value}

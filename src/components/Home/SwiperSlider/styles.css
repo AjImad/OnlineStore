@@ -2,9 +2,10 @@
 
 .swiper {
     width: 100%;
-    height: calc(100% - 62px);
-    position: absolute;
-    top: 55px;
+    height: 90vh;
+    /* height: calc(100% - 62px); */
+    /* position: absolute;
+    top: 55px; */
     z-index: -1;
 }
 

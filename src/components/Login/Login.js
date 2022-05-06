@@ -99,7 +99,6 @@ const Login = props => {
             ...formValid, isEmailValid: true,
             EmailErrorText: 'Email required'
         })
-        console.log('email requird')
     }
     else if(!isEmail(email)){
         setFormValid({
