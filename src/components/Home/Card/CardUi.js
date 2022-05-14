@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
@@ -8,14 +7,13 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import StarIcon from '@mui/icons-material/Star';
-import { Box } from '@mui/material';
+
 
 
 export default function RecipeReviewCard(props) {
-  const [expanded, setExpanded] = React.useState(false);
 
   return (
-    <Card sx={{ width: 290, height: 415 }}>
+    <Card sx={{ width: 290, height: 415,'&:hover':{ boxShadow: 'rgba(149, 157, 165, 0.2) 0px 8px 24px'} }}>
       <CardHeader
         title={
             <Typography component='span' variant='div'
@@ -39,27 +37,30 @@ export default function RecipeReviewCard(props) {
         height="250"
         image={props.cardImg}
         alt="Paella dish"
+        sx={{cursor: 'pointer'}}
       />
       <CardContent>
         <Typography variant="span" sx={{color: '#373f50', fontWeight: 600}}>
-            Kossil Watch Brown
+            {props.productName}
         </Typography>
        <Typography>
-       <IconButton sx={{p:0, mt: 1, mb: 1,color: '#faaf00'}}>
-            <StarIcon fontSize='small' />
-            <StarIcon fontSize='small' />
-        </IconButton>
-       <IconButton sx={{p:0, mt: 1, mb: 1, color: '#c2c2c2'}}>
-            <StarOutlineIcon fontSize='small'/>
-            <StarOutlineIcon fontSize='small' />
-            <StarOutlineIcon fontSize='small'/>
-        </IconButton>
+          {
+            [...Array(props.starN)].map( (item, index) => (
+                <StarIcon key={index} fontSize='small' sx={{p:0, mt: 1,color: '#faaf00'}} />
+                ))
+          }
+          {
+            [...Array(props.starOff)].map( (item, index) => (
+                <StarIcon key={index} fontSize='small' sx={{p:0, mt: 1, color: '#c2c2c2'}} />
+            ))
+          }
+     
        </Typography>
        <Typography variant='div' sx={{color: '#d23f57', mr: 1, fontWeight: 600}}>
-            $157.99
+            ${( props.price - (props.price * props.off)/100 ).toFixed(2)}
        </Typography>
        <Typography variant='div' sx={{color: '#7d879c', textDecoration: 'line-through', fontWeight: 600}}>
-            157.99
+            {props.price}
        </Typography>
       </CardContent>
     </Card>
