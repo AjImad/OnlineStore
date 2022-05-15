@@ -18,7 +18,10 @@ import { Link } from "react-router-dom";
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputAdornment from '@mui/material/InputAdornment';
 import FormControl from '@mui/material/FormControl';
-import { registerWithEmailAndPassword } from '../../firebase'
+import db, { auth } from '../../firebase'
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { addDoc, collection } from 'firebase/firestore';
+import { LoadingButton } from '@mui/lab';
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -67,6 +70,7 @@ function Signup() {
     
     const [name, setName] = React.useState('');
     const [email, setEmail] = React.useState('');
+    const [isLoading, setLoading] = React.useState(false);
 
     const [values, setValues] = React.useState({
         amount: '',
@@ -133,7 +137,25 @@ function Signup() {
           handleEmail()
         else if (!values.password)
           handlePwd()
-        else registerWithEmailAndPassword(name, email, values.password);
+        else {
+            const createAcount = async (name, email, password) => {
+                try {
+                    setLoading(true);
+                    const res = await createUserWithEmailAndPassword(auth, email, password);
+                    const user = res.user;
+                    await addDoc(collection(db, "users"), {
+                        uid: user.uid,
+                        name,
+                        authProvider: "local",
+                        email,
+                    });
+                } catch (error) {
+                    setLoading(false);
+                    alert(error.message);
+                }
+            }
+            createAcount(name, email, values.password);
+        }
       }
     
       const [formValid, setFormValid] =  React.useState({
@@ -236,7 +258,7 @@ function Signup() {
                         {formValid.isPwdValid && <FormHelperText sx={{color: '#dd5c5c'}}>{formValid.PasswordErrorText}</FormHelperText>}
                         </FormControl>
     
-                        <Button 
+                        {!isLoading && <Button 
                         variant='contained' 
                         size='small'
                         sx={{...style.button}}
@@ -244,6 +266,24 @@ function Signup() {
                         >
                         Create Account
                         </Button>
+                        }
+                        { isLoading && <LoadingButton loading variant="outlined" size="large"
+                            sx={{
+                                mt: 2,
+                                background: '#e2374f', width: '100%',
+                                '& .MuiLoadingButton-loadingIndicator':{
+                                '& .MuiCircularProgress-root':{
+                                    color: '#fff',
+                                    fontSize: '28px',
+                                    fontWeight: 600,
+                                    p: 4
+                                }
+                                }
+                                }}
+                            >
+                            Loading
+                            </LoadingButton>
+                        }
     
                         <Box sx={{mt: 3, display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
                         <Divider sx={{...style.divider}}/>

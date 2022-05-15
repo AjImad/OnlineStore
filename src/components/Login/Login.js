@@ -17,8 +17,10 @@ import { Button, Divider } from '@mui/material';
 import GoogleProvider from './GoogleProvider';
 import FacebookProvider from './FacebookProvider';
 import { Link, useNavigate } from "react-router-dom";
-import { auth, logInWithEmailAndPassword } from '../../firebase'
+import { auth } from '../../firebase';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { LoadingButton } from '@mui/lab';
 
 const style = {
   modal: {
@@ -80,17 +82,19 @@ const Login = props => {
   const [email, setEmail] = React.useState('');
   const [user, loading, error] = useAuthState(auth); // listener(observer) for auth state
   const navigate = useNavigate();
+  const [isLoading, setLoading] = React.useState(false);
 
   React.useEffect( () => {
     if (loading) {
-      // maybe trigger a loading screen
+      // console.log("loading")
       return;
     }
     if(error){
-      // navigate('/')
-      // return;
+      // return
     } 
-    if (user) navigate("/home");
+    if (user) { 
+      navigate("/home");
+    }
   },[user, loading, error])
   
   const handleEmail = () => {
@@ -134,7 +138,18 @@ const Login = props => {
       handleEmail()
     else if(!values.password)
       handlePwd()
-    else logInWithEmailAndPassword(email, values.password);
+    else { 
+      const submit = async (email, password) => {
+        try{
+          setLoading(true);
+          await signInWithEmailAndPassword(auth, email, password);
+        } catch (error) {
+          setLoading(false);
+          alert(error.message);
+        }
+      }
+      submit(email, values.password);
+    }
   }
 
   const [formValid, setFormValid] =  React.useState({
@@ -219,7 +234,7 @@ const Login = props => {
                     {formValid.isPwdValid && <FormHelperText sx={{color: '#dd5c5c'}}>{formValid.PasswordErrorText}</FormHelperText>}
                     </FormControl>
 
-                    <Button 
+                  { !isLoading && <Button 
                       variant='contained' 
                       size='small'
                       sx={{...style.button}}
@@ -227,6 +242,24 @@ const Login = props => {
                     >
                       Login
                     </Button>
+                  }
+                  { isLoading && <LoadingButton loading variant="outlined" size="large"
+                      sx={{
+                        mt: 2,
+                        background: '#e2374f', width: '100%',
+                        '& .MuiLoadingButton-loadingIndicator':{
+                          '& .MuiCircularProgress-root':{
+                            color: '#fff',
+                            fontSize: '28px',
+                            fontWeight: 600,
+                            p: 4
+                          }
+                        }
+                        }}
+                      >
+                      Loading
+                    </LoadingButton>
+                  }
 
                     <Box sx={{mt: 3, display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
                       <Divider sx={{...style.divider}}/>
