@@ -3,12 +3,27 @@ import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
-import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import StarIcon from '@mui/icons-material/Star';
+import AddIcon from '@mui/icons-material/Add';
+import { Button, Box } from '@mui/material';
+import { styled } from '@mui/material';
 
 
+const style = {
+  '&.MuiButton-root':{
+    border: '1px solid #d23f57',
+    maxWidth: "28px",
+    maxHeight: "28px",
+    minWidth: "24px",
+    minHeight: "24px",
+  }, 
+  '&.MuiButton-outlined' :{
+    color: '#d23f57',
+    
+  }
+};
 
 export default function RecipeReviewCard(props) {
 
@@ -56,12 +71,23 @@ export default function RecipeReviewCard(props) {
           }
      
        </Typography>
-       <Typography variant='div' sx={{color: '#d23f57', mr: 1, fontWeight: 600}}>
-            ${( props.price - (props.price * props.off)/100 ).toFixed(2)}
-       </Typography>
-       <Typography variant='div' sx={{color: '#7d879c', textDecoration: 'line-through', fontWeight: 600}}>
-            {props.price}
-       </Typography>
+       <Box 
+          sx={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}
+       >
+         <Box>
+            <Typography variant='div' sx={{color: '#d23f57', mr: 1, fontWeight: 600}}>
+                  ${( props.price - (props.price * props.off)/100 ).toFixed(2)}
+            </Typography>
+            <Typography variant='div' sx={{color: '#7d879c', textDecoration: 'line-through', fontWeight: 600}}>
+                  {props.price}
+            </Typography>
+          </Box>
+          <Box>
+            <Button variant='outlined' size="small" sx={style}>
+              <AddIcon fontSize='small'/>
+            </Button>
+          </Box>
+       </Box>
       </CardContent>
     </Card>
   );
