@@ -25,6 +25,13 @@ const style = {
 
 export default function RecipeReviewCard(props) {
 
+  const [count, setCount] = React.useState(null);
+  React.useEffect( () => {
+    if(count === 0){
+      setCount(null);
+    }
+  },[count]);
+
   return (
     <Card sx={{ width: 290, height: 415,'&:hover':{ boxShadow: 'rgba(149, 157, 165, 0.2) 0px 8px 24px'} }}>
       <CardHeader
@@ -68,7 +75,8 @@ export default function RecipeReviewCard(props) {
               }
               {
                 [...Array(props.starOff)].map( (item, index) => (
-                    <StarIcon key={index} fontSize='small' sx={{p:0, mt: 1, color: '#c2c2c2'}} />
+                    // <StarIcon key={index} fontSize='small' sx={{p:0, mt: 1, color: '#c2c2c2'}} />
+                    <StarOutlineIcon key={index} fontSize='small' sx={{p:0, mt: 1, color: '#c2c2c2'}}/>
                 ))
               }
         
@@ -81,13 +89,23 @@ export default function RecipeReviewCard(props) {
             </Typography>
           </Box>
           <Box>
-            <Button variant='outlined' size="small" sx={style}>
-              <RemoveOutlinedIcon fontSize='small'/>
-            </Button>
-            <Box textAlign="center">
-              <Typography variant="div">1</Typography>
-            </Box>
-            <Button variant='outlined' size="small" sx={style}>
+           {
+             count
+             && 
+             <>
+                <Button variant='outlined' size="small" sx={style}
+                  onClick={ () => { setCount(c => c-1) }}
+                >
+                  <RemoveOutlinedIcon fontSize='small'/>
+                </Button>
+                <Box textAlign="center">
+                  <Typography variant="div">{count}</Typography>
+                </Box>
+             </>
+           }
+            <Button variant='outlined' size="small" sx={style}
+              onClick={ () => { setCount(c => c+1) }}
+            >
               <AddIcon fontSize='small'/>
             </Button>
           </Box>
