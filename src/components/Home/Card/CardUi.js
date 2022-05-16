@@ -8,8 +8,7 @@ import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import StarIcon from '@mui/icons-material/Star';
 import AddIcon from '@mui/icons-material/Add';
 import { Button, Box } from '@mui/material';
-import { styled } from '@mui/material';
-
+import RemoveOutlinedIcon from '@mui/icons-material/RemoveOutlined';
 
 const style = {
   '&.MuiButton-root':{
@@ -21,7 +20,6 @@ const style = {
   }, 
   '&.MuiButton-outlined' :{
     color: '#d23f57',
-    
   }
 };
 
@@ -55,26 +53,26 @@ export default function RecipeReviewCard(props) {
         sx={{cursor: 'pointer'}}
       />
       <CardContent>
-        <Typography variant="span" sx={{color: '#373f50', fontWeight: 600}}>
-            {props.productName}
-        </Typography>
-       <Typography>
-          {
-            [...Array(props.starN)].map( (item, index) => (
-                <StarIcon key={index} fontSize='small' sx={{p:0, mt: 1,color: '#faaf00'}} />
+         <Box 
+            sx={{display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end'}}
+         >
+          <Box>
+            <Typography variant="span" sx={{color: '#373f50', fontWeight: 600}}>
+                {props.productName}
+            </Typography>
+            <Typography>
+              {
+                [...Array(props.starN)].map( (item, index) => (
+                    <StarIcon key={index} fontSize='small' sx={{p:0, mt: 1,color: '#faaf00'}} />
+                    ))
+              }
+              {
+                [...Array(props.starOff)].map( (item, index) => (
+                    <StarIcon key={index} fontSize='small' sx={{p:0, mt: 1, color: '#c2c2c2'}} />
                 ))
-          }
-          {
-            [...Array(props.starOff)].map( (item, index) => (
-                <StarIcon key={index} fontSize='small' sx={{p:0, mt: 1, color: '#c2c2c2'}} />
-            ))
-          }
-     
-       </Typography>
-       <Box 
-          sx={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}
-       >
-         <Box>
+              }
+        
+            </Typography>
             <Typography variant='div' sx={{color: '#d23f57', mr: 1, fontWeight: 600}}>
                   ${( props.price - (props.price * props.off)/100 ).toFixed(2)}
             </Typography>
@@ -83,6 +81,12 @@ export default function RecipeReviewCard(props) {
             </Typography>
           </Box>
           <Box>
+            <Button variant='outlined' size="small" sx={style}>
+              <RemoveOutlinedIcon fontSize='small'/>
+            </Button>
+            <Box textAlign="center">
+              <Typography variant="div">1</Typography>
+            </Box>
             <Button variant='outlined' size="small" sx={style}>
               <AddIcon fontSize='small'/>
             </Button>
