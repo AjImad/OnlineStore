@@ -20,6 +20,7 @@ import Logout from '@mui/icons-material/Logout';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import Divider from '@mui/material/Divider';
 import Avatar from '@mui/material/Avatar';
+import { useSelector } from 'react-redux';
 
 
 
@@ -77,6 +78,8 @@ export default function Header(props) {
 
   const [user, loading, error] = useAuthState(auth);
   const navigate = useNavigate();
+  const userName = useSelector(state => state.user.name);
+  
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const openMenu = Boolean(anchorEl);
@@ -205,7 +208,7 @@ export default function Header(props) {
                     anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
                   >
                       <MenuItem>
-                        <Avatar /> Profile
+                        <Avatar /> {userName}
                       </MenuItem>
                       <Divider />
                       <MenuItem>

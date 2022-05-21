@@ -8,6 +8,8 @@ import Signup from './components/Register/Signup';
 import './App.css';
 import Resetpwd from './components/Resetpwd/Resetpwd';
 import BottomNavbar from './components/Header/BottomNavbar';
+import { Provider } from 'react-redux';
+import store from './app/store';
 
 function App() {
 
@@ -19,6 +21,7 @@ function App() {
 
   return (
     <div className="App">
+      <Provider store={store}>
         {
           location.pathname === '/signup' || location.pathname === '/resetpwd' ?
           <></>
@@ -34,6 +37,7 @@ function App() {
               <Route exact path='/signup' element={<Signup />} /> 
               <Route exact path='/resetpwd' element={<Resetpwd />} />   
           </Routes>
+        </Provider>
     </div>
   );
 }

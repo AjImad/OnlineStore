@@ -20,8 +20,10 @@ import InputAdornment from '@mui/material/InputAdornment';
 import FormControl from '@mui/material/FormControl';
 import db, { auth } from '../../firebase'
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { addDoc, collection } from 'firebase/firestore';
+import { addDoc, collection, getDocs } from 'firebase/firestore';
 import { LoadingButton } from '@mui/lab';
+import { setUserLoginDetails } from '../../features/user/userSlice';
+import { useDispatch } from 'react-redux';
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -71,6 +73,7 @@ function Signup() {
     const [name, setName] = React.useState('');
     const [email, setEmail] = React.useState('');
     const [isLoading, setLoading] = React.useState(false);
+    const dispatch = useDispatch();
 
     const [values, setValues] = React.useState({
         amount: '',
@@ -149,6 +152,15 @@ function Signup() {
                         authProvider: "local",
                         email,
                     });
+                    const userInfo = await getDocs(collection(db, "users"));
+                    userInfo.docs.map( doc => {
+                        if(doc.data().uid === user.uid){
+                            dispatch(setUserLoginDetails({
+                                name: doc.data().name,
+                                email: doc.data().email
+                            }))
+                        }
+                    })
                 } catch (error) {
                     setLoading(false);
                     alert(error.message);

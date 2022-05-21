@@ -4,6 +4,8 @@ import GoogleIcon from '@mui/icons-material/Google';
 import { auth, signInWithGoogle } from '../../firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setUserLoginDetails } from '../../features/user/userSlice';
 
 const style = {
     button: {
@@ -24,13 +26,15 @@ const GoogleProvider = props => {
 
     const [user, loading, error] = useAuthState(auth);
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     React.useEffect( () => {
-        if(loading){
-            return;
-        }
         if(user){
             navigate('/home')
+            dispatch(setUserLoginDetails({
+                name: user.displayName,
+                email: user.email
+            }))
         }
     },[user, loading])    
 

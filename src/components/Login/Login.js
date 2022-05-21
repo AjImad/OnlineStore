@@ -21,6 +21,10 @@ import { auth } from '../../firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { LoadingButton } from '@mui/lab';
+import { collection, doc, getDocs } from 'firebase/firestore';
+import db from '../../firebase';
+import { useDispatch } from 'react-redux';
+import { setUserLoginDetails } from '../../features/user/userSlice';
 
 const style = {
   modal: {
@@ -70,7 +74,7 @@ const style = {
 }
 
 const Login = props => {
-
+  const dispatch = useDispatch();
   const [values, setValues] = React.useState({
     amount: '',
     password: '',
@@ -85,17 +89,22 @@ const Login = props => {
   const [isLoading, setLoading] = React.useState(false);
 
   React.useEffect( () => {
-    if (loading) {
-      // console.log("loading")
-      return;
-    }
-    if(error){
-      // return
-    } 
     if (user) { 
       navigate("/home");
+      const getUserInfo = async () => {
+        console.log('user id: ',user.uid)
+        const userInfo = await getDocs(collection(db, "users"));
+        userInfo.docs.map( doc => {
+          if(doc.data().uid === user.uid)
+            dispatch(setUserLoginDetails({
+              name: doc.data().name,
+              email: doc.data().email,
+            }))
+        })
+      }
+      getUserInfo();
     }
-  },[user, loading, error])
+  },[user])
   
   const handleEmail = () => {
     if(email.trim().length === 0 ){
