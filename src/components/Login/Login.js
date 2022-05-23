@@ -92,7 +92,7 @@ const Login = props => {
     if (user) { 
       navigate("/home");
       const getUserInfo = async () => {
-        console.log('user id: ',user.uid)
+        // console.log('user id: ',user.uid)
         const userInfo = await getDocs(collection(db, "users"));
         userInfo.docs.map( doc => {
           if(doc.data().uid === user.uid)

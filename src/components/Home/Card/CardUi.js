@@ -9,6 +9,7 @@ import StarIcon from '@mui/icons-material/Star';
 import AddIcon from '@mui/icons-material/Add';
 import { Button, Box } from '@mui/material';
 import RemoveOutlinedIcon from '@mui/icons-material/RemoveOutlined';
+import { Link } from 'react-router-dom';
 
 const style = {
   '&.MuiButton-root':{
@@ -52,13 +53,15 @@ export default function RecipeReviewCard(props) {
             </Typography>
         }
       />
-      <CardMedia
-        component="img"
-        height="250"
-        image={props.cardImg}
-        alt="Paella dish"
-        sx={{cursor: 'pointer'}}
-      />
+      <Link to={`/product/` + props.productId}>
+        <CardMedia
+          component="img"
+          height="250"
+          image={props.cardImg}
+          alt="Paella dish"
+          sx={{cursor: 'pointer'}}
+        />
+      </Link>
       <CardContent>
          <Box 
             sx={{display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end'}}
@@ -85,7 +88,7 @@ export default function RecipeReviewCard(props) {
                   ${( props.price - (props.price * props.off)/100 ).toFixed(2)}
             </Typography>
             <Typography variant='div' sx={{color: '#7d879c', textDecoration: 'line-through', fontWeight: 600}}>
-                  {props.price}
+                  {(props.price).toFixed(2)}
             </Typography>
           </Box>
           <Box>

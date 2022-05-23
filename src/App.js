@@ -10,6 +10,7 @@ import Resetpwd from './components/Resetpwd/Resetpwd';
 import BottomNavbar from './components/Header/BottomNavbar';
 import { Provider } from 'react-redux';
 import store from './app/store';
+import Product from './components/product/Product';
 
 function App() {
 
@@ -36,6 +37,7 @@ function App() {
               <Route exact path='/' element={open && <Login closeModal={handleClose} open={open}/>} />
               <Route exact path='/signup' element={<Signup />} /> 
               <Route exact path='/resetpwd' element={<Resetpwd />} />   
+              <Route exact path='/product/:id' element={<Product />} />
           </Routes>
         </Provider>
     </div>

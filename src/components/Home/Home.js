@@ -5,7 +5,9 @@ import CardUi from './Card/CardUi'
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import db from '../../firebase';
-import { collection, getDocs } from "firebase/firestore";
+import { collection, doc, getDocs } from "firebase/firestore";
+import { useDispatch, useSelector } from "react-redux";
+import { setProductData } from "../../features/product/productSlice";
 
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -21,17 +23,34 @@ const Item = styled(Paper)(({ theme }) => ({
 export default function Home() {
 
   const [productInfo, setProductInfo] = React.useState([])
+  // let productInfo = [];
+  const dispatch = useDispatch();
+  const userName = useSelector(state => state.user.name);
   
   useEffect( () => {
     // console.log(productInfo)
       const getProductData = async () => {
         const productData = await getDocs(collection(db, "ProductInfo"));
-        setProductInfo(productData.docs.map( doc => ({id: doc.id, ...doc.data()})))
-        // console.log(productData);
+        if(productData){
+          setProductInfo(productData.docs.map( doc => ({id: doc.id, ...doc.data()})))
+          // productData.docs.map( doc => { 
+          //   productInfo = [...productInfo, {id: doc.id, ...doc.data()}]
+          // })
+          
+        }
+        else
+          console.log("no such document")
       }
-
+      
       getProductData();
-    }, [])
+      
+      // console.log(productInfo)
+      // const timer = setTimeout(() => {
+      //   // console.log('productInfo: ', productInfo)
+      // }, 3000);
+
+      // return () => clearTimeout(timer);
+    }, [userName])
     
   return (
     <Box component="div" sx={{
@@ -54,7 +73,11 @@ export default function Home() {
         alignItems={{xs:"center", sm: "flex-start"}}
        >
         {
-          productInfo.map( (item, index) => (
+         productInfo && productInfo.map( (item, index) => {
+            dispatch(setProductData({
+              product: item,
+            }))
+              return (
               <Grid key={index} item xs={12} sm={3}>
                 <CardUi
                  productName={item.productName}
@@ -63,46 +86,13 @@ export default function Home() {
                  price={item.price}
                  starN={item.starNumber}
                  starOff={5 - item.starNumber}
+                 productId={item.id} 
                  />
               </Grid>
-          ))
+              )
+            })
         }
         </Grid>  
-     {/* <Grid container spacing={2} columns={{ sm: 6, md: 12 }} 
-      direction={{xs: "column", sm: "row"}}
-      justifyContent={{xs:"center", sm: "flex-start"}}
-      alignItems={{xs:"center", sm: "flex-start"}}
-     >
-        <Grid item sm={3} xs={12}>
-          <CardUi
-           cardImg="https://bazar-react.vercel.app/_next/image?url=%2Fassets%2Fimages%2Fproducts%2Fflash-2.png&w=1920&q=75"
-           off={8}
-           />
-        </Grid>
-        <Grid item sm={3} xs={12}>
-          <CardUi
-           cardImg="https://bazar-react.vercel.app/_next/image?url=%2Fassets%2Fimages%2Fproducts%2FFashion%2FAccessories%2F15.BarihoWatchBlack.png&w=1920&q=75"
-           off={6}
-           />
-        </Grid>
-        <Grid item sm={3} xs={12}>
-          <CardUi
-           cardImg="https://bazar-react.vercel.app/_next/image?url=%2Fassets%2Fimages%2Fproducts%2FFashion%2FAccessories%2F14.MVMTMWatchBlack.png&w=1920&q=75"
-           off={9}
-           />
-        </Grid>
-        <Grid item sm={3} xs={12}>
-          <CardUi
-           cardImg="https://bazar-react.vercel.app/_next/image?url=%2Fassets%2Fimages%2Fproducts%2FFashion%2FAccessories%2F14.MVMTMWatchBlack.png&w=1920&q=75"
-           off={9}
-           />
-        </Grid>  <Grid item sm={3} xs={12}>
-          <CardUi
-           cardImg="https://bazar-react.vercel.app/_next/image?url=%2Fassets%2Fimages%2Fproducts%2FFashion%2FAccessories%2F14.MVMTMWatchBlack.png&w=1920&q=75"
-           off={9}
-           />
-        </Grid>
-      </Grid> */}
     </Box>
       <br></br>
       <br></br>
