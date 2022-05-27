@@ -50,12 +50,31 @@ export default function Product() {
     }}
     >
       <Grid container spacing={{ xs: 2, md: 3 }} justifyContent="center" columns={{ xs: 10, sm: 5, md: 12 }}>
-          <Grid item xs={10} sm={5}>
-              <Typography variant="p" >
-                <img src={product.productImg} alt='' width="300px" height="300px"/>
-              </Typography>  
+          <Grid item xs={10} sm={5} >
+                <Box display="flex" justifyContent='center' alignItems="center">
+                  {/* <Typography variant="p" > */}
+                    <img src={product.productImg} alt='' width="300px" height="300px"/>
+                  {/* </Typography> */}
+                </Box>
+                <Grid container spacing={2} direction='row' justifyContent='center' alignItems='center'>
+                  <Grid item xs={2} sx={{cursor: 'pointer'}}>
+                    <Typography variant='div' sx={{border: '1px solid #dbe2e8', borderRadius: '8px', pt: 1, pb: 1}} display='flex' justifyContent='center' alignItems='center'>
+                      <img src={product.productImg} alt='' width="50px" height="50px"/>
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={2} sx={{cursor: 'pointer'}}>
+                    <Typography variant='div' sx={{border: '1px solid #dbe2e8', borderRadius: '8px', pt: 1, pb: 1}} display='flex' justifyContent='center' alignItems='center'>
+                      <img src={product.productImg} alt='' width="50px" height="50px"/>
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={2} sx={{cursor: 'pointer'}}>
+                    <Typography variant='div' sx={{border: '1px solid #dbe2e8', borderRadius: '8px', pt: 1, pb: 1}} display='flex' justifyContent='center' alignItems='center'>
+                      <img src={product.productImg} alt='' width="50px" height="50px"/>
+                    </Typography>
+                  </Grid>
+                </Grid>
           </Grid>
-          <Grid item xs={10} sm={5} md={5} sx={{color: '#2B3445', fontFamily: 'Helvetica Neue,sans-serif'}}>
+          <Grid item xs={10} sm={5} md={5} sx={{color: '#2B3445', fontFamily: 'Helvetica Neue,sans-serif', ml: {xs: 2}}}>
             <Typography variant="h4" sx={{
               fontWeight: 600,
               fontSize: '30px',
