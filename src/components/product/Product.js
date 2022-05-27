@@ -6,6 +6,8 @@ import { Box, Grid, Typography, Button } from '@mui/material';
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import StarIcon from '@mui/icons-material/Star';
 import { useSelector } from 'react-redux';
+import ImageGrid from './ImageGrid';
+import MainImage from './MainImage';
 
 const style = {
   button: {
@@ -28,51 +30,36 @@ export default function Product() {
   const { id } = useParams();
   const [product, setProduct] = useState([]);
   const products = useSelector(state => state.product.value)
+  const [selectedImage, setSelectedImgae] = useState(0)  
   
-  
-
   useEffect( () => {
-  products.forEach(element => {
+    products.forEach(element => {
       if(element.id === id){
         setProduct(element);
         return;
       }
-  });
+    });
   },[])
+
+  const images = [
+    product.productImg,
+    "https://bazar-react.vercel.app/_next/image?url=%2Fassets%2Fimages%2Fproducts%2Fflash-2.png&w=1920&q=75",
+    "https://bazar-react.vercel.app/_next/image?url=%2Fassets%2Fimages%2Fproducts%2FFashion%2FAccessories%2F12.Xiaomimiband2.png&w=1920&q=75"
+  ]
 
   return (
     <Box sx={{
       width: '100%', height: 'calc(100% - 65px)',
       position: 'absolute',
       top: '65px',
-      mt: 3,
+      mt: 5,
       mb: 5,
     }}
     >
       <Grid container spacing={{ xs: 2, md: 3 }} justifyContent="center" columns={{ xs: 10, sm: 5, md: 12 }}>
           <Grid item xs={10} sm={5} >
-                <Box display="flex" justifyContent='center' alignItems="center">
-                  {/* <Typography variant="p" > */}
-                    <img src={product.productImg} alt='' width="300px" height="300px"/>
-                  {/* </Typography> */}
-                </Box>
-                <Grid container spacing={2} direction='row' justifyContent='center' alignItems='center'>
-                  <Grid item xs={2} sx={{cursor: 'pointer'}}>
-                    <Typography variant='div' sx={{border: '1px solid #dbe2e8', borderRadius: '8px', pt: 1, pb: 1}} display='flex' justifyContent='center' alignItems='center'>
-                      <img src={product.productImg} alt='' width="50px" height="50px"/>
-                    </Typography>
-                  </Grid>
-                  <Grid item xs={2} sx={{cursor: 'pointer'}}>
-                    <Typography variant='div' sx={{border: '1px solid #dbe2e8', borderRadius: '8px', pt: 1, pb: 1}} display='flex' justifyContent='center' alignItems='center'>
-                      <img src={product.productImg} alt='' width="50px" height="50px"/>
-                    </Typography>
-                  </Grid>
-                  <Grid item xs={2} sx={{cursor: 'pointer'}}>
-                    <Typography variant='div' sx={{border: '1px solid #dbe2e8', borderRadius: '8px', pt: 1, pb: 1}} display='flex' justifyContent='center' alignItems='center'>
-                      <img src={product.productImg} alt='' width="50px" height="50px"/>
-                    </Typography>
-                  </Grid>
-                </Grid>
+            <MainImage image={images[selectedImage]}/>
+            <ImageGrid images={images} onSelect={setSelectedImgae} selectedImage={selectedImage} />
           </Grid>
           <Grid item xs={10} sm={5} md={5} sx={{color: '#2B3445', fontFamily: 'Helvetica Neue,sans-serif', ml: {xs: 2}}}>
             <Typography variant="h4" sx={{
