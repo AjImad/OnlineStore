@@ -10,6 +10,7 @@ import { AppBar, Badge, IconButton, styled, Toolbar, Typography, alpha } from '@
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import InputBase from '@mui/material/InputBase';
+import ShoppingCart from '../product/ShoppingCart';
 
 
 const Search = styled('div')(({ theme }) => ({
@@ -52,6 +53,7 @@ const Search = styled('div')(({ theme }) => ({
 
 function BottomNavbar() {
 
+  const [open, setOpen] = React.useState(true);
   const [value, setValue] = React.useState(0);
   const NavigationAction = styled(BottomNavigationAction)( () => ({
     '&.MuiBottomNavigationAction-root': {
@@ -108,10 +110,8 @@ function BottomNavbar() {
                 <NavigationAction label="Home" icon={<HomeOutlinedIcon />} />
                 <NavigationAction label="Category" icon={<CategoryOutlinedIcon />}/>
                 <NavigationAction label="Carrt" icon={
-                    <Badge badgeContent={4} color="error">
-                    <LocalMallOutlinedIcon />
-                    </Badge>
-                } />
+                    <ShoppingCart bottomCart={open} />
+                  } />
                 <NavigationAction label="Account" icon={<AccountCircleOutlinedIcon />} />
             </BottomNavigation>
         </Box>  

@@ -21,8 +21,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import Divider from '@mui/material/Divider';
 import Avatar from '@mui/material/Avatar';
 import { useSelector } from 'react-redux';
-
-
+import ShoppingCart from '../product/ShoppingCart';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -79,7 +78,7 @@ export default function Header(props) {
   const [user, loading, error] = useAuthState(auth);
   const navigate = useNavigate();
   const userName = useSelector(state => state.user.name);
-  
+  console.log(userName)
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const openMenu = Boolean(anchorEl);
@@ -148,11 +147,12 @@ export default function Header(props) {
                 >
                   <AccountCircleOutlinedIcon sx={{color: '#7b7c7e'}} />
                 </IconButton>
-                <IconButton size="large" sx={{backgroundColor: '#eee', ml: 2}}>
+                {/* <IconButton size="large" sx={{backgroundColor: '#eee', ml: 2}}>
                   <Badge badgeContent={4} color="error" spacing={4}>
                     <ShoppingBagOutlinedIcon sx={{color: '#7b7c7e'}} />
                   </Badge>
-                </IconButton>
+                </IconButton> */}
+                <ShoppingCart />
               </Box>
             :
               <Box sx={{ display: { xs: 'flex', md: 'flex' } }}>
@@ -169,6 +169,7 @@ export default function Header(props) {
                 </IconButton>
                 <IconButton size="large" sx={{backgroundColor: '#eee', ml: 2}}>
                   <Badge badgeContent={4} color="error" spacing={4}>
+                    {/* shopping cart */}
                     <ShoppingBagOutlinedIcon sx={{color: '#7b7c7e'}} />
                   </Badge>
                 </IconButton>
