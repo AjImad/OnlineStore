@@ -152,7 +152,6 @@ export default function Header(props) {
                     <ShoppingBagOutlinedIcon sx={{color: '#7b7c7e'}} />
                   </Badge>
                 </IconButton> */}
-                <ShoppingCart />
               </Box>
             :
               <Box sx={{ display: { xs: 'flex', md: 'flex' } }}>
@@ -167,12 +166,7 @@ export default function Header(props) {
                 >
                   <AccountCircleOutlinedIcon sx={{color: '#7b7c7e'}} />
                 </IconButton>
-                <IconButton size="large" sx={{backgroundColor: '#eee', ml: 2}}>
-                  <Badge badgeContent={4} color="error" spacing={4}>
-                    {/* shopping cart */}
-                    <ShoppingBagOutlinedIcon sx={{color: '#7b7c7e'}} />
-                  </Badge>
-                </IconButton>
+                <ShoppingCart />
                 <Menu
                   anchorEl={anchorEl}
                   id="account-menu"
