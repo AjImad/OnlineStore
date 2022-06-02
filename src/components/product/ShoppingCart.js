@@ -10,6 +10,7 @@ import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveOutlinedIcon from '@mui/icons-material/RemoveOutlined';
 import CloseIcon from '@mui/icons-material/Close';
+import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 
 const style = {
   '&.MuiButton-root':{
@@ -22,6 +23,13 @@ const style = {
   }, 
   '&.MuiButton-outlined' :{
     color: '#d23f57',
+    textTransform: 'none',
+    border: '1px solid #d33f56',
+    fontSize: '0.9rem',
+    // fontWeight: 600
+    '&:hover':{
+      border: '1px solid #d33f56',
+    }
   },
   '&.Mui-disabled':{
     color: '#bdbdbd',
@@ -56,21 +64,33 @@ export default function TemporaryDrawer({bottomCart}) {
     ) {
       return;
     }
-
-    setState({ ...state, [anchor]: open });
+    setState({[anchor]: open });
+    console.log('current value of state.right', state.right)
   };
 
   const list = (anchor) => (
+    <>
     <Box
-      sx={{ width: 380 }}
+      sx={{ width: {xs: '100vw', sm: 380} }}
       role="presentation"
-      onClick={toggleDrawer(anchor, true)}
+      // onClick={toggleDrawer(anchor, true)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
+      <Box sx={{maxHeight: '80vh', overflowY: 'auto'}}>
       <List>
-        <Typography variant="p" display="flex" alignItems="center" sx={{mt: 2, mb: 2, ml: 5}}>
+        <Typography variant="p" display="flex" alignItems="center" sx={{mt: 2, mb: 2, ml: {xs: 3, sm: 4} }}>
             <ShoppingBagOutlinedIcon sx={{color: 'rgb(15, 52, 96)'}}  />
             <Typography variant="span" sx={{color: 'rgb(15, 52, 96)', fontSize: '16px', fontWeight: 600, ml: 1}}>4 item</Typography>
+            <Box sx={{flexGrow: 1}} />
+            {/* <IconButton onClick={toggleDrawer(anchor, false)}> */}
+            <CancelOutlinedIcon 
+              sx={{display: {xs: 'block', sm: 'none'},
+               color: 'rgb(15, 52, 96)', mr: 2,
+               cursor: 'pointer'
+              }}
+              onClick={toggleDrawer("right", false)}
+             />
+            {/* </IconButton> */}
         </Typography>
       </List>
       <Divider />
@@ -224,7 +244,33 @@ export default function TemporaryDrawer({bottomCart}) {
         </Box>
 
       </List>
+      </Box>
+  
+      <Box sx={{p: 2,
+               position: 'absolute', bottom: 0,
+               display: 'flex',
+               flexDirection: 'column',
+               width: '90%' 
+              }}
+      >
+        <Button variant="contained" 
+                sx={{ mb: 2,
+                      textTransform: 'none',
+                      fontSize: '0.9rem',
+                      backgroundColor: '#d33f56',
+                      '&.MuiButton-contained':{
+                        '&:hover':{
+                          backgroundColor: '#d33f56'
+                        }
+                      }
+                   }}
+        >
+          Checkout Now ($1000.00)
+        </Button>
+        <Button variant="outlined" sx={style["&.MuiButton-outlined"]}>View Cart</Button>
+      </Box>
     </Box>
+    </>
   );
 
   return (
