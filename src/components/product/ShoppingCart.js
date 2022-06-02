@@ -22,6 +22,15 @@ const style = {
   }, 
   '&.MuiButton-outlined' :{
     color: '#d23f57',
+  },
+  '&.Mui-disabled':{
+    color: '#bdbdbd',
+    border: '1px solid #bdbdbd'
+  },
+  divider:{
+    '&.MuiDivider-root':{
+      backgroundColor: '#fefeff'
+    }
   }
 }
 
@@ -66,7 +75,9 @@ export default function TemporaryDrawer({bottomCart}) {
       </List>
       <Divider />
       <List>
-        <Box display="flex" alignItems="center" justifyContent="space-between" sx={{mt: 2}}>
+        <Box display="flex" alignItems="center" justifyContent="space-between"
+          sx={{borderBottom: '1px solid rgb(243, 245, 249)', py: 2}}
+        >
           <Box textAlign="left" sx={{ml: 2}}>
               <Button variant='outlined' size="small" sx={style}
                 onClick={ () => { count.current = count.current + 1 }}
@@ -88,9 +99,9 @@ export default function TemporaryDrawer({bottomCart}) {
                 <img src="./images/watch.png" alt="watch" width="56px" height="56px"/>
               </Typography>
               <Box sx={{display:"flex", flexDirection: "column", mx: 3}}>
-                <Typography variant="h5" sx={{color: '#2B3445', fontSize: '14px', fontWeight: 600}}>Watch</Typography>
-                <Typography variant="div">price x Qnt</Typography>
-                <Typography variant="div">price</Typography>
+                <Typography variant="h5" sx={{color: '#2B3445', fontSize: '14px', fontWeight: 600}}>Smart Watch Black</Typography>
+                <Typography variant="span" sx={{color: 'rgb(125, 135, 156)', fontSize: '12px', my: 0.5}}>$250.00 x 1</Typography>
+                <Typography variant="h5" sx={{color: 'rgb(210, 63, 87)', fontSize: '14px', fontWeight: 600}}>$250.00</Typography>
               </Box>
             </Box>
             <Box sx={{flexGrow: 1}} />
@@ -100,6 +111,118 @@ export default function TemporaryDrawer({bottomCart}) {
               </IconButton>
             </Box>
         </Box>
+        {/* <Divider sx={{my: 2, ...style.divider}}/> */}
+        <Box display="flex" alignItems="center" justifyContent="space-between"
+          sx={{borderBottom: '1px solid rgb(243, 245, 249)', py: 2}}
+        >
+          <Box textAlign="left" sx={{ml: 2}}>
+              <Button variant='outlined' size="small" sx={style}
+                onClick={ () => { count.current = count.current + 1 }}
+              >
+                <AddIcon fontSize='small'/>
+              </Button>
+              <Box textAlign="center" sx={{my: 1}}>
+                <Typography variant="div">{count.current}</Typography>
+              </Box>
+              <Button variant='outlined' size="small" sx={style}
+                    onClick={ () => { count.current = count.current - 1 }}
+                    disabled={count.current === 1 ? true : false}
+                  >
+                    <RemoveOutlinedIcon fontSize='small'/>
+              </Button>
+            </Box>
+            <Box sx={{ml: 3, display:"flex", flexDirection: "row"}}>
+              <Typography variant="div">
+                <img src="https://bazar-react.vercel.app/_next/image?url=%2Fassets%2Fimages%2Fproducts%2Fflash-2.png&w=1920&q=75" alt="watch" width="56px" height="56px"/>
+              </Typography>
+              <Box sx={{display:"flex", flexDirection: "column", mx: 3}}>
+                <Typography variant="h5" sx={{color: '#2B3445', fontSize: '14px', fontWeight: 600}}>Smart Watch Black</Typography>
+                <Typography variant="span" sx={{color: 'rgb(125, 135, 156)', fontSize: '12px', my: 0.5}}>$250.00 x 1</Typography>
+                <Typography variant="h5" sx={{color: 'rgb(210, 63, 87)', fontSize: '14px', fontWeight: 600}}>$250.00</Typography>
+              </Box>
+            </Box>
+            <Box sx={{flexGrow: 1}} />
+            <Box sx={{mr: 2}}>
+              <IconButton>
+              <CloseIcon sx={{color: '#757575'}} fontSize="small" />
+              </IconButton>
+            </Box>
+        </Box>
+
+        <Box display="flex" alignItems="center" justifyContent="space-between"
+          sx={{borderBottom: '1px solid rgb(243, 245, 249)', py: 2}}
+        >
+          <Box textAlign="left" sx={{ml: 2}}>
+              <Button variant='outlined' size="small" sx={style}
+                onClick={ () => { count.current = count.current + 1 }}
+              >
+                <AddIcon fontSize='small'/>
+              </Button>
+              <Box textAlign="center" sx={{my: 1}}>
+                <Typography variant="div">{count.current}</Typography>
+              </Box>
+              <Button variant='outlined' size="small" sx={style}
+                    onClick={ () => { count.current = count.current - 1 }}
+                    disabled={count.current === 1 ? true : false}
+                  >
+                    <RemoveOutlinedIcon fontSize='small'/>
+              </Button>
+            </Box>
+            <Box sx={{ml: 3, display:"flex", flexDirection: "row"}}>
+              <Typography variant="div">
+                <img src="https://bazar-react.vercel.app/_next/image?url=%2Fassets%2Fimages%2Fproducts%2FFashion%2FAccessories%2F14.MVMTMWatchBlack.png&w=1920&q=75" alt="watch" width="56px" height="56px"/>
+              </Typography>
+              <Box sx={{display:"flex", flexDirection: "column", mx: 3}}>
+                <Typography variant="h5" sx={{color: '#2B3445', fontSize: '14px', fontWeight: 600}}>Smart Watch Black</Typography>
+                <Typography variant="span" sx={{color: 'rgb(125, 135, 156)', fontSize: '12px', my: 0.5}}>$250.00 x 1</Typography>
+                <Typography variant="h5" sx={{color: 'rgb(210, 63, 87)', fontSize: '14px', fontWeight: 600}}>$250.00</Typography>
+              </Box>
+            </Box>
+            <Box sx={{flexGrow: 1}} />
+            <Box sx={{mr: 2}}>
+              <IconButton>
+              <CloseIcon sx={{color: '#757575'}} fontSize="small" />
+              </IconButton>
+            </Box>
+        </Box>
+
+        <Box display="flex" alignItems="center" justifyContent="space-between"
+          sx={{borderBottom: '1px solid rgb(243, 245, 249)', py: 2}}
+        >
+          <Box textAlign="left" sx={{ml: 2}}>
+              <Button variant='outlined' size="small" sx={style}
+                onClick={ () => { count.current = count.current + 1 }}
+              >
+                <AddIcon fontSize='small'/>
+              </Button>
+              <Box textAlign="center" sx={{my: 1}}>
+                <Typography variant="div">{count.current}</Typography>
+              </Box>
+              <Button variant='outlined' size="small" sx={style}
+                    onClick={ () => { count.current = count.current - 1 }}
+                    disabled={count.current === 1 ? true : false}
+                  >
+                    <RemoveOutlinedIcon fontSize='small'/>
+              </Button>
+            </Box>
+            <Box sx={{ml: 3, display:"flex", flexDirection: "row"}}>
+              <Typography variant="div">
+                <img src="https://bazar-react.vercel.app/_next/image?url=%2Fassets%2Fimages%2Fproducts%2FFashion%2FAccessories%2F12.Xiaomimiband2.png&w=1920&q=75" alt="watch" width="56px" height="56px"/>
+              </Typography>
+              <Box sx={{display:"flex", flexDirection: "column", mx: 3}}>
+                <Typography variant="h5" sx={{color: '#2B3445', fontSize: '14px', fontWeight: 600}}>Smart Watch Black</Typography>
+                <Typography variant="span" sx={{color: 'rgb(125, 135, 156)', fontSize: '12px', my: 0.5}}>$250.00 x 1</Typography>
+                <Typography variant="h5" sx={{color: 'rgb(210, 63, 87)', fontSize: '14px', fontWeight: 600}}>$250.00</Typography>
+              </Box>
+            </Box>
+            <Box sx={{flexGrow: 1}} />
+            <Box sx={{mr: 2}}>
+              <IconButton>
+              <CloseIcon sx={{color: '#757575'}} fontSize="small" />
+              </IconButton>
+            </Box>
+        </Box>
+
       </List>
     </Box>
   );
