@@ -10,6 +10,8 @@ import AddIcon from '@mui/icons-material/Add';
 import { Button, Box } from '@mui/material';
 import RemoveOutlinedIcon from '@mui/icons-material/RemoveOutlined';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../../../features/cart/cartSlice';
 
 const style = {
   '&.MuiButton-root':{
@@ -24,9 +26,14 @@ const style = {
   }
 };
 
-export default function RecipeReviewCard(props) {
+export default function RecipeReviewCard({productName,cardImg,off,price,starN,starOff,productId}) {
 
   const [count, setCount] = React.useState(null);
+  const dispatch = useDispatch();
+  const handleAddToCart = () => {
+    dispatch(addToCart({id: productId, productName: productName, price: price, productImg: cardImg}))
+  }
+
   React.useEffect( () => {
     if(count === 0){
       setCount(null);
@@ -49,15 +56,15 @@ export default function RecipeReviewCard(props) {
                     fontSize: '12px',
                 }}
             >
-                {props.off}% off
+                {off}% off
             </Typography>
         }
       />
-      <Link to={`/product/` + props.productId}>
+      <Link to={`/product/` + productId}>
         <CardMedia
           component="img"
           height="250"
-          image={props.cardImg}
+          image={cardImg}
           alt="Paella dish"
           sx={{cursor: 'pointer'}}
         />
@@ -68,16 +75,16 @@ export default function RecipeReviewCard(props) {
          >
           <Box>
             <Typography variant="span" sx={{color: '#373f50', fontWeight: 600}}>
-                {props.productName}
+                {productName}
             </Typography>
             <Typography>
               {
-                [...Array(props.starN)].map( (item, index) => (
+                [...Array(starN)].map( (item, index) => (
                     <StarIcon key={index} fontSize='small' sx={{p:0, mt: 1,color: '#faaf00'}} />
                     ))
               }
               {
-                [...Array(props.starOff)].map( (item, index) => (
+                [...Array(starOff)].map( (item, index) => (
                     // <StarIcon key={index} fontSize='small' sx={{p:0, mt: 1, color: '#c2c2c2'}} />
                     <StarOutlineIcon key={index} fontSize='small' sx={{p:0, mt: 1, color: '#c2c2c2'}}/>
                 ))
@@ -85,10 +92,10 @@ export default function RecipeReviewCard(props) {
         
             </Typography>
             <Typography variant='div' sx={{color: '#d23f57', mr: 1, fontWeight: 600}}>
-                  ${( props.price - (props.price * props.off)/100 ).toFixed(2)}
+                  ${( price - (price * off)/100 ).toFixed(2)}
             </Typography>
             <Typography variant='div' sx={{color: '#7d879c', textDecoration: 'line-through', fontWeight: 600}}>
-                  {(props.price).toFixed(2)}
+                  {(price).toFixed(2)}
             </Typography>
           </Box>
           <Box>
@@ -107,7 +114,7 @@ export default function RecipeReviewCard(props) {
              </>
            }
             <Button variant='outlined' size="small" sx={style}
-              onClick={ () => { setCount(c => c+1) }}
+              onClick={ () => { setCount(c => c+1); handleAddToCart() }}
             >
               <AddIcon fontSize='small'/>
             </Button>

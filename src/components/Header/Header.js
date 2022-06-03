@@ -78,7 +78,7 @@ export default function Header(props) {
   const [user, loading, error] = useAuthState(auth);
   const navigate = useNavigate();
   const userName = useSelector(state => state.user.name);
-  console.log(userName)
+  // console.log(userName)
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const openMenu = Boolean(anchorEl);

@@ -11,6 +11,7 @@ import AddIcon from '@mui/icons-material/Add';
 import RemoveOutlinedIcon from '@mui/icons-material/RemoveOutlined';
 import CloseIcon from '@mui/icons-material/Close';
 import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
+import { useSelector } from "react-redux";
 
 const style = {
   '&.MuiButton-root':{
@@ -44,14 +45,18 @@ const style = {
 
 export default function TemporaryDrawer({bottomCart}) {
 
-  // const [count, setCount] = React.useState(1);
-  const count = React.useRef(1);
-  React.useEffect( () => {
-    if(count.current === 0){
-      // setCount(null);
-      // count.current = 1;
-    }
-  },[count.current]);
+  const [count, setCount] = React.useState(1);
+  const productCart = useSelector(state => state.cart.cartItems);
+  const cartProductNumber = useSelector(state => state.cart.cartTotalQuantity)
+
+  // console.log(productCart)
+  // const count = React.useRef(1);
+  // React.useEffect( () => {
+  //   if(count.current === 0){
+  //     // setCount(null);
+  //     // count.current = 1;
+  //   }
+  // },[count.current]);
 
   const [state, setState] = React.useState({
     right: false
@@ -65,7 +70,7 @@ export default function TemporaryDrawer({bottomCart}) {
       return;
     }
     setState({[anchor]: open });
-    console.log('current value of state.right', state.right)
+    // console.log('current value of state.right', state.right)
   };
 
   const list = (anchor) => (
@@ -80,7 +85,7 @@ export default function TemporaryDrawer({bottomCart}) {
       <List>
         <Typography variant="p" display="flex" alignItems="center" sx={{mt: 2, mb: 2, ml: {xs: 3, sm: 4} }}>
             <ShoppingBagOutlinedIcon sx={{color: 'rgb(15, 52, 96)'}}  />
-            <Typography variant="span" sx={{color: 'rgb(15, 52, 96)', fontSize: '16px', fontWeight: 600, ml: 1}}>4 item</Typography>
+            <Typography variant="span" sx={{color: 'rgb(15, 52, 96)', fontSize: '16px', fontWeight: 600, ml: 1}}>{cartProductNumber} item</Typography>
             <Box sx={{flexGrow: 1}} />
             {/* <IconButton onClick={toggleDrawer(anchor, false)}> */}
             <CancelOutlinedIcon 
@@ -95,31 +100,34 @@ export default function TemporaryDrawer({bottomCart}) {
       </List>
       <Divider />
       <List>
-        <Box display="flex" alignItems="center" justifyContent="space-between"
+        {
+          productCart.length != 0 ?
+          productCart.map( (item, index) => (
+        <Box key={index} display="flex" alignItems="center" justifyContent="space-between"
           sx={{borderBottom: '1px solid rgb(243, 245, 249)', py: 2}}
         >
           <Box textAlign="left" sx={{ml: 2}}>
               <Button variant='outlined' size="small" sx={style}
-                onClick={ () => { count.current = count.current + 1 }}
+                onClick={ () => { setCount(c => c+1) }}
               >
                 <AddIcon fontSize='small'/>
               </Button>
               <Box textAlign="center" sx={{my: 1}}>
-                <Typography variant="div">{count.current}</Typography>
+                <Typography variant="div">{count}</Typography>
               </Box>
               <Button variant='outlined' size="small" sx={style}
-                    onClick={ () => { count.current = count.current - 1 }}
-                    disabled={count.current === 1 ? true : false}
+                    onClick={ () => { setCount(c => c-1) }}
+                    disabled={count === 1 ? true : false}
                   >
                     <RemoveOutlinedIcon fontSize='small'/>
               </Button>
             </Box>
             <Box sx={{ml: 3, display:"flex", flexDirection: "row"}}>
               <Typography variant="div">
-                <img src="./images/watch.png" alt="watch" width="56px" height="56px"/>
+                <img src={item.productImg} alt="watch" width="56px" height="56px"/>
               </Typography>
               <Box sx={{display:"flex", flexDirection: "column", mx: 3}}>
-                <Typography variant="h5" sx={{color: '#2B3445', fontSize: '14px', fontWeight: 600}}>Smart Watch Black</Typography>
+                <Typography variant="h5" sx={{color: '#2B3445', fontSize: '14px', fontWeight: 600}}>{item.productName}</Typography>
                 <Typography variant="span" sx={{color: 'rgb(125, 135, 156)', fontSize: '12px', my: 0.5}}>$250.00 x 1</Typography>
                 <Typography variant="h5" sx={{color: 'rgb(210, 63, 87)', fontSize: '14px', fontWeight: 600}}>$250.00</Typography>
               </Box>
@@ -131,118 +139,10 @@ export default function TemporaryDrawer({bottomCart}) {
               </IconButton>
             </Box>
         </Box>
-        {/* <Divider sx={{my: 2, ...style.divider}}/> */}
-        <Box display="flex" alignItems="center" justifyContent="space-between"
-          sx={{borderBottom: '1px solid rgb(243, 245, 249)', py: 2}}
-        >
-          <Box textAlign="left" sx={{ml: 2}}>
-              <Button variant='outlined' size="small" sx={style}
-                onClick={ () => { count.current = count.current + 1 }}
-              >
-                <AddIcon fontSize='small'/>
-              </Button>
-              <Box textAlign="center" sx={{my: 1}}>
-                <Typography variant="div">{count.current}</Typography>
-              </Box>
-              <Button variant='outlined' size="small" sx={style}
-                    onClick={ () => { count.current = count.current - 1 }}
-                    disabled={count.current === 1 ? true : false}
-                  >
-                    <RemoveOutlinedIcon fontSize='small'/>
-              </Button>
-            </Box>
-            <Box sx={{ml: 3, display:"flex", flexDirection: "row"}}>
-              <Typography variant="div">
-                <img src="https://bazar-react.vercel.app/_next/image?url=%2Fassets%2Fimages%2Fproducts%2Fflash-2.png&w=1920&q=75" alt="watch" width="56px" height="56px"/>
-              </Typography>
-              <Box sx={{display:"flex", flexDirection: "column", mx: 3}}>
-                <Typography variant="h5" sx={{color: '#2B3445', fontSize: '14px', fontWeight: 600}}>Smart Watch Black</Typography>
-                <Typography variant="span" sx={{color: 'rgb(125, 135, 156)', fontSize: '12px', my: 0.5}}>$250.00 x 1</Typography>
-                <Typography variant="h5" sx={{color: 'rgb(210, 63, 87)', fontSize: '14px', fontWeight: 600}}>$250.00</Typography>
-              </Box>
-            </Box>
-            <Box sx={{flexGrow: 1}} />
-            <Box sx={{mr: 2}}>
-              <IconButton>
-              <CloseIcon sx={{color: '#757575'}} fontSize="small" />
-              </IconButton>
-            </Box>
-        </Box>
-
-        <Box display="flex" alignItems="center" justifyContent="space-between"
-          sx={{borderBottom: '1px solid rgb(243, 245, 249)', py: 2}}
-        >
-          <Box textAlign="left" sx={{ml: 2}}>
-              <Button variant='outlined' size="small" sx={style}
-                onClick={ () => { count.current = count.current + 1 }}
-              >
-                <AddIcon fontSize='small'/>
-              </Button>
-              <Box textAlign="center" sx={{my: 1}}>
-                <Typography variant="div">{count.current}</Typography>
-              </Box>
-              <Button variant='outlined' size="small" sx={style}
-                    onClick={ () => { count.current = count.current - 1 }}
-                    disabled={count.current === 1 ? true : false}
-                  >
-                    <RemoveOutlinedIcon fontSize='small'/>
-              </Button>
-            </Box>
-            <Box sx={{ml: 3, display:"flex", flexDirection: "row"}}>
-              <Typography variant="div">
-                <img src="https://bazar-react.vercel.app/_next/image?url=%2Fassets%2Fimages%2Fproducts%2FFashion%2FAccessories%2F14.MVMTMWatchBlack.png&w=1920&q=75" alt="watch" width="56px" height="56px"/>
-              </Typography>
-              <Box sx={{display:"flex", flexDirection: "column", mx: 3}}>
-                <Typography variant="h5" sx={{color: '#2B3445', fontSize: '14px', fontWeight: 600}}>Smart Watch Black</Typography>
-                <Typography variant="span" sx={{color: 'rgb(125, 135, 156)', fontSize: '12px', my: 0.5}}>$250.00 x 1</Typography>
-                <Typography variant="h5" sx={{color: 'rgb(210, 63, 87)', fontSize: '14px', fontWeight: 600}}>$250.00</Typography>
-              </Box>
-            </Box>
-            <Box sx={{flexGrow: 1}} />
-            <Box sx={{mr: 2}}>
-              <IconButton>
-              <CloseIcon sx={{color: '#757575'}} fontSize="small" />
-              </IconButton>
-            </Box>
-        </Box>
-
-        <Box display="flex" alignItems="center" justifyContent="space-between"
-          sx={{borderBottom: '1px solid rgb(243, 245, 249)', py: 2}}
-        >
-          <Box textAlign="left" sx={{ml: 2}}>
-              <Button variant='outlined' size="small" sx={style}
-                onClick={ () => { count.current = count.current + 1 }}
-              >
-                <AddIcon fontSize='small'/>
-              </Button>
-              <Box textAlign="center" sx={{my: 1}}>
-                <Typography variant="div">{count.current}</Typography>
-              </Box>
-              <Button variant='outlined' size="small" sx={style}
-                    onClick={ () => { count.current = count.current - 1 }}
-                    disabled={count.current === 1 ? true : false}
-                  >
-                    <RemoveOutlinedIcon fontSize='small'/>
-              </Button>
-            </Box>
-            <Box sx={{ml: 3, display:"flex", flexDirection: "row"}}>
-              <Typography variant="div">
-                <img src="https://bazar-react.vercel.app/_next/image?url=%2Fassets%2Fimages%2Fproducts%2FFashion%2FAccessories%2F12.Xiaomimiband2.png&w=1920&q=75" alt="watch" width="56px" height="56px"/>
-              </Typography>
-              <Box sx={{display:"flex", flexDirection: "column", mx: 3}}>
-                <Typography variant="h5" sx={{color: '#2B3445', fontSize: '14px', fontWeight: 600}}>Smart Watch Black</Typography>
-                <Typography variant="span" sx={{color: 'rgb(125, 135, 156)', fontSize: '12px', my: 0.5}}>$250.00 x 1</Typography>
-                <Typography variant="h5" sx={{color: 'rgb(210, 63, 87)', fontSize: '14px', fontWeight: 600}}>$250.00</Typography>
-              </Box>
-            </Box>
-            <Box sx={{flexGrow: 1}} />
-            <Box sx={{mr: 2}}>
-              <IconButton>
-              <CloseIcon sx={{color: '#757575'}} fontSize="small" />
-              </IconButton>
-            </Box>
-        </Box>
-
+          ))
+          :
+          <Box> there's no item in your cart</Box>
+        }
       </List>
       </Box>
   
@@ -279,14 +179,14 @@ export default function TemporaryDrawer({bottomCart}) {
           {/* <Button onClick={toggleDrawer("right", true)}>Right</Button> */}
           {
           bottomCart ?
-            <Badge badgeContent={4} color="error" >
+            <Badge badgeContent={cartProductNumber} color="error" >
               <LocalMallOutlinedIcon onClick={toggleDrawer("right", true)}/>
             </Badge>
           :          
           <IconButton size="large" sx={{backgroundColor: '#eee', ml: 2}}
             onClick={toggleDrawer("right", true)}
           >
-            <Badge badgeContent={4} color="error" spacing={4}>
+            <Badge badgeContent={cartProductNumber} color="error" spacing={4}>
               {/* shopping cart */}
               <ShoppingBagOutlinedIcon sx={{color: '#7b7c7e'}} />
             </Badge>
