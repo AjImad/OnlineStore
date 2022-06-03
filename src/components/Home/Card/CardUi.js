@@ -31,7 +31,7 @@ export default function RecipeReviewCard({productName,cardImg,off,price,starN,st
   const [count, setCount] = React.useState(null);
   const dispatch = useDispatch();
   const handleAddToCart = () => {
-    dispatch(addToCart({id: productId, productName: productName, price: price, productImg: cardImg}))
+    dispatch(addToCart({id: productId, productName: productName, price: (price - (price * off)/100).toFixed(2), productImg: cardImg}))
   }
 
   React.useEffect( () => {

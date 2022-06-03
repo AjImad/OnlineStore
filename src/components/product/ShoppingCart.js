@@ -128,8 +128,8 @@ export default function TemporaryDrawer({bottomCart}) {
               </Typography>
               <Box sx={{display:"flex", flexDirection: "column", mx: 3}}>
                 <Typography variant="h5" sx={{color: '#2B3445', fontSize: '14px', fontWeight: 600}}>{item.productName}</Typography>
-                <Typography variant="span" sx={{color: 'rgb(125, 135, 156)', fontSize: '12px', my: 0.5}}>$250.00 x 1</Typography>
-                <Typography variant="h5" sx={{color: 'rgb(210, 63, 87)', fontSize: '14px', fontWeight: 600}}>$250.00</Typography>
+                <Typography variant="span" sx={{color: 'rgb(125, 135, 156)', fontSize: '12px', my: 0.5}}>${item.price} x {item.cartQuantity}</Typography>
+                <Typography variant="h5" sx={{color: 'rgb(210, 63, 87)', fontSize: '14px', fontWeight: 600}}>${(item.price * item.cartQuantity).toFixed(2)}</Typography>
               </Box>
             </Box>
             <Box sx={{flexGrow: 1}} />
