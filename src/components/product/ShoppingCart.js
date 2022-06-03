@@ -48,6 +48,7 @@ export default function TemporaryDrawer({bottomCart}) {
   const [count, setCount] = React.useState(1);
   const productCart = useSelector(state => state.cart.cartItems);
   const cartProductNumber = useSelector(state => state.cart.cartTotalQuantity)
+  const cartTotalAmount = useSelector(state => state.cart.cartTotalAmount)
 
   // console.log(productCart)
   // const count = React.useRef(1);
@@ -165,7 +166,7 @@ export default function TemporaryDrawer({bottomCart}) {
                       }
                    }}
         >
-          Checkout Now ($1000.00)
+          Checkout Now (${cartTotalAmount})
         </Button>
         <Button variant="outlined" sx={style["&.MuiButton-outlined"]}>View Cart</Button>
       </Box>
