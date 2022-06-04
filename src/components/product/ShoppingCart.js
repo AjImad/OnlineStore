@@ -11,44 +11,50 @@ import AddIcon from '@mui/icons-material/Add';
 import RemoveOutlinedIcon from '@mui/icons-material/RemoveOutlined';
 import CloseIcon from '@mui/icons-material/Close';
 import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { removeProductFromCart } from "../../features/cart/cartSlice";
 
 const style = {
-  '&.MuiButton-root':{
+  '&.MuiButton-root': {
     border: '1px solid #d23f57',
     borderRadius: '50%',
     maxWidth: "28px",
     maxHeight: "28px",
     minWidth: "24px",
     minHeight: "24px",
-  }, 
-  '&.MuiButton-outlined' :{
+  },
+  '&.MuiButton-outlined': {
     color: '#d23f57',
     textTransform: 'none',
     border: '1px solid #d33f56',
     fontSize: '0.9rem',
     // fontWeight: 600
-    '&:hover':{
+    '&:hover': {
       border: '1px solid #d33f56',
     }
   },
-  '&.Mui-disabled':{
+  '&.Mui-disabled': {
     color: '#bdbdbd',
     border: '1px solid #bdbdbd'
   },
-  divider:{
-    '&.MuiDivider-root':{
+  divider: {
+    '&.MuiDivider-root': {
       backgroundColor: '#fefeff'
     }
   }
 }
 
-export default function TemporaryDrawer({bottomCart}) {
+export default function TemporaryDrawer({ bottomCart }) {
 
   const [count, setCount] = React.useState(1);
   const productCart = useSelector(state => state.cart.cartItems);
   const cartProductNumber = useSelector(state => state.cart.cartTotalQuantity)
   const cartTotalAmount = useSelector(state => state.cart.cartTotalAmount)
+  const dispatch = useDispatch()
+
+  const handlerRemoveProduct = (index) => {
+    dispatch(removeProductFromCart({ id: index }))
+  }
 
   // console.log(productCart)
   // const count = React.useRef(1);
@@ -70,137 +76,140 @@ export default function TemporaryDrawer({bottomCart}) {
     ) {
       return;
     }
-    setState({[anchor]: open });
+    setState({ [anchor]: open });
     // console.log('current value of state.right', state.right)
   };
 
   const list = (anchor) => (
     <>
-    <Box
-      sx={{ width: {xs: '100vw', sm: 380} }}
-      role="presentation"
-      // onClick={toggleDrawer(anchor, true)}
-      onKeyDown={toggleDrawer(anchor, false)}
-    >
-      <Box sx={{maxHeight: '80vh', overflowY: 'auto'}}>
-      <List>
-        <Typography variant="p" display="flex" alignItems="center" sx={{mt: 2, mb: 2, ml: {xs: 3, sm: 4} }}>
-            <ShoppingBagOutlinedIcon sx={{color: 'rgb(15, 52, 96)'}}  />
-            <Typography variant="span" sx={{color: 'rgb(15, 52, 96)', fontSize: '16px', fontWeight: 600, ml: 1}}>{cartProductNumber} item</Typography>
-            <Box sx={{flexGrow: 1}} />
-            {/* <IconButton onClick={toggleDrawer(anchor, false)}> */}
-            <CancelOutlinedIcon 
-              sx={{display: {xs: 'block', sm: 'none'},
-               color: 'rgb(15, 52, 96)', mr: 2,
-               cursor: 'pointer'
-              }}
-              onClick={toggleDrawer("right", false)}
-             />
-            {/* </IconButton> */}
-        </Typography>
-      </List>
-      <Divider />
-      <List>
-        {
-          productCart.length != 0 ?
-          productCart.map( (item, index) => (
-        <Box key={index} display="flex" alignItems="center" justifyContent="space-between"
-          sx={{borderBottom: '1px solid rgb(243, 245, 249)', py: 2}}
-        >
-          <Box textAlign="left" sx={{ml: 2}}>
-              <Button variant='outlined' size="small" sx={style}
-                onClick={ () => { setCount(c => c+1) }}
-              >
-                <AddIcon fontSize='small'/>
-              </Button>
-              <Box textAlign="center" sx={{my: 1}}>
-                <Typography variant="div">{count}</Typography>
-              </Box>
-              <Button variant='outlined' size="small" sx={style}
-                    onClick={ () => { setCount(c => c-1) }}
-                    disabled={count === 1 ? true : false}
-                  >
-                    <RemoveOutlinedIcon fontSize='small'/>
-              </Button>
-            </Box>
-            <Box sx={{ml: 3, display:"flex", flexDirection: "row"}}>
-              <Typography variant="div">
-                <img src={item.productImg} alt="watch" width="56px" height="56px"/>
-              </Typography>
-              <Box sx={{display:"flex", flexDirection: "column", mx: 3}}>
-                <Typography variant="h5" sx={{color: '#2B3445', fontSize: '14px', fontWeight: 600}}>{item.productName}</Typography>
-                <Typography variant="span" sx={{color: 'rgb(125, 135, 156)', fontSize: '12px', my: 0.5}}>${item.price} x {item.cartQuantity}</Typography>
-                <Typography variant="h5" sx={{color: 'rgb(210, 63, 87)', fontSize: '14px', fontWeight: 600}}>${(item.price * item.cartQuantity).toFixed(2)}</Typography>
-              </Box>
-            </Box>
-            <Box sx={{flexGrow: 1}} />
-            <Box sx={{mr: 2}}>
-              <IconButton>
-              <CloseIcon sx={{color: '#757575'}} fontSize="small" />
-              </IconButton>
-            </Box>
-        </Box>
-          ))
-          :
-          <Box> there's no item in your cart</Box>
-        }
-      </List>
-      </Box>
-  
-      <Box sx={{p: 2,
-               position: 'absolute', bottom: 0,
-               display: 'flex',
-               flexDirection: 'column',
-               width: '90%' 
-              }}
+      <Box
+        sx={{ width: { xs: '100vw', sm: 380 } }}
+        role="presentation"
+        // onClick={toggleDrawer(anchor, true)}
+        onKeyDown={toggleDrawer(anchor, false)}
       >
-        <Button variant="contained" 
-                sx={{ mb: 2,
-                      textTransform: 'none',
-                      fontSize: '0.9rem',
-                      backgroundColor: '#d33f56',
-                      '&.MuiButton-contained':{
-                        '&:hover':{
-                          backgroundColor: '#d33f56'
-                        }
-                      }
-                   }}
+        <Box sx={{ maxHeight: '80vh', overflowY: 'auto' }}>
+          <List>
+            <Typography variant="p" display="flex" alignItems="center" sx={{ mt: 2, mb: 2, ml: { xs: 3, sm: 4 } }}>
+              <ShoppingBagOutlinedIcon sx={{ color: 'rgb(15, 52, 96)' }} />
+              <Typography variant="span" sx={{ color: 'rgb(15, 52, 96)', fontSize: '16px', fontWeight: 600, ml: 1 }}>{cartProductNumber} item</Typography>
+              <Box sx={{ flexGrow: 1 }} />
+              {/* <IconButton onClick={toggleDrawer(anchor, false)}> */}
+              <CancelOutlinedIcon
+                sx={{
+                  display: { xs: 'block', sm: 'none' },
+                  color: 'rgb(15, 52, 96)', mr: 2,
+                  cursor: 'pointer'
+                }}
+                onClick={toggleDrawer("right", false)}
+              />
+              {/* </IconButton> */}
+            </Typography>
+          </List>
+          <Divider />
+          <List>
+            {
+              productCart.length != 0 ?
+                productCart.map((item, index) => (
+                  <Box key={index} display="flex" alignItems="center" justifyContent="space-between"
+                    sx={{ borderBottom: '1px solid rgb(243, 245, 249)', py: 2 }}
+                  >
+                    <Box textAlign="left" sx={{ ml: 2 }}>
+                      <Button variant='outlined' size="small" sx={style}
+                        onClick={() => { setCount(c => c + 1) }}
+                      >
+                        <AddIcon fontSize='small' />
+                      </Button>
+                      <Box textAlign="center" sx={{ my: 1 }}>
+                        <Typography variant="div">{item.cartQuantity}</Typography>
+                      </Box>
+                      <Button variant='outlined' size="small" sx={style}
+                        onClick={() => { setCount(c => c - 1) }}
+                        disabled={count === 1 ? true : false}
+                      >
+                        <RemoveOutlinedIcon fontSize='small' />
+                      </Button>
+                    </Box>
+                    <Box sx={{ ml: 3, display: "flex", flexDirection: "row" }}>
+                      <Typography variant="div">
+                        <img src={item.productImg} alt="watch" width="56px" height="56px" />
+                      </Typography>
+                      <Box sx={{ display: "flex", flexDirection: "column", mx: 3 }}>
+                        <Typography variant="h5" sx={{ color: '#2B3445', fontSize: '14px', fontWeight: 600 }}>{item.productName}</Typography>
+                        <Typography variant="span" sx={{ color: 'rgb(125, 135, 156)', fontSize: '12px', my: 0.5 }}>${item.price} x {item.cartQuantity}</Typography>
+                        <Typography variant="h5" sx={{ color: 'rgb(210, 63, 87)', fontSize: '14px', fontWeight: 600 }}>${(item.price * item.cartQuantity).toFixed(2)}</Typography>
+                      </Box>
+                    </Box>
+                    <Box sx={{ flexGrow: 1 }} />
+                    <Box sx={{ mr: 2 }}>
+                      <IconButton onClick={() => handlerRemoveProduct(index)}>
+                        <CloseIcon sx={{ color: '#757575' }} fontSize="small" />
+                      </IconButton>
+                    </Box>
+                  </Box>
+                ))
+                :
+                <Box> there's no item in your cart</Box>
+            }
+          </List>
+        </Box>
+
+        <Box sx={{
+          p: 2,
+          position: 'absolute', bottom: 0,
+          display: 'flex',
+          flexDirection: 'column',
+          width: '90%'
+        }}
         >
-          Checkout Now (${cartTotalAmount})
-        </Button>
-        <Button variant="outlined" sx={style["&.MuiButton-outlined"]}>View Cart</Button>
-      </Box>
-    </Box>
+          <Button variant="contained"
+            sx={{
+              mb: 2,
+              textTransform: 'none',
+              fontSize: '0.9rem',
+              backgroundColor: '#d33f56',
+              '&.MuiButton-contained': {
+                '&:hover': {
+                  backgroundColor: '#d33f56'
+                }
+              }
+            }}
+          >
+            Checkout Now (${cartTotalAmount.toFixed(2)})
+          </Button>
+          <Button variant="outlined" sx={style["&.MuiButton-outlined"]}>View Cart</Button>
+        </Box>
+      </Box >
     </>
   );
 
   return (
     <div>
       <React.Fragment>
-          {/* <Button onClick={toggleDrawer("right", true)}>Right</Button> */}
-          {
+        {/* <Button onClick={toggleDrawer("right", true)}>Right</Button> */}
+        {
           bottomCart ?
             <Badge badgeContent={cartProductNumber} color="error" >
-              <LocalMallOutlinedIcon onClick={toggleDrawer("right", true)}/>
+              <LocalMallOutlinedIcon onClick={toggleDrawer("right", true)} />
             </Badge>
-          :          
-          <IconButton size="large" sx={{backgroundColor: '#eee', ml: 2}}
-            onClick={toggleDrawer("right", true)}
-          >
-            <Badge badgeContent={cartProductNumber} color="error" spacing={4}>
-              {/* shopping cart */}
-              <ShoppingBagOutlinedIcon sx={{color: '#7b7c7e'}} />
-            </Badge>
-          </IconButton>
-          }
-          <Drawer
-            anchor="right"
-            open={state.right}
-            onClose={toggleDrawer("right", false)}
-          >
-            {list("right")}
-          </Drawer>
-        </React.Fragment>
+            :
+            <IconButton size="large" sx={{ backgroundColor: '#eee', ml: 2 }}
+              onClick={toggleDrawer("right", true)}
+            >
+              <Badge badgeContent={cartProductNumber} color="error" spacing={4}>
+                {/* shopping cart */}
+                <ShoppingBagOutlinedIcon sx={{ color: '#7b7c7e' }} />
+              </Badge>
+            </IconButton>
+        }
+        <Drawer
+          anchor="right"
+          open={state.right}
+          onClose={toggleDrawer("right", false)}
+        >
+          {list("right")}
+        </Drawer>
+      </React.Fragment>
     </div>
   );
 }

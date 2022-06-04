@@ -17,7 +17,7 @@ function App() {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  
+
   const location = useLocation();
 
   return (
@@ -25,21 +25,21 @@ function App() {
       <Provider store={store}>
         {
           location.pathname === '/signup' || location.pathname === '/resetpwd' ?
-          <></>
-          :
-          <>
-          <Header openModal={handleOpen}/>
-          <BottomNavbar />
-          </>
+            <></>
+            :
+            <>
+              <Header openModal={handleOpen} />
+              <BottomNavbar />
+            </>
         }
-          <Routes>
-              <Route exact path="/home" element={<Home />} />
-              <Route exact path='/' element={open && <Login closeModal={handleClose} open={open}/>} />
-              <Route exact path='/signup' element={<Signup />} /> 
-              <Route exact path='/resetpwd' element={<Resetpwd />} />   
-              <Route exact path='/product/:id' element={<Product />} />
-          </Routes>
-        </Provider>
+        <Routes>
+          <Route exact path="/home" element={<Home />} />
+          <Route exact path='/' element={open && <Login closeModal={handleClose} open={open} />} />
+          <Route exact path='/signup' element={<Signup />} />
+          <Route exact path='/resetpwd' element={<Resetpwd />} />
+          <Route exact path='/product/:id' element={<Product />} />
+        </Routes>
+      </Provider>
     </div>
   );
 }
