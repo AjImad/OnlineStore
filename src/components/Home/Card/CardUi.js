@@ -33,8 +33,8 @@ export default function RecipeReviewCard({ productName, cardImg, off, price, sta
   const handleAddToCart = () => {
     dispatch(addToCart({ id: productId, productName: productName, price: (price - (price * off) / 100).toFixed(2), productImg: cardImg }))
   }
-  const handleDecreaseProductQnt = () => {
-    dispatch(decreaseProductQuantity({ id: productId }))
+  const handleDecreaseProductQnt = (index) => {
+    dispatch(decreaseProductQuantity({ id: index }))
   }
   const productCart = useSelector(state => state.cart.cartItems);
   // console.log(productCart)
@@ -116,7 +116,7 @@ export default function RecipeReviewCard({ productName, cardImg, off, price, sta
               &&
               <>
                 <Button variant='outlined' size="small" sx={style}
-                  onClick={() => { setCount(c => c - 1); handleDecreaseProductQnt() }}
+                  onClick={() => { setCount(c => c - 1); handleDecreaseProductQnt(productId) }}
                 >
                   <RemoveOutlinedIcon fontSize='small' />
                 </Button>

@@ -35,8 +35,23 @@ const cartSlice = createSlice({
         // },
         decreaseProductQuantity: (state, action) => {
             const itemIndex = state.cartItems.findIndex((item) => { return item.id === action.payload.id })
-            if (itemIndex >= 0) {
-                state.cartItems[itemIndex] = { ...state.cartItems[itemIndex], cartQuantity: state.cartItems[itemIndex].cartQuantity - 1 }
+            if (state.cartItems[itemIndex].cartQuantity > 1) {
+                state.cartItems[itemIndex].cartQuantity -= 1;
+            }
+            state.cartTotalAmount = 0;
+            state.cartItems.forEach(element => {
+                state.cartTotalAmount += element.price * element.cartQuantity
+                // console.log(state.cartTotalAmount)
+            });
+
+            // if (itemIndex >= 0) {
+            //     state.cartItems[itemIndex] = { ...state.cartItems[itemIndex], cartQuantity: state.cartItems[itemIndex].cartQuantity - 1 }
+            // }
+        },
+        increaseProductQuantity: (state, action) => {
+            const itemIndex = state.cartItems.findIndex((item) => { return item.id === action.payload.id })
+            if (state.cartItems[itemIndex].cartQuantity >= 1) {
+                state.cartItems[itemIndex].cartQuantity += 1;
             }
             state.cartTotalAmount = 0;
             state.cartItems.forEach(element => {
@@ -45,6 +60,14 @@ const cartSlice = createSlice({
             });
         },
         removeProductFromCart: (state, action) => {
+            /* another way to remove product from the shopping cart
+                const nextCartItems = state.cartItems.filter(
+                    (cartItem) => cartItem.id !== action.payload.id
+                )
+
+                state.cartItems = nextCartItems
+            */
+
             const itemIndex = state.cartItems.findIndex(item => item.id === action.payload.id);
             state.cartItems.splice(itemIndex, 1);
             state.cartTotalQuantity -= 1;
@@ -52,6 +75,6 @@ const cartSlice = createSlice({
     }
 })
 
-export const { addToCart, decreaseProductQuantity, removeProductFromCart } = cartSlice.actions;
+export const { addToCart, decreaseProductQuantity, increaseProductQuantity, removeProductFromCart } = cartSlice.actions;
 
 export default cartSlice.reducer;

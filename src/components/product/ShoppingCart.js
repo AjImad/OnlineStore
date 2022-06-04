@@ -12,7 +12,7 @@ import RemoveOutlinedIcon from '@mui/icons-material/RemoveOutlined';
 import CloseIcon from '@mui/icons-material/Close';
 import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 import { useDispatch, useSelector } from "react-redux";
-import { removeProductFromCart } from "../../features/cart/cartSlice";
+import { removeProductFromCart, decreaseProductQuantity, increaseProductQuantity } from "../../features/cart/cartSlice";
 
 const style = {
   '&.MuiButton-root': {
@@ -47,6 +47,7 @@ const style = {
 export default function TemporaryDrawer({ bottomCart }) {
 
   const [count, setCount] = React.useState(1);
+  const cart = useSelector(state => state.cart);
   const productCart = useSelector(state => state.cart.cartItems);
   const cartProductNumber = useSelector(state => state.cart.cartTotalQuantity)
   const cartTotalAmount = useSelector(state => state.cart.cartTotalAmount)
@@ -55,7 +56,12 @@ export default function TemporaryDrawer({ bottomCart }) {
   const handlerRemoveProduct = (index) => {
     dispatch(removeProductFromCart({ id: index }))
   }
-
+  const handleIncreaseProductQuantity = (index) => {
+    dispatch(increaseProductQuantity({ id: index }))
+  }
+  const handleDecreaseProductQnt = (index) => {
+    dispatch(decreaseProductQuantity({ id: index }))
+  }
   // console.log(productCart)
   // const count = React.useRef(1);
   // React.useEffect( () => {
@@ -92,7 +98,7 @@ export default function TemporaryDrawer({ bottomCart }) {
           <List>
             <Typography variant="p" display="flex" alignItems="center" sx={{ mt: 2, mb: 2, ml: { xs: 3, sm: 4 } }}>
               <ShoppingBagOutlinedIcon sx={{ color: 'rgb(15, 52, 96)' }} />
-              <Typography variant="span" sx={{ color: 'rgb(15, 52, 96)', fontSize: '16px', fontWeight: 600, ml: 1 }}>{cartProductNumber} item</Typography>
+              <Typography variant="span" sx={{ color: 'rgb(15, 52, 96)', fontSize: '16px', fontWeight: 600, ml: 1 }}>{cart.cartTotalQuantity} item</Typography>
               <Box sx={{ flexGrow: 1 }} />
               {/* <IconButton onClick={toggleDrawer(anchor, false)}> */}
               <CancelOutlinedIcon
@@ -109,14 +115,14 @@ export default function TemporaryDrawer({ bottomCart }) {
           <Divider />
           <List>
             {
-              productCart.length != 0 ?
-                productCart.map((item, index) => (
+              cart.cartItems.length != 0 ?
+                cart.cartItems.map((item, index) => (
                   <Box key={index} display="flex" alignItems="center" justifyContent="space-between"
                     sx={{ borderBottom: '1px solid rgb(243, 245, 249)', py: 2 }}
                   >
                     <Box textAlign="left" sx={{ ml: 2 }}>
                       <Button variant='outlined' size="small" sx={style}
-                        onClick={() => { setCount(c => c + 1) }}
+                        onClick={() => { handleIncreaseProductQuantity(item.id) }}
                       >
                         <AddIcon fontSize='small' />
                       </Button>
@@ -124,8 +130,9 @@ export default function TemporaryDrawer({ bottomCart }) {
                         <Typography variant="div">{item.cartQuantity}</Typography>
                       </Box>
                       <Button variant='outlined' size="small" sx={style}
-                        onClick={() => { setCount(c => c - 1) }}
-                        disabled={count === 1 ? true : false}
+                        onClick={() => handleDecreaseProductQnt(item.id)}
+                        disabled={item.cartQuantity === 1 ? true : false}
+
                       >
                         <RemoveOutlinedIcon fontSize='small' />
                       </Button>
@@ -175,7 +182,7 @@ export default function TemporaryDrawer({ bottomCart }) {
               }
             }}
           >
-            Checkout Now (${cartTotalAmount.toFixed(2)})
+            Checkout Now (${cart.cartTotalAmount.toFixed(2)})
           </Button>
           <Button variant="outlined" sx={style["&.MuiButton-outlined"]}>View Cart</Button>
         </Box>
