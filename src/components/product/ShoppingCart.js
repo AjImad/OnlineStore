@@ -48,9 +48,7 @@ export default function TemporaryDrawer({ bottomCart }) {
 
   const [count, setCount] = React.useState(1);
   const cart = useSelector(state => state.cart);
-  const productCart = useSelector(state => state.cart.cartItems);
   const cartProductNumber = useSelector(state => state.cart.cartTotalQuantity)
-  const cartTotalAmount = useSelector(state => state.cart.cartTotalAmount)
   const dispatch = useDispatch()
 
   const handlerRemoveProduct = (index) => {

@@ -28,8 +28,8 @@ const style = {
 
 export default function RecipeReviewCard({ productName, cardImg, off, price, starN, starOff, productId }) {
 
-  const [count, setCount] = React.useState(null);
   const dispatch = useDispatch();
+
   const handleAddToCart = () => {
     dispatch(addToCart({ id: productId, productName: productName, price: (price - (price * off) / 100).toFixed(2), productImg: cardImg }))
   }
@@ -37,20 +37,7 @@ export default function RecipeReviewCard({ productName, cardImg, off, price, sta
     dispatch(decreaseProductQuantity({ id: index }))
   }
   const productCart = useSelector(state => state.cart.cartItems);
-  // console.log(productCart)
-
-  React.useEffect(() => {
-    if (count === 0) {
-      setCount(null);
-    } else {
-      productCart.map((item, index) => {
-        if (item.id === productId) {
-          setCount(item.cartQuantity)
-          // console.log("item.cartQuantity", item.cartQuantity)
-        }
-      })
-    }
-  }, [count]);
+  const itemIndex = productCart.findIndex(item => { return item.id === productId });
 
   return (
     <Card sx={{ width: 290, height: 415, '&:hover': { boxShadow: 'rgba(149, 157, 165, 0.2) 0px 8px 24px' } }}>
@@ -112,21 +99,21 @@ export default function RecipeReviewCard({ productName, cardImg, off, price, sta
           </Box>
           <Box>
             {
-              count
-              &&
-              <>
-                <Button variant='outlined' size="small" sx={style}
-                  onClick={() => { setCount(c => c - 1); handleDecreaseProductQnt(productId) }}
-                >
-                  <RemoveOutlinedIcon fontSize='small' />
-                </Button>
-                <Box textAlign="center">
-                  <Typography variant="div">{count}</Typography>
-                </Box>
-              </>
+              itemIndex === -1 ? null : productCart[itemIndex].cartQuantity
+                &&
+                <>
+                  <Button variant='outlined' size="small" sx={style}
+                    onClick={() => { handleDecreaseProductQnt(productId) }}
+                  >
+                    <RemoveOutlinedIcon fontSize='small' />
+                  </Button>
+                  <Box textAlign="center">
+                    <Typography variant="div">{itemIndex === -1 ? null : productCart[itemIndex].cartQuantity}</Typography>
+                  </Box>
+                </>
             }
             <Button variant='outlined' size="small" sx={style}
-              onClick={() => { setCount(c => c + 1); handleAddToCart() }}
+              onClick={() => { handleAddToCart() }}
             >
               <AddIcon fontSize='small' />
             </Button>
