@@ -111,7 +111,7 @@ export default function TemporaryDrawer({ bottomCart }) {
             </Typography>
           </List>
           <Divider />
-          <List>
+          <List sx={{ height: '60vh', display: cart.cartItems.length === 0 ? 'flex' : 'inline-block', justifyContent: 'center', alignItems: 'center' }} >
             {
               cart.cartItems.length != 0 ?
                 cart.cartItems.map((item, index) => (
@@ -154,36 +154,48 @@ export default function TemporaryDrawer({ bottomCart }) {
                   </Box>
                 ))
                 :
-                <Box> there's no item in your cart</Box>
+                <Box display='flex' flexDirection='column' justifyContent='center' alignItems='center' sx={{ width: '60%' }}>
+                  <Typography variant="div">
+                    <img src="./images/shopping-bag.svg" alt="" />
+                  </Typography>
+                  <Typography variant="p" noWrap={false} textAlign='center' sx={{ color: '#9199aa', mt: 2 }}>
+                    Your shopping bag is empty. Start shopping
+                  </Typography>
+                </Box>
             }
           </List>
         </Box>
+        {
+          cart.cartItems.length != 0 ?
 
-        <Box sx={{
-          p: 2,
-          position: 'absolute', bottom: 0,
-          display: 'flex',
-          flexDirection: 'column',
-          width: '90%'
-        }}
-        >
-          <Button variant="contained"
-            sx={{
-              mb: 2,
-              textTransform: 'none',
-              fontSize: '0.9rem',
-              backgroundColor: '#d33f56',
-              '&.MuiButton-contained': {
-                '&:hover': {
-                  backgroundColor: '#d33f56'
-                }
-              }
+            <Box sx={{
+              p: 2,
+              position: 'absolute', bottom: 0,
+              display: 'flex',
+              flexDirection: 'column',
+              width: '90%'
             }}
-          >
-            Checkout Now (${cart.cartTotalAmount.toFixed(2)})
-          </Button>
-          <Button variant="outlined" sx={style["&.MuiButton-outlined"]}>View Cart</Button>
-        </Box>
+            >
+              <Button variant="contained"
+                sx={{
+                  mb: 2,
+                  textTransform: 'none',
+                  fontSize: '0.9rem',
+                  backgroundColor: '#d33f56',
+                  '&.MuiButton-contained': {
+                    '&:hover': {
+                      backgroundColor: '#d33f56'
+                    }
+                  }
+                }}
+              >
+                Checkout Now (${cart.cartTotalAmount.toFixed(2)})
+              </Button>
+              <Button variant="outlined" sx={style["&.MuiButton-outlined"]}>View Cart</Button>
+            </Box>
+            :
+            <></>
+        }
       </Box >
     </>
   );
