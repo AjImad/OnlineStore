@@ -15,7 +15,7 @@ import Product from './components/product/Product';
 function App() {
 
   const [open, setOpen] = useState(false);
-  const handleOpen = () => { console.log('open modal'); setOpen(true) };
+  const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   const location = useLocation();

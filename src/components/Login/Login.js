@@ -89,7 +89,6 @@ const Login = props => {
   const [isLoading, setLoading] = React.useState(false);
 
   React.useEffect(() => {
-    console.log('user'.user)
     if (user) {
       navigate("/");
       const getUserInfo = async () => {
@@ -281,7 +280,7 @@ const Login = props => {
 
         </Box>
         <FacebookProvider />
-        <GoogleProvider />
+        <GoogleProvider closeModal={props.closeModal} />
 
         <Box sx={{ ...style.footerModal }}>
           <Typography component='p'

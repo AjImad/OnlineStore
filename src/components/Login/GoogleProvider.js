@@ -17,9 +17,9 @@ const style = {
         textTransform: 'none',
         backgroundColor: '#4285f4',
         '&:hover': {
-          backgroundColor: '#4285f4',
+            backgroundColor: '#4285f4',
         }
-      },
+    },
 }
 
 const GoogleProvider = props => {
@@ -28,25 +28,26 @@ const GoogleProvider = props => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    React.useEffect( () => {
-        if(user){
-            navigate('/home')
+    React.useEffect(() => {
+        if (user) {
+            props.closeModal()
+            navigate('/')
             dispatch(setUserLoginDetails({
                 name: user.displayName,
                 email: user.email
             }))
         }
-    },[user, loading])    
+    }, [user, loading])
 
     return (
-        <Button 
-            variant='contained' 
+        <Button
+            variant='contained'
             size='small'
-            sx={{...style.button}}
-            startIcon={ <GoogleIcon />}
+            sx={{ ...style.button }}
+            startIcon={<GoogleIcon />}
             onClick={signInWithGoogle}
         >
-                Continue with Google
+            Continue with Google
         </Button>
     )
 }

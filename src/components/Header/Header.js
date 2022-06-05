@@ -22,6 +22,7 @@ import Divider from '@mui/material/Divider';
 import Avatar from '@mui/material/Avatar';
 import { useSelector } from 'react-redux';
 import ShoppingCart from '../product/ShoppingCart';
+import { Link } from "react-router-dom";
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -119,9 +120,9 @@ export default function Header(props) {
             variant="h5"
             noWrap
             component="div"
-            sx={{ display: { xs: 'none', sm: 'block' } }}
+            sx={{ display: { xs: 'none', sm: 'block', cursor: 'pointer' } }}
           >
-            <img src='https://bazar-react.vercel.app/assets/images/logo2.svg' alt='' />
+            <Link to='/'><img src='https://bazar-react.vercel.app/assets/images/logo2.svg' alt='' /></Link>
           </Typography>
           <Search>
             <SearchIconWrapper>
