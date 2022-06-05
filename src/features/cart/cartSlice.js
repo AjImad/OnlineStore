@@ -30,6 +30,7 @@ const cartSlice = createSlice({
             console.log('action.payload.id', action.payload.id)
 
             const itemIndex = state.cartItems.findIndex((item) => { return item.id === action.payload.id })
+            console.log(itemIndex)
             if (state.cartItems[itemIndex].cartQuantity > 1) {
                 state.cartItems[itemIndex].cartQuantity -= 1;
             }

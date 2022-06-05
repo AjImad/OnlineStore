@@ -156,7 +156,7 @@ export default function TemporaryDrawer({ bottomCart }) {
                 :
                 <Box display='flex' flexDirection='column' justifyContent='center' alignItems='center' sx={{ width: '60%' }}>
                   <Typography variant="div">
-                    <img src="./images/shopping-bag.svg" alt="" />
+                    <img src="https://bazar-react.vercel.app/assets/images/logos/shopping-bag.svg" alt="shopping bag" />
                   </Typography>
                   <Typography variant="p" noWrap={false} textAlign='center' sx={{ color: '#9199aa', mt: 2 }}>
                     Your shopping bag is empty. Start shopping
