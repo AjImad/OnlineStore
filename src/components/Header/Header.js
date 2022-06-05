@@ -55,10 +55,10 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   borderRadius: '15px',
   '&:hover': {
     border: '1px solid #d24159'
-   },
-   '&:focus': {
+  },
+  '&:focus': {
     // '& .MuiInputBase-input': {
-        border: '2px solid #d24159',
+    border: '2px solid #d24159',
     // },
   },
   '& .MuiInputBase-input': {
@@ -89,30 +89,31 @@ export default function Header(props) {
     setAnchorEl(null);
   };
 
-  React.useEffect( () => {
-    if(user) navigate("/home")
+  React.useEffect(() => {
+    // if(user) navigate("/home")
+    if (user) navigate("/")
     else navigate('/')
-  },[user])
+  }, [user])
 
 
   const style = {
-      Logo: {
-          color: '#274870',
-          fontWeight: 600,
-          fontFamily: 'Segoe UI'
-      },
-      toolbar:{
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center'
+    Logo: {
+      color: '#274870',
+      fontWeight: 600,
+      fontFamily: 'Segoe UI'
+    },
+    toolbar: {
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center'
     },
   }
 
   return (
-    <Box sx={{ flexGrow: 1, display: {sm: 'none', md: 'inline-block'} }}>
+    <Box sx={{ flexGrow: 1, display: { sm: 'none', md: 'inline-block' } }}>
       <AppBar position="fixed" color="default">
         <Toolbar
-            sx={{...style.toolbar}}
+          sx={{ ...style.toolbar }}
         >
           <Typography
             variant="h5"
@@ -124,7 +125,7 @@ export default function Header(props) {
           </Typography>
           <Search>
             <SearchIconWrapper>
-              <SearchIcon sx={{color: '#838da1'}}/>
+              <SearchIcon sx={{ color: '#838da1' }} />
             </SearchIconWrapper>
             <StyledInputBase
               placeholder="Search for…"
@@ -133,6 +134,7 @@ export default function Header(props) {
             />
           </Search>
           {/* <Box sx={{ flexGrow: 1, border: '1px solid black' }} /> */}
+
           {
             !user ?
               <Box sx={{ display: { xs: 'flex', md: 'flex' } }}>
@@ -140,31 +142,32 @@ export default function Header(props) {
                   size="large"
                   edge="end"
                   aria-label="account of current user"
-                //   aria-controls={menuId}
+                  //   aria-controls={menuId}
                   aria-haspopup="true"
                   onClick={() => props.openModal()}
-                  sx={{backgroundColor: '#eee'}}
+                  sx={{ backgroundColor: '#eee' }}
                 >
-                  <AccountCircleOutlinedIcon sx={{color: '#7b7c7e'}} />
+                  <AccountCircleOutlinedIcon sx={{ color: '#7b7c7e' }} />
                 </IconButton>
                 {/* <IconButton size="large" sx={{backgroundColor: '#eee', ml: 2}}>
                   <Badge badgeContent={4} color="error" spacing={4}>
                     <ShoppingBagOutlinedIcon sx={{color: '#7b7c7e'}} />
                   </Badge>
                 </IconButton> */}
+                <ShoppingCart />
               </Box>
-            :
+              :
               <Box sx={{ display: { xs: 'flex', md: 'flex' } }}>
                 <IconButton
                   size="large"
                   edge="end"
                   aria-label="account of current user"
-                //   aria-controls={menuId}
+                  //   aria-controls={menuId}
                   aria-haspopup="true"
                   onClick={handleClick}
-                  sx={{backgroundColor: '#eee'}}
+                  sx={{ backgroundColor: '#eee' }}
                 >
-                  <AccountCircleOutlinedIcon sx={{color: '#7b7c7e'}} />
+                  <AccountCircleOutlinedIcon sx={{ color: '#7b7c7e' }} />
                 </IconButton>
                 <ShoppingCart />
                 <Menu
@@ -198,30 +201,30 @@ export default function Header(props) {
                         zIndex: 0,
                       },
                     },
-                    }}
-                    transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-                    anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+                  }}
+                  transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+                  anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+                >
+                  <MenuItem>
+                    <Avatar /> {userName}
+                  </MenuItem>
+                  <Divider />
+                  <MenuItem>
+                    <ListItemIcon>
+                      <Settings fontSize="small" />
+                    </ListItemIcon>
+                    Settings
+                  </MenuItem>
+                  <MenuItem
+                    onClick={logout}
                   >
-                      <MenuItem>
-                        <Avatar /> {userName}
-                      </MenuItem>
-                      <Divider />
-                      <MenuItem>
-                        <ListItemIcon>
-                          <Settings fontSize="small" />
-                        </ListItemIcon>
-                        Settings
-                      </MenuItem>
-                      <MenuItem
-                        onClick={logout}
-                      >
-                        <ListItemIcon>
-                          <Logout fontSize="small" />
-                        </ListItemIcon>
-                        Logout
-                      </MenuItem>
+                    <ListItemIcon>
+                      <Logout fontSize="small" />
+                    </ListItemIcon>
+                    Logout
+                  </MenuItem>
                 </Menu>
-            </Box>
+              </Box>
           }
         </Toolbar>
       </AppBar>

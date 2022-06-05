@@ -15,7 +15,7 @@ import Product from './components/product/Product';
 function App() {
 
   const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
+  const handleOpen = () => { console.log('open modal'); setOpen(true) };
   const handleClose = () => setOpen(false);
 
   const location = useLocation();
@@ -30,11 +30,13 @@ function App() {
             <>
               <Header openModal={handleOpen} />
               <BottomNavbar />
+              {open && <Login closeModal={handleClose} open={open} />}
             </>
         }
         <Routes>
-          <Route exact path="/home" element={<Home />} />
-          <Route exact path='/' element={open && <Login closeModal={handleClose} open={open} />} />
+          {/* <Route exact path="/home" element={<Home />} /> */}
+          <Route exact path="/" element={<Home />} />
+          {/* <Route exact path='/' element={open && <Login closeModal={handleClose} open={open} />} /> */}
           <Route exact path='/signup' element={<Signup />} />
           <Route exact path='/resetpwd' element={<Resetpwd />} />
           <Route exact path='/product/:id' element={<Product />} />
