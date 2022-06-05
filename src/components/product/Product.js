@@ -34,6 +34,7 @@ const style = {
       maxHeight: "30px",
       minWidth: "26px",
       minHeight: "26px",
+      p: 2
     },
     '&.MuiButton-outlined': {
       color: '#d23f57',
