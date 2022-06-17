@@ -11,6 +11,7 @@ import BottomNavbar from './components/Header/BottomNavbar';
 import { Provider } from 'react-redux';
 import store from './app/store';
 import Product from './components/product/Product';
+import Footer from './components/footer/Footer';
 
 function App() {
 
@@ -33,15 +34,18 @@ function App() {
               {open && <Login closeModal={handleClose} open={open} />}
             </>
         }
+
         <Routes>
           {/* <Route exact path="/home" element={<Home />} /> */}
           <Route exact path="/" element={<Home />} />
+          {/* <Route exact path="/" eglement={<Footer />} /> */}
           {/* <Route exact path='/' element={open && <Login closeModal={handleClose} open={open} />} /> */}
           <Route exact path='/signup' element={<Signup closeModal={handleClose} />} />
           <Route exact path='/resetpwd' element={<Resetpwd />} />
           <Route exact path='/product/:id' element={<Product />} />
         </Routes>
       </Provider>
+      <Footer />
     </div>
   );
 }

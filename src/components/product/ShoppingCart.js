@@ -4,7 +4,7 @@ import Drawer from "@mui/material/Drawer";
 import Button from "@mui/material/Button";
 import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
-import { Badge, IconButton, Typography, styled } from "@mui/material";
+import { Badge, IconButton, Typography } from "@mui/material";
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
 import AddIcon from '@mui/icons-material/Add';
@@ -13,6 +13,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 import { useDispatch, useSelector } from "react-redux";
 import { removeProductFromCart, decreaseProductQuantity, increaseProductQuantity } from "../../features/cart/cartSlice";
+import { Link } from "react-router-dom";
 
 const style = {
   '&.MuiButton-root': {
@@ -46,7 +47,6 @@ const style = {
 
 export default function TemporaryDrawer({ bottomCart }) {
 
-  const [count, setCount] = React.useState(1);
   const cart = useSelector(state => state.cart);
   const cartProductNumber = useSelector(state => state.cart.cartTotalQuantity)
   const dispatch = useDispatch()
@@ -113,7 +113,7 @@ export default function TemporaryDrawer({ bottomCart }) {
           <Divider />
           <List sx={{ height: '60vh', display: cart.cartItems.length === 0 ? 'flex' : 'inline-block', justifyContent: 'center', alignItems: 'center' }} >
             {
-              cart.cartItems.length != 0 ?
+              cart.cartItems.length !== 0 ?
                 cart.cartItems.map((item, index) => (
                   <Box key={index} display="flex" alignItems="center" justifyContent="space-between"
                     sx={{ borderBottom: '1px solid rgb(243, 245, 249)', py: 2 }}
@@ -135,16 +135,18 @@ export default function TemporaryDrawer({ bottomCart }) {
                         <RemoveOutlinedIcon fontSize='small' />
                       </Button>
                     </Box>
-                    <Box sx={{ ml: 3, display: "flex", flexDirection: "row" }}>
-                      <Typography variant="div">
-                        <img src={item.productImg} alt="watch" width="56px" height="56px" />
-                      </Typography>
-                      <Box sx={{ display: "flex", flexDirection: "column", mx: 3 }}>
-                        <Typography variant="h5" sx={{ color: '#2B3445', fontSize: '14px', fontWeight: 600 }}>{item.productName}</Typography>
-                        <Typography variant="span" sx={{ color: 'rgb(125, 135, 156)', fontSize: '12px', my: 0.5 }}>${item.price} x {item.cartQuantity}</Typography>
-                        <Typography variant="h5" sx={{ color: 'rgb(210, 63, 87)', fontSize: '14px', fontWeight: 600 }}>${(item.price * item.cartQuantity).toFixed(2)}</Typography>
+                    <Link to={`/product/` + item.id} style={{ textDecoration: 'none' }}>
+                      <Box sx={{ ml: 3, display: "flex", flexDirection: "row", cursor: 'pointer' }}>
+                        <Typography variant="div">
+                          <img src={item.productImg} alt="watch" width="56px" height="56px" />
+                        </Typography>
+                        <Box sx={{ display: "flex", flexDirection: "column", mx: 3 }}>
+                          <Typography variant="h5" sx={{ color: '#2B3445', fontSize: '14px', fontWeight: 600 }}>{item.productName}</Typography>
+                          <Typography variant="span" sx={{ color: 'rgb(125, 135, 156)', fontSize: '12px', my: 0.5 }}>${item.price} x {item.cartQuantity}</Typography>
+                          <Typography variant="h5" sx={{ color: 'rgb(210, 63, 87)', fontSize: '14px', fontWeight: 600 }}>${(item.price * item.cartQuantity).toFixed(2)}</Typography>
+                        </Box>
                       </Box>
-                    </Box>
+                    </Link>
                     <Box sx={{ flexGrow: 1 }} />
                     <Box sx={{ mr: 2 }}>
                       <IconButton onClick={() => handlerRemoveProduct(index)}>
@@ -166,7 +168,7 @@ export default function TemporaryDrawer({ bottomCart }) {
           </List>
         </Box>
         {
-          cart.cartItems.length != 0 ?
+          cart.cartItems.length !== 0 ?
 
             <Box sx={{
               p: 2,

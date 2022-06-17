@@ -84,7 +84,7 @@ export default function Product() {
   return (
     <Box sx={{
       width: '100%', height: 'calc(100% - 65px)',
-      position: 'absolute',
+      position: 'relative',
       top: '65px',
       mt: 5,
       mb: 5,

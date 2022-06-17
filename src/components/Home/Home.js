@@ -26,74 +26,74 @@ export default function Home() {
   // let productInfo = [];
   const dispatch = useDispatch();
   const userName = useSelector(state => state.user.name);
-  
-  useEffect( () => {
-    // console.log(productInfo)
-      const getProductData = async () => {
-        const productData = await getDocs(collection(db, "ProductInfo"));
-        if(productData){
-          setProductInfo(productData.docs.map( doc => ({id: doc.id, ...doc.data()})))
-          // productData.docs.map( doc => { 
-          //   productInfo = [...productInfo, {id: doc.id, ...doc.data()}]
-          // })
-          
-        }
-        else
-          console.log("no such document")
-      }
-      
-      getProductData();
-      
-      // console.log(productInfo)
-      // const timer = setTimeout(() => {
-      //   // console.log('productInfo: ', productInfo)
-      // }, 3000);
 
-      // return () => clearTimeout(timer);
-    }, [userName])
-    
+  useEffect(() => {
+    // console.log(productInfo)
+    const getProductData = async () => {
+      const productData = await getDocs(collection(db, "ProductInfo"));
+      if (productData) {
+        setProductInfo(productData.docs.map(doc => ({ id: doc.id, ...doc.data() })))
+        // productData.docs.map( doc => { 
+        //   productInfo = [...productInfo, {id: doc.id, ...doc.data()}]
+        // })
+
+      }
+      else
+        console.log("no such document")
+    }
+
+    getProductData();
+
+    // console.log(productInfo)
+    // const timer = setTimeout(() => {
+    //   // console.log('productInfo: ', productInfo)
+    // }, 3000);
+
+    // return () => clearTimeout(timer);
+  }, [userName])
+
   return (
     <Box component="div" sx={{
-        width: '100%', height: 'calc(100% - 62px)',
-        position: 'absolute',
-        top: '55px',
-        mb: 5,
-      }}
+      width: '100%', height: 'calc(100% - 62px)',
+      // position: 'relative',
+      top: '55px',
+      mb: 5,
+    }}
     >
       <Slider />
-        <Typography component="div" variant="h5" sx={{display: 'inline-block', mt: 3, pl: 2, color: '#2b3445', fontWeight: 600}}>
-            Watches
-        </Typography>
-      
-      
-      <Box sx={{p: 2}}>
-        <Grid container spacing={2} columns={{ xs: 12, sm: 6, md: 12 }} 
-        direction={{xs: "column", sm: "row"}}
-        justifyContent={{xs:"center", sm: "flex-start"}}
-        alignItems={{xs:"center", sm: "flex-start"}}
-       >
-        {
-         productInfo && productInfo.map( (item, index) => {
-            dispatch(setProductData({
-              product: item,
-            }))
+      <Typography component="div" variant="h5" sx={{ display: 'inline-block', mt: 3, pl: 2, color: '#2b3445', fontWeight: 600 }}>
+        Watches
+      </Typography>
+
+
+      <Box sx={{ p: 2 }}>
+        <Grid container spacing={2} columns={{ xs: 12, sm: 6, md: 12 }}
+          direction={{ xs: "column", sm: "row" }}
+          justifyContent={{ xs: "center", sm: "flex-start" }}
+          alignItems={{ xs: "center", sm: "flex-start" }}
+        >
+          {
+            productInfo && productInfo.map((item, index) => {
+              dispatch(setProductData({
+                product: item,
+              }))
               return (
-              <Grid key={index} item xs={12} sm={3}>
-                <CardUi
-                 productName={item.productName}
-                 cardImg={item.productImg}
-                 off={item.sold}
-                 price={item.price}
-                 starN={item.starNumber}
-                 starOff={5 - item.starNumber}
-                 productId={item.id} 
-                 />
-              </Grid>
+                <Grid key={index} item xs={12} sm={3}>
+                  <CardUi
+                    productName={item.productName}
+                    cardImg={item.productImg}
+                    off={item.sold}
+                    price={item.price}
+                    starN={item.starNumber}
+                    starOff={5 - item.starNumber}
+                    productId={item.id}
+                  />
+                </Grid>
               )
             })
-        }
-        </Grid>  
-    </Box>
+          }
+        </Grid>
+      </Box>
       <br></br>
       <br></br>
       <br></br>
