@@ -111,7 +111,7 @@ export default function Header(props) {
   }
 
   return (
-    <Box sx={{ flexGrow: 1, display: { sm: 'none', md: 'inline-block' } }}>
+    <Box sx={{ flexGrow: 1, position: 'relative', display: { sm: 'none', md: 'inline-block' } }}>
       <AppBar position="fixed" color="default">
         <Toolbar
           sx={{ ...style.toolbar }}

@@ -193,7 +193,11 @@ export default function TemporaryDrawer({ bottomCart }) {
               >
                 Checkout Now (${cart.cartTotalAmount.toFixed(2)})
               </Button>
-              <Button variant="outlined" sx={style["&.MuiButton-outlined"]}>View Cart</Button>
+              <Button variant="outlined" sx={style["&.MuiButton-outlined"]}>
+                <Link to='/cart/' style={{ textDecoration: 'none', color: '#d23f57' }}>
+                  View Cart
+                </Link>
+              </Button>
             </Box>
             :
             <></>

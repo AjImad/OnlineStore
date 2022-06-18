@@ -55,7 +55,7 @@ export default function Home() {
   return (
     <Box component="div" sx={{
       width: '100%', height: 'calc(100% - 62px)',
-      // position: 'relative',
+      position: 'relative',
       top: '55px',
       mb: 5,
     }}

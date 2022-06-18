@@ -12,6 +12,7 @@ import { Provider } from 'react-redux';
 import store from './app/store';
 import Product from './components/product/Product';
 import Footer from './components/footer/Footer';
+import Cart from './components/cart/Cart';
 
 function App() {
 
@@ -43,6 +44,7 @@ function App() {
           <Route exact path='/signup' element={<Signup closeModal={handleClose} />} />
           <Route exact path='/resetpwd' element={<Resetpwd />} />
           <Route exact path='/product/:id' element={<Product />} />
+          <Route exact path='/cart/' element={<Cart />} />
         </Routes>
       </Provider>
       <Footer />
