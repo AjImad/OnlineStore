@@ -5,6 +5,13 @@ import AddIcon from '@mui/icons-material/Add';
 import RemoveOutlinedIcon from '@mui/icons-material/RemoveOutlined';
 import { removeProductFromCart, decreaseProductQuantity, increaseProductQuantity } from "../../features/cart/cartSlice";
 import ClearIcon from '@mui/icons-material/Clear';
+import Autocomplete from '@mui/material/Autocomplete';
+import { countries } from './Countries';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import { Link } from "react-router-dom";
 
 const style = {
     '&.MuiDivider-root': {
@@ -63,27 +70,23 @@ const Cart = () => {
         dispatch(decreaseProductQuantity({ id: index }))
     }
 
+    const [state, setState] = React.useState('');
+
+    const handleChange = (event) => {
+        setState(event.target.value);
+    };
+
     return (
         <Box
             component="div" sx={{
                 width: '100%',
-                // height: 'calc(100vh - 62px)',
-                // height: '80vh',
                 mt: '65px',
                 position: 'relative',
-                // border: '1px solid'
             }}
         >
             <Box display='flex' justifyContent={{ xs: 'center', md: 'left' }} alignItems='center' my={4} ml={{ sm: 0, md: 10 }} flexWrap='wrap'
                 sx={{
                     '& .MuiTypography-div': {
-                        // backgroundColor: false ? 'rgb(210, 63, 87)' : '#fce9ec',
-                        // color: '#d34757',
-                        // px: 3.5,
-                        // py: .75,
-                        // borderRadius: '10px',
-                        // fontSize: '14px',
-                        // fontWeight: 600
                         cursor: 'pointer'
                     }
                 }}
@@ -151,7 +154,7 @@ const Cart = () => {
             </Box>
             <Box>
                 <Grid container rowSpacing={{ md: 3 }} columnSpacing={{ xs: 1, sm: 2, md: 4 }} columns={{ xs: 8, sm: 8, md: 12 }} justifyContent="center">
-                    <Grid item xs={7} sm={7.5} md={7.5} >
+                    <Grid item xs={7} sm={7.5} md={7.5}>
                         {
                             cart.cartItems.length !== 0 ?
                                 cart.cartItems.map((item, index) => (
@@ -223,7 +226,19 @@ const Cart = () => {
                                     </Box>
                                 ))
                                 :
-                                <Box>Nothing in the your cart</Box>
+                                <Box display='flex' flexDirection='column' justifyContent='center' alignItems='center' position='relative' top={{ xs: 0, sm: 100 }} mb={5}>
+                                    <Typography variant="div">
+                                        <img src="https://bazar-react.vercel.app/assets/images/logos/shopping-bag.svg" alt="shopping bag" />
+                                    </Typography>
+                                    <Typography variant="p" noWrap={false} textAlign='center' sx={{ color: '#9199aa', mt: 2 }}>
+                                        Your shopping bag is empty.
+                                    </Typography>
+                                    <Link to='/' style={{ textDecoration: 'none', color: '#9199aa' }}>
+                                        <Typography sx={{ fontWeight: 600, mt: 1 }}>
+                                            Start shopping
+                                        </Typography>
+                                    </Link>
+                                </Box>
                         }
                     </Grid>
                     <Grid item xs={7} sm={7.5} md={4} >
@@ -231,13 +246,13 @@ const Cart = () => {
                             <Box display='flex' mb={2}>
                                 <Typography component='p' variant='div' sx={{ color: 'rgb(125, 135, 156)', fontSize: '15px' }}>Total:</Typography>
                                 <Box sx={{ flexGrow: 1 }} />
-                                <Typography component='p' variant='div' fontWeight={600}>$0.00</Typography>
+                                <Typography component='p' variant='div' fontWeight={600}>${cart.cartTotalAmount.toFixed(2)}</Typography>
                             </Box>
                             <Divider />
                             <Box my={2}>
                                 <Box >
                                     <Typography component='span' variant='div' mb={2}
-                                        sx={{ fontSize: '15px', fontWeight: 600 }}
+                                        sx={{ fontSize: '15px', fontWeight: 600, color: 'rgb(43, 52, 69)' }}
                                     >
                                         Additional Comments
                                     </Typography>
@@ -290,7 +305,100 @@ const Cart = () => {
                             </Box>
                             <Divider />
                             <Box my={3}>
-                                hello
+                                <Typography component='span' variant='div' mb={2}
+                                    sx={{ fontSize: '15px', fontWeight: 600, color: 'rgb(43, 52, 69)' }}
+                                >
+                                    Shipping Estimates
+                                </Typography>
+                                <Box my={3}></Box>
+                                <Autocomplete
+                                    id="country-select-demo"
+                                    // sx={{ width: 300 }}
+                                    options={countries}
+                                    autoHighlight
+                                    getOptionLabel={(option) => option.label}
+                                    renderOption={(props, option) => (
+                                        <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
+                                            <img
+                                                loading="lazy"
+                                                width="20"
+                                                src={`https://flagcdn.com/w20/${option.code.toLowerCase()}.png`}
+                                                srcSet={`https://flagcdn.com/w40/${option.code.toLowerCase()}.png 2x`}
+                                                alt=""
+                                            />
+                                            {option.label} ({option.code}) +{option.phone}
+                                        </Box>
+                                    )}
+                                    renderInput={(params) => (
+                                        <TextField
+                                            {...params}
+                                            label="Country"
+                                            size='small'
+                                            inputProps={{
+                                                ...params.inputProps,
+                                                autoComplete: 'new-password', // disable autocomplete and autofill
+                                            }}
+                                            color='error'
+                                            sx={{ width: '100%' }}
+                                        />
+                                    )}
+                                />
+                                <FormControl sx={{ my: 2, minWidth: '100%' }} size="small">
+                                    <InputLabel id="demo-select-small" color='error'>State</InputLabel>
+                                    <Select
+                                        labelId="demo-select-small"
+                                        id="demo-select-small"
+                                        value={state}
+                                        label="State"
+                                        onChange={handleChange}
+                                        color='error'
+                                    >
+                                        <MenuItem value="">
+                                            {/* <em>None</em> */}
+                                        </MenuItem>
+                                        <MenuItem value='Tangier'>Tangier</MenuItem>
+                                        <MenuItem value='Rabat'>Rabat</MenuItem>
+                                        <MenuItem value='Casa'>Casa</MenuItem>
+                                    </Select>
+                                </FormControl>
+                                <TextField
+                                    variant='outlined'
+                                    color='error'
+                                    label="Zip code"
+                                    size='small'
+                                    placeholder='9000'
+                                    sx={{ width: '100%' }}
+
+                                />
+                                <Box my={3}>
+                                    <Button variant='outlined' display='block'
+                                        sx={{
+                                            width: '100%',
+                                            color: '#d23f57',
+                                            border: '1px solid #d33f56',
+                                            textTransform: 'none',
+                                            '&:hover': {
+                                                border: '1px solid #d33f56'
+                                            },
+                                            mb: 2
+                                        }}
+                                    >
+                                        Calculate Shipping
+                                    </Button>
+                                    <Button variant='contained' display='block'
+                                        sx={{
+                                            width: '100%',
+                                            color: '#fff',
+                                            backgroundColor: '#d33f56',
+                                            textTransform: 'none',
+                                            '&:hover': {
+                                                backgroundColor: '#d33f56'
+                                            },
+                                        }}
+                                    >
+                                        Checkout Now
+                                    </Button>
+                                </Box>
                             </Box>
                         </Box>
                     </Grid>
