@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Grid, Typography, Divider, Button, IconButton } from '@mui/material';
+import { Box, Grid, Typography, Divider, Button, IconButton, createTheme } from '@mui/material';
 import { useSelector, useDispatch } from 'react-redux';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveOutlinedIcon from '@mui/icons-material/RemoveOutlined';
@@ -35,10 +35,21 @@ const style = {
     },
 }
 
+const theme = createTheme({
+    breakpoints: {
+        values: {
+            xs: 0,
+            sm: 600,
+            md: 900,
+            lg: 1200,
+            xl: 1536,
+        },
+    },
+});
+
 const Cart = () => {
 
     const cart = useSelector(state => state.cart);
-    console.log('length: ', cart.cartItems)
     const cartProductNumber = useSelector(state => state.cart.cartTotalQuantity)
     const dispatch = useDispatch()
 
@@ -139,40 +150,54 @@ const Cart = () => {
                 </Typography>
             </Box>
             <Box>
-                <Grid container rowSpacing={{ md: 3 }} columnSpacing={{ xs: 1, sm: 2, md: 4 }} justifyContent="center">
-                    <Grid item md={7.5} >
+                <Grid container rowSpacing={{ md: 3 }} columnSpacing={{ xs: 1, sm: 2, md: 4 }} columns={{ xs: 8, sm: 8, md: 12 }} justifyContent="center">
+                    <Grid item xs={7} sm={7.5} md={7.5} >
                         {
                             cart.cartItems.length !== 0 ?
                                 cart.cartItems.map((item, index) => (
-                                    <Box boxShadow='rgba(99, 99, 99, 0.1) 0px 2px 8px 0px' borderRadius='8px' display='flex' backgroundColor='white' mb={2}>
-                                        <Box>
-                                            <Typography key={index}
-                                                sx={{
-                                                    '& img': {
-                                                        width: '130px',
-                                                        height: '130px'
-                                                    }
-                                                }}
-                                            >
-                                                <img src={item.productImg} alt="" />
-                                            </Typography>
+                                    <Box boxShadow='rgba(99, 99, 99, 0.2) 0px 2px 8px 0px' borderRadius='8px' display='flex' flexDirection={{ xs: 'column', sm: 'row' }} backgroundColor='white' mb={2}>
+                                        <Box >
+                                            <Box display={{ xs: 'flex', sm: 'none' }} m={1} justifyContent='end'>
+                                                <Box sx={{ flexGrow: 1 }} />
+                                                <IconButton onClick={() => handlerRemoveProduct(item.id)}>
+                                                    <ClearIcon fontSize='small' />
+                                                </IconButton>
+                                            </Box>
+                                            <Box>
+                                                <Typography key={index}
+                                                    sx={{
+                                                        // m: 1,
+                                                        '& img': {
+                                                            [theme.breakpoints.down('sm')]: {
+                                                                width: '100%',
+                                                                height: '100%'
+                                                            },
+                                                            width: '130px',
+                                                            height: '130px'
+                                                        }
+                                                    }}
+                                                >
+                                                    <img src={item.productImg} alt="" />
+                                                </Typography>
+                                            </Box>
+
                                             {/* } */}
                                         </Box>
-                                        <Box display='flex' justifyContent='center' alignItem='center' flexDirection='column'>
-                                            <Box>
-                                                <Typography component='p' variant='div'>
+                                        <Box display='flex' justifyContent='center' alignItem='center' flexDirection='column' ml={3}>
+                                            <Box sx={{ fontSize: '15px' }}>
+                                                <Typography component='p' variant='div' sx={{ fontWeight: 600 }}>
                                                     {item.productName}
                                                 </Typography>
-                                                <Box display='flex' my={2}>
-                                                    <Typography component='p' variant='div'>
+                                                <Box display='flex' my={2} >
+                                                    <Typography component='p' variant='div' sx={{ color: 'rgb(125, 135, 156)' }}>
                                                         {`$` + item.price + ` x ` + item.cartQuantity}
                                                     </Typography>
-                                                    <Typography component='p' variant='div' ml={2}>
+                                                    <Typography component='p' variant='div' ml={2} sx={{ color: '#d24157', fontWeight: 600 }}>
                                                         {`$` + (item.price * item.cartQuantity).toFixed(2)}
                                                     </Typography>
                                                 </Box>
                                             </Box>
-                                            <Box display='flex' justifyContent='left' alignItems='center' textAlign="left">
+                                            <Box display='flex' justifyContent='left' alignItems='center' textAlign="left" mb={{ xs: 2, sm: 0 }}>
                                                 <Button variant='outlined' size="small" sx={style}
                                                     onClick={() => { handleDecreaseProductQnt(item.id) }}
                                                     disabled={item.cartQuantity === 1 ? true : false}
@@ -190,7 +215,7 @@ const Cart = () => {
                                             </Box>
                                         </Box>
                                         <Box sx={{ flexGrow: 1 }} />
-                                        <Box m={1}>
+                                        <Box display={{ xs: 'none', sm: 'inline-block' }} m={1}>
                                             <IconButton onClick={() => handlerRemoveProduct(item.id)}>
                                                 <ClearIcon fontSize='small' />
                                             </IconButton>
@@ -201,7 +226,7 @@ const Cart = () => {
                                 <Box>Nothing in the your cart</Box>
                         }
                     </Grid>
-                    <Grid item md={4} >
+                    <Grid item xs={7} sm={7.5} md={4} >
                         <Box border='1px solid'>
                             cart
                         </Box>
