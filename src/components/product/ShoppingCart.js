@@ -149,7 +149,7 @@ export default function TemporaryDrawer({ bottomCart }) {
                     </Link>
                     <Box sx={{ flexGrow: 1 }} />
                     <Box sx={{ mr: 2 }}>
-                      <IconButton onClick={() => handlerRemoveProduct(index)}>
+                      <IconButton onClick={() => handlerRemoveProduct(item.id)}>
                         <CloseIcon sx={{ color: '#757575' }} fontSize="small" />
                       </IconButton>
                     </Box>
