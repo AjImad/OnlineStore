@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Grid, Typography, Divider, Button, IconButton, createTheme } from '@mui/material';
+import { Box, Grid, Typography, Divider, Button, IconButton, createTheme, TextField } from '@mui/material';
 import { useSelector, useDispatch } from 'react-redux';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveOutlinedIcon from '@mui/icons-material/RemoveOutlined';
@@ -227,8 +227,71 @@ const Cart = () => {
                         }
                     </Grid>
                     <Grid item xs={7} sm={7.5} md={4} >
-                        <Box border='1px solid'>
-                            cart
+                        <Box boxShadow='rgba(99, 99, 99, 0.2) 0px 2px 8px 0px' borderRadius='8px' backgroundColor='white' p={2} mb={4}>
+                            <Box display='flex' mb={2}>
+                                <Typography component='p' variant='div' sx={{ color: 'rgb(125, 135, 156)', fontSize: '15px' }}>Total:</Typography>
+                                <Box sx={{ flexGrow: 1 }} />
+                                <Typography component='p' variant='div' fontWeight={600}>$0.00</Typography>
+                            </Box>
+                            <Divider />
+                            <Box my={2}>
+                                <Box >
+                                    <Typography component='span' variant='div' mb={2}
+                                        sx={{ fontSize: '15px', fontWeight: 600 }}
+                                    >
+                                        Additional Comments
+                                    </Typography>
+                                    <Typography component='span' variant='div'
+                                        sx={{
+                                            backgroundColor: 'rgb(252, 233, 236)',
+                                            color: 'rgb(210, 63, 87)',
+                                            fontSize: '12px',
+                                            py: .75, px: 1.25,
+                                            borderRadius: '6px',
+                                            ml: 1
+                                        }}
+                                    >
+                                        Note
+                                    </Typography>
+                                </Box>
+                                <TextField
+                                    id="outlined-multiline-static"
+                                    // label="Multiline"
+                                    color='error'
+                                    multiline
+                                    rows={4}
+                                    // defaultValue="Default Value"
+                                    sx={{ width: '100%', my: 2 }}
+                                />
+                                <TextField
+                                    id="filled-search"
+                                    label="Voucher"
+                                    type="search"
+                                    variant="outlined"
+                                    placeholder='Voucher'
+                                    color='error'
+                                    size='small'
+                                    sx={{ width: '100%', my: 2 }}
+                                />
+                                <Button variant="outlined"
+                                    sx={{
+                                        width: '100%',
+                                        color: '#d23f57',
+                                        border: '1px solid #d33f56',
+                                        textTransform: 'none',
+                                        '&:hover': {
+                                            border: '1px solid #d33f56'
+                                        },
+                                        mb: 2
+                                    }}
+                                >
+                                    Apply Voucher
+                                </Button>
+                            </Box>
+                            <Divider />
+                            <Box my={3}>
+                                hello
+                            </Box>
                         </Box>
                     </Grid>
                 </Grid>
