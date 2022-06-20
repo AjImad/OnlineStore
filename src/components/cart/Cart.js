@@ -108,19 +108,27 @@ const Cart = () => {
                 </Typography>
                 {/* <Divider sx={{ ...style }} /> */}
                 <Box sx={{ width: '50px', height: '4px', backgroundColor: '#fce9ec' }}></Box>
-                <Typography component='p' variant='div'
-                    sx={{
-                        backgroundColor: false ? 'rgb(210, 63, 87)' : '#fce9ec',
-                        color: '#d34757',
-                        px: 3.5,
-                        py: .75,
-                        borderRadius: '10px',
-                        fontSize: '14px',
-                        fontWeight: 600
-                    }}
-                >
-                    2. Details
-                </Typography>
+                <Link to='/checkout/' style={{ textDecoration: 'none' }}>
+                    <Typography component='p' variant='div'
+                        sx={{
+                            backgroundColor: false ? 'rgb(210, 63, 87)' : '#fce9ec',
+                            color: '#d34757',
+                            px: 3.5,
+                            py: .75,
+                            borderRadius: '10px',
+                            fontSize: '14px',
+                            fontWeight: 600,
+                            '&.MuiTypography-div': {
+                                '&:hover': {
+                                    backgroundColor: 'rgb(210, 63, 87)',
+                                    color: '#fce9ec',
+                                }
+                            }
+                        }}
+                    >
+                        2. Details
+                    </Typography>
+                </Link>
                 {/* <Divider sx={{ ...style }} /> */}
                 <Box sx={{ width: '50px', height: '4px', backgroundColor: '#fce9ec' }}></Box>
                 <Typography component='p' variant='div' mt={{ xs: 2, sm: 0 }}
@@ -131,7 +139,13 @@ const Cart = () => {
                         py: .75,
                         borderRadius: '10px',
                         fontSize: '14px',
-                        fontWeight: 600
+                        fontWeight: 600,
+                        '&.MuiTypography-div': {
+                            '&:hover': {
+                                backgroundColor: 'rgb(210, 63, 87)',
+                                color: '#fce9ec',
+                            }
+                        }
                     }}
                 >
                     3. Payment
@@ -385,19 +399,21 @@ const Cart = () => {
                                     >
                                         Calculate Shipping
                                     </Button>
-                                    <Button variant='contained' display='block'
-                                        sx={{
-                                            width: '100%',
-                                            color: '#fff',
-                                            backgroundColor: '#d33f56',
-                                            textTransform: 'none',
-                                            '&:hover': {
-                                                backgroundColor: '#d33f56'
-                                            },
-                                        }}
-                                    >
-                                        Checkout Now
-                                    </Button>
+                                    <Link to='/checkout/' style={{ textDecoration: 'none' }}>
+                                        <Button variant='contained' display='block'
+                                            sx={{
+                                                width: '100%',
+                                                color: '#fff',
+                                                backgroundColor: '#d33f56',
+                                                textTransform: 'none',
+                                                '&:hover': {
+                                                    backgroundColor: '#d33f56'
+                                                },
+                                            }}
+                                        >
+                                            Checkout Now
+                                        </Button>
+                                    </Link>
                                 </Box>
                             </Box>
                         </Box>

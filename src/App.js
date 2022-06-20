@@ -13,6 +13,7 @@ import store from './app/store';
 import Product from './components/product/Product';
 import Footer from './components/footer/Footer';
 import Cart from './components/cart/Cart';
+import Checkout from './components/checkout/Checkout';
 
 function App() {
 
@@ -45,6 +46,7 @@ function App() {
           <Route exact path='/resetpwd' element={<Resetpwd />} />
           <Route exact path='/product/:id' element={<Product />} />
           <Route exact path='/cart/' element={<Cart />} />
+          <Route exact path='/checkout/' element={<Checkout />} />
         </Routes>
       </Provider>
       <Footer />
