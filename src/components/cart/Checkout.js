@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Grid, Typography, Divider, TextField, Button, Autocomplete } from '@mui/material';
 import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { countries } from './Countries';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -101,7 +101,6 @@ const Checkout = () => {
                 </Typography>
             </Box>
 
-            {/* here put your Grid  */}
             <Box>
                 <Grid container rowSpacing={{ xs: 1, md: 3 }} columnSpacing={{ xs: 1, sm: 2, md: 4 }} columns={{ xs: 8, sm: 8, md: 12 }} justifyContent="center">
                     <Grid item xs={7} sm={7.5} md={7.5} order={{ xs: 2, md: 1 }}>
@@ -354,22 +353,24 @@ const Checkout = () => {
                                     </Link>
                                 </Grid>
                                 <Grid item xs={8} sm={4} md={6} >
-                                    <Button variant="outlined"
-                                        sx={{
-                                            width: '100%',
-                                            color: '#fff',
-                                            backgroundColor: '#d23f57',
-                                            border: '1px solid #d33f56',
-                                            textTransform: 'none',
-                                            '&:hover': {
+                                    <Link to='/payment' style={{ textDecoration: 'none' }}>
+                                        <Button variant="outlined"
+                                            sx={{
+                                                width: '100%',
+                                                color: '#fff',
                                                 backgroundColor: '#d23f57',
                                                 border: '1px solid #d33f56',
-                                            },
-                                            mb: 2
-                                        }}
-                                    >
-                                        Proceed To Payment
-                                    </Button>
+                                                textTransform: 'none',
+                                                '&:hover': {
+                                                    backgroundColor: '#e3364e',
+                                                    border: '1px solid #e3364e',
+                                                },
+                                                mb: 2
+                                            }}
+                                        >
+                                            Proceed To Payment
+                                        </Button>
+                                    </Link>
                                 </Grid>
                             </Grid>
                         </Box>
@@ -431,42 +432,6 @@ const Checkout = () => {
                         </Box>
                     </Grid>
                 </Grid>
-                {/* <Box display='flex' my={3} p={2} mb={4}>
-                    <Grid container rowSpacing={{ md: 3 }} columnSpacing={{ xs: 1, sm: 2, md: 4 }} columns={{ xs: 8, sm: 8, md: 12 }} justifyContent='left'>
-                        <Grid item sm={4} md={5.5}>
-                            <Button variant="outlined"
-                                sx={{
-                                    width: '100%',
-                                    color: '#d23f57',
-                                    border: '1px solid #d33f56',
-                                    textTransform: 'none',
-                                    '&:hover': {
-                                        border: '1px solid #d33f56'
-                                    },
-                                    mb: 2
-                                }}
-                            >
-                                Apply Voucher
-                            </Button>
-                        </Grid>
-                        <Grid item sm={4} md={5.5}>
-                            <Button variant="outlined"
-                                sx={{
-                                    width: '100%',
-                                    color: '#d23f57',
-                                    border: '1px solid #d33f56',
-                                    textTransform: 'none',
-                                    '&:hover': {
-                                        border: '1px solid #d33f56'
-                                    },
-                                    mb: 2
-                                }}
-                            >
-                                Apply Voucher
-                            </Button>
-                        </Grid>
-                    </Grid>
-                </Box> */}
             </Box>
 
         </Box>

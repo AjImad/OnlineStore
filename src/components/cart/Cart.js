@@ -174,7 +174,7 @@ const Cart = () => {
                         {
                             cart.cartItems.length !== 0 ?
                                 cart.cartItems.map((item, index) => (
-                                    <Box boxShadow='rgba(99, 99, 99, 0.2) 0px 2px 8px 0px' borderRadius='8px' display='flex' flexDirection={{ xs: 'column', sm: 'row' }} backgroundColor='white' mb={2}>
+                                    <Box key={index} boxShadow='rgba(99, 99, 99, 0.2) 0px 2px 8px 0px' borderRadius='8px' display='flex' flexDirection={{ xs: 'column', sm: 'row' }} backgroundColor='white' mb={2}>
                                         <Box >
                                             <Box display={{ xs: 'flex', sm: 'none' }} m={1} justifyContent='end'>
                                                 <Box sx={{ flexGrow: 1 }} />
@@ -409,7 +409,7 @@ const Cart = () => {
                                                 backgroundColor: '#d33f56',
                                                 textTransform: 'none',
                                                 '&:hover': {
-                                                    backgroundColor: '#d33f56'
+                                                    backgroundColor: '#e3364e',
                                                 },
                                             }}
                                         >
