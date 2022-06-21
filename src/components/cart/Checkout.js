@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, Grid, Typography, Divider, TextField, Button, Autocomplete } from '@mui/material';
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
-import { countries } from '../cart/Countries';
+import { countries } from './Countries';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
@@ -334,20 +334,22 @@ const Checkout = () => {
                         <Box my={2}>
                             <Grid container rowSpacing={{ md: 3 }} columnSpacing={{ xs: 1, sm: 2, md: 4 }} columns={{ xs: 8, sm: 8, md: 12 }} justifyContent='left'>
                                 <Grid item xs={8} sm={4} md={6} >
-                                    <Button variant="outlined"
-                                        sx={{
-                                            width: '100%',
-                                            color: '#d23f57',
-                                            border: '1px solid #d33f56',
-                                            textTransform: 'none',
-                                            '&:hover': {
-                                                border: '1px solid #d33f56'
-                                            },
-                                            mb: 2
-                                        }}
-                                    >
-                                        Back To Cart
-                                    </Button>
+                                    <Link to='/cart/' style={{ textDecoration: 'none' }}>
+                                        <Button variant="outlined"
+                                            sx={{
+                                                width: '100%',
+                                                color: '#d23f57',
+                                                border: '1px solid #d33f56',
+                                                textTransform: 'none',
+                                                '&:hover': {
+                                                    border: '1px solid #d33f56'
+                                                },
+                                                mb: 2
+                                            }}
+                                        >
+                                            Back To Cart
+                                        </Button>
+                                    </Link>
                                 </Grid>
                                 <Grid item xs={8} sm={4} md={6} >
                                     <Button variant="outlined"

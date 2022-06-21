@@ -13,7 +13,7 @@ import store from './app/store';
 import Product from './components/product/Product';
 import Footer from './components/footer/Footer';
 import Cart from './components/cart/Cart';
-import Checkout from './components/checkout/Checkout';
+import Checkout from './components/cart/Checkout';
 
 function App() {
 
