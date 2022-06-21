@@ -101,8 +101,8 @@ const Checkout = () => {
 
             {/* here put your Grid  */}
             <Box>
-                <Grid container rowSpacing={{ md: 3 }} columnSpacing={{ xs: 1, sm: 2, md: 4 }} columns={{ xs: 8, sm: 8, md: 12 }} justifyContent="center">
-                    <Grid item xs={7} sm={7.5} md={7.5}>
+                <Grid container rowSpacing={{ xs: 1, md: 3 }} columnSpacing={{ xs: 1, sm: 2, md: 4 }} columns={{ xs: 8, sm: 8, md: 12 }} justifyContent="center">
+                    <Grid item xs={7} sm={7.5} md={7.5} order={{ xs: 2, md: 1 }}>
                         <Box boxShadow='rgba(99, 99, 99, 0.2) 0px 2px 8px 0px' borderRadius='8px' backgroundColor='white' p={2} mb={4}>
                             <Box my={2}>
                                 <Typography component='span' variant='div'
@@ -112,7 +112,7 @@ const Checkout = () => {
                                 </Typography>
                             </Box>
                             <Box>
-                                <Grid container rowSpacing={{ md: 3 }} columnSpacing={{ xs: 1, sm: 2, md: 4 }} columns={{ xs: 8, sm: 8, md: 12 }} justifyContent='left'>
+                                <Grid container rowSpacing={{ xs: 3, md: 3 }} columnSpacing={{ xs: 1, sm: 2, md: 4 }} columns={{ xs: 8, sm: 8, md: 12 }} justifyContent='left'>
                                     <Grid item sm={4} md={6} >
                                         <TextField
                                             id="filled-search"
@@ -228,7 +228,7 @@ const Checkout = () => {
                                 </FormGroup>
                             </Box>
                             <Box display={notChecked ? 'block' : 'none'}>
-                                <Grid container rowSpacing={{ md: 3 }} columnSpacing={{ xs: 1, sm: 2, md: 4 }} columns={{ xs: 8, sm: 8, md: 12 }} justifyContent='left'>
+                                <Grid container rowSpacing={{ xs: 3, md: 3 }} columnSpacing={{ xs: 1, sm: 2, md: 4 }} columns={{ xs: 8, sm: 8, md: 12 }} justifyContent='left'>
                                     <Grid item sm={4} md={6} >
                                         <TextField
                                             id="filled-search"
@@ -331,8 +331,46 @@ const Checkout = () => {
                                 </Grid>
                             </Box>
                         </Box>
+                        <Box my={2}>
+                            <Grid container rowSpacing={{ md: 3 }} columnSpacing={{ xs: 1, sm: 2, md: 4 }} columns={{ xs: 8, sm: 8, md: 12 }} justifyContent='left'>
+                                <Grid item xs={8} sm={4} md={6} >
+                                    <Button variant="outlined"
+                                        sx={{
+                                            width: '100%',
+                                            color: '#d23f57',
+                                            border: '1px solid #d33f56',
+                                            textTransform: 'none',
+                                            '&:hover': {
+                                                border: '1px solid #d33f56'
+                                            },
+                                            mb: 2
+                                        }}
+                                    >
+                                        Back To Cart
+                                    </Button>
+                                </Grid>
+                                <Grid item xs={8} sm={4} md={6} >
+                                    <Button variant="outlined"
+                                        sx={{
+                                            width: '100%',
+                                            color: '#fff',
+                                            backgroundColor: '#d23f57',
+                                            border: '1px solid #d33f56',
+                                            textTransform: 'none',
+                                            '&:hover': {
+                                                backgroundColor: '#d23f57',
+                                                border: '1px solid #d33f56',
+                                            },
+                                            mb: 2
+                                        }}
+                                    >
+                                        Proceed To Payment
+                                    </Button>
+                                </Grid>
+                            </Grid>
+                        </Box>
                     </Grid>
-                    <Grid item xs={7} sm={7.5} md={4} >
+                    <Grid item xs={7} sm={7.5} md={4} order={{ xs: 1, md: 2 }}>
                         <Box boxShadow='rgba(99, 99, 99, 0.2) 0px 2px 8px 0px' borderRadius='8px' backgroundColor='white' p={2} mb={4}>
                             <Box >
                                 <Box display='flex' mb={2}>
@@ -389,6 +427,42 @@ const Checkout = () => {
                         </Box>
                     </Grid>
                 </Grid>
+                {/* <Box display='flex' my={3} p={2} mb={4}>
+                    <Grid container rowSpacing={{ md: 3 }} columnSpacing={{ xs: 1, sm: 2, md: 4 }} columns={{ xs: 8, sm: 8, md: 12 }} justifyContent='left'>
+                        <Grid item sm={4} md={5.5}>
+                            <Button variant="outlined"
+                                sx={{
+                                    width: '100%',
+                                    color: '#d23f57',
+                                    border: '1px solid #d33f56',
+                                    textTransform: 'none',
+                                    '&:hover': {
+                                        border: '1px solid #d33f56'
+                                    },
+                                    mb: 2
+                                }}
+                            >
+                                Apply Voucher
+                            </Button>
+                        </Grid>
+                        <Grid item sm={4} md={5.5}>
+                            <Button variant="outlined"
+                                sx={{
+                                    width: '100%',
+                                    color: '#d23f57',
+                                    border: '1px solid #d33f56',
+                                    textTransform: 'none',
+                                    '&:hover': {
+                                        border: '1px solid #d33f56'
+                                    },
+                                    mb: 2
+                                }}
+                            >
+                                Apply Voucher
+                            </Button>
+                        </Grid>
+                    </Grid>
+                </Box> */}
             </Box>
 
         </Box>
