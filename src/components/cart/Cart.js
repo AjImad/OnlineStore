@@ -131,25 +131,27 @@ const Cart = () => {
                 </Link>
                 {/* <Divider sx={{ ...style }} /> */}
                 <Box sx={{ width: '50px', height: '4px', backgroundColor: '#fce9ec' }}></Box>
-                <Typography component='p' variant='div' mt={{ xs: 2, sm: 0 }}
-                    sx={{
-                        backgroundColor: false ? 'rgb(210, 63, 87)' : '#fce9ec',
-                        color: '#d34757',
-                        px: 3.5,
-                        py: .75,
-                        borderRadius: '10px',
-                        fontSize: '14px',
-                        fontWeight: 600,
-                        '&.MuiTypography-div': {
-                            '&:hover': {
-                                backgroundColor: 'rgb(210, 63, 87)',
-                                color: '#fce9ec',
+                <Link to='/payment/' style={{ textDecoration: 'none' }}>
+                    <Typography component='p' variant='div' mt={{ xs: 2, sm: 0 }}
+                        sx={{
+                            backgroundColor: false ? 'rgb(210, 63, 87)' : '#fce9ec',
+                            color: '#d34757',
+                            px: 3.5,
+                            py: .75,
+                            borderRadius: '10px',
+                            fontSize: '14px',
+                            fontWeight: 600,
+                            '&.MuiTypography-div': {
+                                '&:hover': {
+                                    backgroundColor: 'rgb(210, 63, 87)',
+                                    color: '#fce9ec',
+                                }
                             }
-                        }
-                    }}
-                >
-                    3. Payment
-                </Typography>
+                        }}
+                    >
+                        3. Payment
+                    </Typography>
+                </Link>
                 {/* <Divider sx={{ ...style }} /> */}
                 <Box sx={{ width: '50px', height: '4px', backgroundColor: '#fce9ec' }}></Box>
                 <Typography component='p' variant='div' mt={{ xs: 2, sm: 0 }}

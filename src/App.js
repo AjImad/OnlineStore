@@ -5,7 +5,6 @@ import Home from './components/Home/Home';
 import Login from './components/Login/Login';
 import Header from "./components/Header/Header";
 import Signup from './components/Register/Signup';
-import './App.css';
 import Resetpwd from './components/Resetpwd/Resetpwd';
 import BottomNavbar from './components/Header/BottomNavbar';
 import { Provider } from 'react-redux';
@@ -14,6 +13,7 @@ import Product from './components/product/Product';
 import Footer from './components/footer/Footer';
 import Cart from './components/cart/Cart';
 import Checkout from './components/cart/Checkout';
+import Payment from './components/cart/Payment';
 
 function App() {
 
@@ -47,6 +47,7 @@ function App() {
           <Route exact path='/product/:id' element={<Product />} />
           <Route exact path='/cart/' element={<Cart />} />
           <Route exact path='/checkout/' element={<Checkout />} />
+          <Route exact path='/payment/' element={<Payment />} />
         </Routes>
       </Provider>
       <Footer />
