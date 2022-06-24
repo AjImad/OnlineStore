@@ -14,6 +14,7 @@ import Footer from './components/footer/Footer';
 import Cart from './components/cart/Cart';
 import Checkout from './components/cart/Checkout';
 import Payment from './components/cart/Payment';
+import Orders from './components/dashboard/Orders';
 
 function App() {
 
@@ -48,6 +49,7 @@ function App() {
           <Route exact path='/cart/' element={<Cart />} />
           <Route exact path='/checkout/' element={<Checkout />} />
           <Route exact path='/payment/' element={<Payment />} />
+          <Route exact path='/orders/' element={<Orders />} />
         </Routes>
       </Provider>
       <Footer />

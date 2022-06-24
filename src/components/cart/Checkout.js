@@ -86,15 +86,16 @@ const Checkout = () => {
                 </Link>
                 {/* <Divider sx={{ ...style }} /> */}
                 <Box sx={{ width: '50px', height: '4px', backgroundColor: '#fce9ec' }}></Box>
-                <Typography component='p' variant='div' mt={{ xs: 2, sm: 0 }}
+                <Typography component='p' variant='span' mt={{ xs: 2, sm: 0 }}
                     sx={{
-                        backgroundColor: false ? 'rgb(210, 63, 87)' : '#fce9ec',
-                        color: '#d34757',
+                        backgroundColor: '#fcf3f3',
+                        color: '#eab9c3',
                         px: 3.5,
                         py: .75,
                         borderRadius: '10px',
                         fontSize: '14px',
                         fontWeight: 600,
+                        cursor: 'default'
                     }}
                 >
                     4. Review

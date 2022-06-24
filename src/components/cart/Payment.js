@@ -109,15 +109,16 @@ const Payment = () => {
                 </Typography>
                 {/* <Divider sx={{ ...style }} /> */}
                 <Box sx={{ width: '50px', height: '4px', backgroundColor: '#fce9ec' }}></Box>
-                <Typography component='p' variant='div' mt={{ xs: 2, sm: 0 }}
+                <Typography component='p' variant='span' mt={{ xs: 2, sm: 0 }}
                     sx={{
-                        backgroundColor: false ? 'rgb(210, 63, 87)' : '#fce9ec',
-                        color: '#d34757',
+                        backgroundColor: '#fcf3f3',
+                        color: '#eab9c3',
                         px: 3.5,
                         py: .75,
                         borderRadius: '10px',
                         fontSize: '14px',
                         fontWeight: 600,
+                        cursor: 'default'
                     }}
                 >
                     4. Review
@@ -258,22 +259,24 @@ const Payment = () => {
                                     </Link>
                                 </Grid>
                                 <Grid item xs={8} sm={4} md={6} >
-                                    <Button variant="outlined"
-                                        sx={{
-                                            width: '100%',
-                                            color: '#fff',
-                                            backgroundColor: '#d23f57',
-                                            border: '1px solid #d33f56',
-                                            textTransform: 'none',
-                                            '&:hover': {
-                                                backgroundColor: '#e3364e',
-                                                border: '1px solid #e3364e',
-                                            },
-                                            mb: 2
-                                        }}
-                                    >
-                                        Review
-                                    </Button>
+                                    <Link to='/orders/' style={{ textDecoration: 'none' }}>
+                                        <Button variant="outlined"
+                                            sx={{
+                                                width: '100%',
+                                                color: '#fff',
+                                                backgroundColor: '#d23f57',
+                                                border: '1px solid #d33f56',
+                                                textTransform: 'none',
+                                                '&:hover': {
+                                                    backgroundColor: '#e3364e',
+                                                    border: '1px solid #e3364e',
+                                                },
+                                                mb: 2
+                                            }}
+                                        >
+                                            Review
+                                        </Button>
+                                    </Link>
                                 </Grid>
                             </Grid>
                         </Box>
