@@ -9,6 +9,10 @@ import SupportAgentOutlinedIcon from '@mui/icons-material/SupportAgentOutlined';
 import PersonIcon from '@mui/icons-material/Person';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import PaymentIcon from '@mui/icons-material/Payment';
+import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
+import EastIcon from '@mui/icons-material/East';
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
 
 const Orders = () => {
 
@@ -175,9 +179,137 @@ const Orders = () => {
                         </Box>
                     </Box>
                 </Grid>
-                <Grid item xs={7} sm={7.5} md={8} >
-                    <Box boxShadow='rgba(99, 99, 99, 0.2) 0px 2px 8px 0px' borderRadius='8px' backgroundColor='white' p={2} mb={4}>
-                        Orders
+
+                <Grid item xs={7} sm={7.5} md={8.5} >
+                    <Box>
+                        <Box display='flex' alignItems='center'>
+                            <ShoppingBagIcon sx={{ color: '#d23f57' }} />
+                            <Typography component='p' variant='h5' ml={2} sx={{ fontWeight: 700, fontFamily: 'sans-serif', fontSize: '25px' }}>My Orders</Typography>
+                        </Box>
+                        <Box display='flex' alignItems='center' px={2} my={2} mt={3}
+                            sx={{ color: 'rgb(125, 135, 156)', fontWeight: 600, letterSpacing: '1.25px' }}
+                        >
+                            <Grid container spacing={2}>
+                                <Grid item xs={2.5}>
+                                    <Typography component='p' variant='div'>Order #</Typography>
+                                </Grid>
+                                <Grid item xs={2.5}>
+                                    <Typography component='p' variant='div'>Status</Typography>
+                                </Grid>
+                                <Grid item xs={2.5}>
+                                    <Typography component='p' variant='div'>Date Purchased</Typography>
+                                </Grid>
+                                <Grid item xs={2.5}>
+                                    <Typography component='p' variant='div'>Total</Typography>
+                                </Grid>
+                                <Grid item xs={2}>
+                                    <Typography component='p' variant='div'></Typography>
+                                </Grid>
+                            </Grid>
+                        </Box>
+                        <Box boxShadow='rgba(99, 99, 99, 0.1) 0px 2px 8px 0px' borderRadius='8px' backgroundColor='white' p={2} mb={2}>
+                            <Grid container spacing={2}>
+                                <Grid item xs={2.5}>
+                                    <Typography component='p' variant='div' sx={{ fontWeight: 600, letterSpacing: '1px' }}>1050017AS</Typography>
+                                </Grid>
+                                <Grid item xs={2.5}>
+                                    <Typography component='p' variant='span' sx={{ display: 'inline', px: 1.5, py: .75, borderRadius: '10px', fontSize: '14px', fontFamily: 'sans-serif', letterSpacing: '1px', backgroundColor: '#e8e8ee', color: '#535458' }}>Pending</Typography>
+                                </Grid>
+                                <Grid item xs={2.5}>
+                                    <Typography component='p' variant='div' sx={{ fontSize: '14px', fontFamily: 'sans-serif', letterSpacing: '1px' }}>Jun 24, 2022</Typography>
+                                </Grid>
+                                <Grid item xs={2.5}>
+                                    <Typography component='p' variant='div' sx={{ fontSize: '14px', fontFamily: 'sans-serif', letterSpacing: '1px' }}>$350.00</Typography>
+                                </Grid>
+                                <Grid item xs={2}>
+                                    <Box display='flex'>
+                                        <Box sx={{ flexGrow: 1 }} />
+                                        <EastIcon sx={{ color: 'rgb(125, 135, 156)' }} fontSize='small' />
+                                    </Box>
+                                </Grid>
+                            </Grid>
+                        </Box>
+                        <Box boxShadow='rgba(99, 99, 99, 0.1) 0px 2px 8px 0px' borderRadius='8px' backgroundColor='white' p={2} mb={2}>
+                            <Grid container spacing={2}>
+                                <Grid item xs={2.5}>
+                                    <Typography component='p' variant='div' sx={{ fontWeight: 600, letterSpacing: '1px' }}>1050017AS</Typography>
+                                </Grid>
+                                <Grid item xs={2.5}>
+                                    <Typography component='p' variant='span' sx={{ display: 'inline', px: 1.5, py: .75, borderRadius: '10px', fontSize: '14px', fontFamily: 'sans-serif', letterSpacing: '1px', backgroundColor: '#e8e8ee', color: '#535458' }}>Processing</Typography>
+                                </Grid>
+                                <Grid item xs={2.5}>
+                                    <Typography component='p' variant='div' sx={{ fontSize: '14px', fontFamily: 'sans-serif', letterSpacing: '1px' }}>Jun 24, 2022</Typography>
+                                </Grid>
+                                <Grid item xs={2.5}>
+                                    <Typography component='p' variant='div' sx={{ fontSize: '14px', fontFamily: 'sans-serif', letterSpacing: '1px' }}>$350.00</Typography>
+                                </Grid>
+                                <Grid item xs={2}>
+                                    <Box display='flex'>
+                                        <Box sx={{ flexGrow: 1 }} />
+                                        <EastIcon sx={{ color: 'rgb(125, 135, 156)' }} fontSize='small' />
+                                    </Box>
+                                </Grid>
+                            </Grid>
+                        </Box>
+                        <Box boxShadow='rgba(99, 99, 99, 0.1) 0px 2px 8px 0px' borderRadius='8px' backgroundColor='white' p={2} mb={2}>
+                            <Grid container spacing={2}>
+                                <Grid item xs={2.5}>
+                                    <Typography component='p' variant='div' sx={{ fontWeight: 600, letterSpacing: '1px' }}>1050017AS</Typography>
+                                </Grid>
+                                <Grid item xs={2.5}>
+                                    <Typography component='p' variant='span' sx={{ display: 'inline', px: 1.5, py: .75, borderRadius: '10px', fontSize: '14px', fontFamily: 'sans-serif', letterSpacing: '1px', backgroundColor: '#e7f9ed', color: '#6f9252' }}>Delivered</Typography>
+                                </Grid>
+                                <Grid item xs={2.5}>
+                                    <Typography component='p' variant='div' sx={{ fontSize: '14px', fontFamily: 'sans-serif', letterSpacing: '1px' }}>Jun 24, 2022</Typography>
+                                </Grid>
+                                <Grid item xs={2.5}>
+                                    <Typography component='p' variant='div' sx={{ fontSize: '14px', fontFamily: 'sans-serif', letterSpacing: '1px' }}>$350.00</Typography>
+                                </Grid>
+                                <Grid item xs={2}>
+                                    <Box display='flex'>
+                                        <Box sx={{ flexGrow: 1 }} />
+                                        <EastIcon sx={{ color: 'rgb(125, 135, 156)' }} fontSize='small' />
+                                    </Box>
+                                </Grid>
+                            </Grid>
+                        </Box>
+                        <Box boxShadow='rgba(99, 99, 99, 0.2) 0px 2px 8px 0px' borderRadius='8px' backgroundColor='white' p={2} mb={4}>
+                            <Grid container spacing={2}>
+                                <Grid item xs={2.5}>
+                                    <Typography component='p' variant='div' sx={{ fontWeight: 600, letterSpacing: '1px' }}>1050017AS</Typography>
+                                </Grid>
+                                <Grid item xs={2.5}>
+                                    <Typography component='p' variant='span' sx={{ display: 'inline', px: 1.5, py: .75, borderRadius: '10px', fontSize: '14px', fontFamily: 'sans-serif', letterSpacing: '1px', backgroundColor: '#ffeaea', color: '#ff4c3a' }}>Cancelled</Typography>
+                                </Grid>
+                                <Grid item xs={2.5}>
+                                    <Typography component='p' variant='div' sx={{ fontSize: '14px', fontFamily: 'sans-serif', letterSpacing: '1px' }}>Jun 24, 2022</Typography>
+                                </Grid>
+                                <Grid item xs={2.5}>
+                                    <Typography component='p' variant='div' sx={{ fontSize: '14px', fontFamily: 'sans-serif', letterSpacing: '1px' }}>$350.00</Typography>
+                                </Grid>
+                                <Grid item xs={2}>
+                                    <Box display='flex'>
+                                        <Box sx={{ flexGrow: 1 }} />
+                                        <EastIcon sx={{ color: 'rgb(125, 135, 156)' }} fontSize='small' />
+                                    </Box>
+                                </Grid>
+                            </Grid>
+                        </Box>
+                        <Box display='flex' justifyContent='center' mb={5}>
+                            <Stack spacing={2}
+                                sx={{
+                                    '& .MuiPagination-root': {
+                                        '& .Mui-selected': {
+                                            color: 'rgb(210, 63, 87)',
+                                            backgroundColor: 'rgba(210, 63, 87, 0.12)',
+                                            border: '1px solid rgba(210, 63, 87, 0.5)'
+                                        }
+                                    }
+                                }}
+                            >
+                                <Pagination count={5} variant="outlined" />
+                            </Stack>
+                        </Box>
                     </Box>
                 </Grid>
             </Grid>
