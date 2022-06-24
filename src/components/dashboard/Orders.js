@@ -13,6 +13,7 @@ import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import EastIcon from '@mui/icons-material/East';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
+import MenuIcon from '@mui/icons-material/Menu';
 
 const Orders = () => {
 
@@ -27,7 +28,7 @@ const Orders = () => {
             }}
         >
             <Grid container rowSpacing={{ xs: 1, md: 3 }} columnSpacing={{ xs: 1, sm: 2, md: 4 }} columns={{ xs: 8, sm: 8, md: 12 }} justifyContent="center">
-                <Grid item xs={7} sm={7.5} md={3}>
+                <Grid item xs={7} sm={7.5} md={3} display={{ xs: 'none', md: 'block' }}>
                     <Box boxShadow='rgba(99, 99, 99, 0.2) 0px 2px 8px 0px' borderRadius='8px' backgroundColor='white' p={1} mb={4} sx={{ boxSizing: 'border-box' }}>
                         <Box my={2} mb={3} sx={{ boxSizing: 'border-box' }}>
                             <Box display='flex' mb={2} px={2} pt={1}>
@@ -182,11 +183,15 @@ const Orders = () => {
 
                 <Grid item xs={7} sm={7.5} md={8.5} >
                     <Box>
-                        <Box display='flex' alignItems='center'>
-                            <ShoppingBagIcon sx={{ color: '#d23f57' }} />
-                            <Typography component='p' variant='h5' ml={2} sx={{ fontWeight: 700, fontFamily: 'sans-serif', fontSize: '25px' }}>My Orders</Typography>
+                        <Box display='flex' alignItems='center' my={{ xs: 2 }}>
+                            <Box display='flex' alignItems='center'>
+                                <ShoppingBagIcon sx={{ color: '#d23f57' }} />
+                                <Typography component='p' variant='h5' ml={2} sx={{ fontWeight: 700, fontFamily: 'sans-serif', fontSize: '25px' }}>My Orders</Typography>
+                            </Box>
+                            <Box sx={{ flexGrow: 1 }} />
+                            <MenuIcon fontSize='small' sx={{ cursor: 'pointer', display: { sm: 'block', md: 'none' } }} />
                         </Box>
-                        <Box display='flex' alignItems='center' px={2} my={2} mt={3}
+                        <Box display={{ xs: 'none', md: 'flex' }} alignItems='center' px={2} my={2} mt={3}
                             sx={{ color: 'rgb(125, 135, 156)', fontWeight: 600, letterSpacing: '1.25px' }}
                         >
                             <Grid container spacing={2}>
@@ -209,19 +214,19 @@ const Orders = () => {
                         </Box>
                         <Box boxShadow='rgba(99, 99, 99, 0.1) 0px 2px 8px 0px' borderRadius='8px' backgroundColor='white' p={2} mb={2}>
                             <Grid container spacing={2}>
-                                <Grid item xs={2.5}>
+                                <Grid item sm={3} md={2.5}>
                                     <Typography component='p' variant='div' sx={{ fontWeight: 600, letterSpacing: '1px' }}>1050017AS</Typography>
                                 </Grid>
-                                <Grid item xs={2.5}>
+                                <Grid item sm={3} md={2.5}>
                                     <Typography component='p' variant='span' sx={{ display: 'inline', px: 1.5, py: .75, borderRadius: '10px', fontSize: '14px', fontFamily: 'sans-serif', letterSpacing: '1px', backgroundColor: '#e8e8ee', color: '#535458' }}>Pending</Typography>
                                 </Grid>
-                                <Grid item xs={2.5}>
+                                <Grid item sm={3} md={2.5}>
                                     <Typography component='p' variant='div' sx={{ fontSize: '14px', fontFamily: 'sans-serif', letterSpacing: '1px' }}>Jun 24, 2022</Typography>
                                 </Grid>
-                                <Grid item xs={2.5}>
+                                <Grid item sm={3} md={2.5}>
                                     <Typography component='p' variant='div' sx={{ fontSize: '14px', fontFamily: 'sans-serif', letterSpacing: '1px' }}>$350.00</Typography>
                                 </Grid>
-                                <Grid item xs={2}>
+                                <Grid item xs={2} display={{ xs: 'none', md: 'block' }}>
                                     <Box display='flex'>
                                         <Box sx={{ flexGrow: 1 }} />
                                         <EastIcon sx={{ color: 'rgb(125, 135, 156)' }} fontSize='small' />
@@ -231,19 +236,19 @@ const Orders = () => {
                         </Box>
                         <Box boxShadow='rgba(99, 99, 99, 0.1) 0px 2px 8px 0px' borderRadius='8px' backgroundColor='white' p={2} mb={2}>
                             <Grid container spacing={2}>
-                                <Grid item xs={2.5}>
+                                <Grid item sm={3} md={2.5}>
                                     <Typography component='p' variant='div' sx={{ fontWeight: 600, letterSpacing: '1px' }}>1050017AS</Typography>
                                 </Grid>
-                                <Grid item xs={2.5}>
+                                <Grid item sm={3} md={2.5}>
                                     <Typography component='p' variant='span' sx={{ display: 'inline', px: 1.5, py: .75, borderRadius: '10px', fontSize: '14px', fontFamily: 'sans-serif', letterSpacing: '1px', backgroundColor: '#e8e8ee', color: '#535458' }}>Processing</Typography>
                                 </Grid>
-                                <Grid item xs={2.5}>
+                                <Grid item sm={3} md={2.5}>
                                     <Typography component='p' variant='div' sx={{ fontSize: '14px', fontFamily: 'sans-serif', letterSpacing: '1px' }}>Jun 24, 2022</Typography>
                                 </Grid>
-                                <Grid item xs={2.5}>
+                                <Grid item sm={3} md={2.5}>
                                     <Typography component='p' variant='div' sx={{ fontSize: '14px', fontFamily: 'sans-serif', letterSpacing: '1px' }}>$350.00</Typography>
                                 </Grid>
-                                <Grid item xs={2}>
+                                <Grid item xs={2} display={{ xs: 'none', md: 'block' }}>
                                     <Box display='flex'>
                                         <Box sx={{ flexGrow: 1 }} />
                                         <EastIcon sx={{ color: 'rgb(125, 135, 156)' }} fontSize='small' />
@@ -253,19 +258,19 @@ const Orders = () => {
                         </Box>
                         <Box boxShadow='rgba(99, 99, 99, 0.1) 0px 2px 8px 0px' borderRadius='8px' backgroundColor='white' p={2} mb={2}>
                             <Grid container spacing={2}>
-                                <Grid item xs={2.5}>
+                                <Grid item sm={3} md={2.5}>
                                     <Typography component='p' variant='div' sx={{ fontWeight: 600, letterSpacing: '1px' }}>1050017AS</Typography>
                                 </Grid>
-                                <Grid item xs={2.5}>
+                                <Grid item sm={3} md={2.5}>
                                     <Typography component='p' variant='span' sx={{ display: 'inline', px: 1.5, py: .75, borderRadius: '10px', fontSize: '14px', fontFamily: 'sans-serif', letterSpacing: '1px', backgroundColor: '#e7f9ed', color: '#6f9252' }}>Delivered</Typography>
                                 </Grid>
-                                <Grid item xs={2.5}>
+                                <Grid item sm={3} md={2.5}>
                                     <Typography component='p' variant='div' sx={{ fontSize: '14px', fontFamily: 'sans-serif', letterSpacing: '1px' }}>Jun 24, 2022</Typography>
                                 </Grid>
-                                <Grid item xs={2.5}>
+                                <Grid item sm={3} md={2.5}>
                                     <Typography component='p' variant='div' sx={{ fontSize: '14px', fontFamily: 'sans-serif', letterSpacing: '1px' }}>$350.00</Typography>
                                 </Grid>
-                                <Grid item xs={2}>
+                                <Grid item xs={2} display={{ xs: 'none', md: 'block' }}>
                                     <Box display='flex'>
                                         <Box sx={{ flexGrow: 1 }} />
                                         <EastIcon sx={{ color: 'rgb(125, 135, 156)' }} fontSize='small' />
@@ -275,19 +280,19 @@ const Orders = () => {
                         </Box>
                         <Box boxShadow='rgba(99, 99, 99, 0.2) 0px 2px 8px 0px' borderRadius='8px' backgroundColor='white' p={2} mb={4}>
                             <Grid container spacing={2}>
-                                <Grid item xs={2.5}>
+                                <Grid item sm={3} md={2.5}>
                                     <Typography component='p' variant='div' sx={{ fontWeight: 600, letterSpacing: '1px' }}>1050017AS</Typography>
                                 </Grid>
-                                <Grid item xs={2.5}>
+                                <Grid item sm={3} md={2.5}>
                                     <Typography component='p' variant='span' sx={{ display: 'inline', px: 1.5, py: .75, borderRadius: '10px', fontSize: '14px', fontFamily: 'sans-serif', letterSpacing: '1px', backgroundColor: '#ffeaea', color: '#ff4c3a' }}>Cancelled</Typography>
                                 </Grid>
-                                <Grid item xs={2.5}>
+                                <Grid item sm={3} md={2.5}>
                                     <Typography component='p' variant='div' sx={{ fontSize: '14px', fontFamily: 'sans-serif', letterSpacing: '1px' }}>Jun 24, 2022</Typography>
                                 </Grid>
-                                <Grid item xs={2.5}>
+                                <Grid item sm={3} md={2.5}>
                                     <Typography component='p' variant='div' sx={{ fontSize: '14px', fontFamily: 'sans-serif', letterSpacing: '1px' }}>$350.00</Typography>
                                 </Grid>
-                                <Grid item xs={2}>
+                                <Grid item xs={2} display={{ xs: 'none', md: 'block' }}>
                                     <Box display='flex'>
                                         <Box sx={{ flexGrow: 1 }} />
                                         <EastIcon sx={{ color: 'rgb(125, 135, 156)' }} fontSize='small' />
