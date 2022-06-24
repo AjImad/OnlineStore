@@ -14,10 +14,190 @@ import EastIcon from '@mui/icons-material/East';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import MenuIcon from '@mui/icons-material/Menu';
+import Drawer from '@mui/material/Drawer';
+import List from '@mui/material/List';
+
 
 const Orders = () => {
 
     const cart = useSelector(state => state.cart);
+
+    const [state, setState] = React.useState({
+        top: false,
+        left: false,
+        bottom: false,
+        right: false,
+    });
+
+    const toggleDrawer = (anchor, open) => (event) => {
+        if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+            return;
+        }
+
+        setState({ ...state, [anchor]: open });
+    };
+
+    const list = (anchor) => (
+        <Box
+            sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
+            role="presentation"
+            onClick={toggleDrawer(anchor, false)}
+            onKeyDown={toggleDrawer(anchor, false)}
+        >
+            <List>
+                <Box my={2} mb={3} sx={{ boxSizing: 'border-box' }}>
+                    <Box display='flex' mb={2} px={2} pt={1}>
+                        <Typography component='p' variant='div' sx={{ color: 'rgb(125, 135, 156)', fontSize: '13px' }}>DASHBOARD</Typography>
+                    </Box>
+                    <Box display='flex' alignItems='center' mb={2} px={2}
+                        sx={{
+                            cursor: 'pointer',
+                            boxSizing: 'border-box',
+                            position: 'relative',
+                            // boxShadow: '-5px 0px 0px 0px #d23f57',
+                            color: '#d23f57',
+                            '& .MuiSvgIcon-root': {
+                                color: '#d23f57',
+                            }
+                        }}
+                    >
+                        <ShoppingBagOutlinedIcon sx={{ color: 'rgb(125, 135, 156)' }} fontSize='small' />
+                        <Typography component='p' variant='div' sx={{ fontSize: '15px', ml: 1 }}>Orders</Typography>
+                        <Box sx={{ flexGrow: 1 }} />
+                        <Typography component='p' variant='div' fontWeight={600}>5</Typography>
+                    </Box>
+                    <Box display='flex' alignItems='center' mb={2} px={2}
+                        sx={{
+                            cursor: 'pointer',
+                            boxSizing: 'border-box',
+                            width: '100%',
+                            position: 'relative',
+                            // boxSizing: 'content-box',
+                            // borderLeft: '4px solid #d23f57',
+
+                            '&:hover': {
+                                boxSizing: 'border-box',
+                                // boxShadow: '-5px 0px 0px 0px #d23f57',
+                                color: '#d23f57',
+                                '& .MuiSvgIcon-root': {
+                                    color: '#d23f57',
+                                }
+                            }
+                        }}
+                    >
+                        <FavoriteBorderOutlinedIcon sx={{ color: 'rgb(125, 135, 156)' }} fontSize='small' />
+                        <Typography component='p' variant='div' sx={{ fontSize: '15px', ml: 1 }}>Wishlist</Typography>
+                        <Box sx={{ flexGrow: 1 }} />
+                        <Typography component='p' variant='div' fontWeight={600}>15</Typography>
+                    </Box>
+                    <Box display='flex' alignItems='center' mb={2} px={2}
+                        sx={{
+                            cursor: 'pointer',
+                            boxSizing: 'border-box',
+                            width: '100%',
+                            position: 'relative',
+                            // boxSizing: 'content-box',
+                            // borderLeft: '4px solid #d23f57',
+
+                            '&:hover': {
+                                boxSizing: 'border-box',
+                                // boxShadow: '-5px 0px 0px 0px #d23f57',
+                                color: '#d23f57',
+                                '& .MuiSvgIcon-root': {
+                                    color: '#d23f57',
+                                }
+                            }
+                        }}
+                    >
+                        <SupportAgentOutlinedIcon sx={{ color: 'rgb(125, 135, 156)' }} fontSize='small' />
+                        <Typography component='p' variant='div' sx={{ fontSize: '15px', ml: 1 }}>Support Tickets</Typography>
+                        <Box sx={{ flexGrow: 1 }} />
+                        <Typography component='p' variant='div' fontWeight={600}>1</Typography>
+                    </Box>
+                </Box>
+            </List>
+            <Divider />
+            <List>
+                <Box my={2} mt={3} sx={{ boxSizing: 'border-box' }}>
+                    <Box display='flex' mb={2} px={2} pt={1}>
+                        <Typography component='p' variant='div' sx={{ color: 'rgb(125, 135, 156)', fontSize: '13px' }}>ACCOUNT SETTINGS</Typography>
+                    </Box>
+                    <Box display='flex' alignItems='center' mb={2} px={2}
+                        sx={{
+                            cursor: 'pointer',
+                            boxSizing: 'border-box',
+                            width: '100%',
+                            position: 'relative',
+                            // boxSizing: 'content-box',
+                            // borderLeft: '4px solid #d23f57',
+
+                            '&:hover': {
+                                boxSizing: 'border-box',
+                                // boxShadow: '-5px 0px 0px 0px #d23f57',
+                                color: '#d23f57',
+                                '& .MuiSvgIcon-root': {
+                                    color: '#d23f57',
+                                }
+                            }
+                        }}
+                    >
+                        <PersonIcon sx={{ color: 'rgb(125, 135, 156)' }} fontSize='small' />
+                        <Typography component='p' variant='div' sx={{ fontSize: '15px', ml: 1 }}>Profile Info</Typography>
+                        <Box sx={{ flexGrow: 1 }} />
+                        <Typography component='p' variant='div' fontWeight={600}>1</Typography>
+                    </Box>
+                    <Box display='flex' alignItems='center' mb={2} px={2}
+                        sx={{
+                            cursor: 'pointer',
+                            boxSizing: 'border-box',
+                            width: '100%',
+                            position: 'relative',
+                            // boxSizing: 'content-box',
+                            // borderLeft: '4px solid #d23f57',
+
+                            '&:hover': {
+                                // boxShadow: '-5px 0px 0px 0px #d23f57',
+                                boxSizing: 'border-box',
+                                color: '#d23f57',
+                                '& .MuiSvgIcon-root': {
+                                    color: '#d23f57',
+                                }
+                            }
+                        }}
+                    >
+                        <LocationOnIcon sx={{ color: 'rgb(125, 135, 156)' }} fontSize='small' />
+                        <Typography component='p' variant='div' sx={{ fontSize: '15px', ml: 1 }}>Addresses</Typography>
+                        <Box sx={{ flexGrow: 1 }} />
+                        <Typography component='p' variant='div' fontWeight={600}>1</Typography>
+                    </Box>
+                    <Box display='flex' alignItems='center' mb={2} px={2}
+                        sx={{
+                            cursor: 'pointer',
+                            boxSizing: 'border-box',
+                            width: '100%',
+                            position: 'relative',
+                            // boxSizing: 'content-box',
+                            // borderLeft: '4px solid #d23f57',
+
+                            '&:hover': {
+                                boxSizing: 'border-box',
+                                // boxShadow: '-5px 0px 0px 0px #d23f57',
+                                color: '#d23f57',
+                                '& .MuiSvgIcon-root': {
+                                    color: '#d23f57',
+                                }
+                            }
+                        }}
+                    >
+                        <PaymentIcon sx={{ color: 'rgb(125, 135, 156)' }} fontSize='small' />
+                        <Typography component='p' variant='div' sx={{ fontSize: '15px', ml: 1 }}>Payment Methods</Typography>
+                        <Box sx={{ flexGrow: 1 }} />
+                        <Typography component='p' variant='div' fontWeight={600}>1</Typography>
+                    </Box>
+                </Box>
+            </List>
+        </Box>
+    );
 
     return (
         <Box
@@ -189,7 +369,16 @@ const Orders = () => {
                                 <Typography component='p' variant='h5' ml={2} sx={{ fontWeight: 700, fontFamily: 'sans-serif', fontSize: '25px' }}>My Orders</Typography>
                             </Box>
                             <Box sx={{ flexGrow: 1 }} />
-                            <MenuIcon fontSize='small' sx={{ cursor: 'pointer', display: { sm: 'block', md: 'none' } }} />
+                            {/* Start Menu */}
+                            <MenuIcon fontSize='small' sx={{ cursor: 'pointer', display: { sm: 'block', md: 'none' } }} onClick={toggleDrawer("left", true)} />
+                            <Drawer
+                                anchor={"left"}
+                                open={state["left"]}
+                                onClose={toggleDrawer("left", false)}
+                            >
+                                {list("left")}
+                            </Drawer>
+                            {/* End Menu */}
                         </Box>
                         <Box display={{ xs: 'none', md: 'flex' }} alignItems='center' px={2} my={2} mt={3}
                             sx={{ color: 'rgb(125, 135, 156)', fontWeight: 600, letterSpacing: '1.25px' }}
