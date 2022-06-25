@@ -15,6 +15,7 @@ import Cart from './components/cart/Cart';
 import Checkout from './components/cart/Checkout';
 import Payment from './components/cart/Payment';
 import Orders from './components/dashboard/Orders';
+import Wishlist from './components/dashboard/Wishlist';
 
 function App() {
 
@@ -50,6 +51,7 @@ function App() {
           <Route exact path='/checkout/' element={<Checkout />} />
           <Route exact path='/payment/' element={<Payment />} />
           <Route exact path='/orders/' element={<Orders />} />
+          <Route exact path='/wishlist/' element={<Wishlist />} />
         </Routes>
       </Provider>
       <Footer />

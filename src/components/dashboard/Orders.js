@@ -66,30 +66,32 @@ const Orders = () => {
                         <Box sx={{ flexGrow: 1 }} />
                         <Typography component='p' variant='div' fontWeight={600}>5</Typography>
                     </Box>
-                    <Box display='flex' alignItems='center' mb={2} px={2}
-                        sx={{
-                            cursor: 'pointer',
-                            boxSizing: 'border-box',
-                            width: '100%',
-                            position: 'relative',
-                            // boxSizing: 'content-box',
-                            // borderLeft: '4px solid #d23f57',
-
-                            '&:hover': {
+                    <Link to='/wishlist/' style={{ textDecoration: 'none' }}>
+                        <Box display='flex' alignItems='center' mb={2} px={2}
+                            sx={{
+                                cursor: 'pointer',
                                 boxSizing: 'border-box',
-                                // boxShadow: '-5px 0px 0px 0px #d23f57',
-                                color: '#d23f57',
-                                '& .MuiSvgIcon-root': {
+                                width: '100%',
+                                position: 'relative',
+                                // boxSizing: 'content-box',
+                                // borderLeft: '4px solid #d23f57',
+
+                                '&:hover': {
+                                    boxSizing: 'border-box',
+                                    // boxShadow: '-5px 0px 0px 0px #d23f57',
                                     color: '#d23f57',
+                                    '& .MuiSvgIcon-root': {
+                                        color: '#d23f57',
+                                    }
                                 }
-                            }
-                        }}
-                    >
-                        <FavoriteBorderOutlinedIcon sx={{ color: 'rgb(125, 135, 156)' }} fontSize='small' />
-                        <Typography component='p' variant='div' sx={{ fontSize: '15px', ml: 1 }}>Wishlist</Typography>
-                        <Box sx={{ flexGrow: 1 }} />
-                        <Typography component='p' variant='div' fontWeight={600}>15</Typography>
-                    </Box>
+                            }}
+                        >
+                            <FavoriteBorderOutlinedIcon sx={{ color: 'rgb(125, 135, 156)' }} fontSize='small' />
+                            <Typography component='p' variant='div' sx={{ fontSize: '15px', ml: 1 }}>Wishlist</Typography>
+                            <Box sx={{ flexGrow: 1 }} />
+                            <Typography component='p' variant='div' fontWeight={600}>15</Typography>
+                        </Box>
+                    </Link>
                     <Box display='flex' alignItems='center' mb={2} px={2}
                         sx={{
                             cursor: 'pointer',
@@ -231,30 +233,32 @@ const Orders = () => {
                                 <Box sx={{ flexGrow: 1 }} />
                                 <Typography component='p' variant='div' fontWeight={600}>5</Typography>
                             </Box>
-                            <Box display='flex' alignItems='center' mb={2} px={2}
-                                sx={{
-                                    cursor: 'pointer',
-                                    boxSizing: 'border-box',
-                                    width: '100%',
-                                    position: 'relative',
-                                    // boxSizing: 'content-box',
-                                    // borderLeft: '4px solid #d23f57',
-
-                                    '&:hover': {
+                            <Link to='/wishlist/' style={{ textDecoration: 'none' }}>
+                                <Box display='flex' alignItems='center' mb={2} px={2}
+                                    sx={{
+                                        cursor: 'pointer',
                                         boxSizing: 'border-box',
-                                        boxShadow: '-5px 0px 0px 0px #d23f57',
-                                        color: '#d23f57',
-                                        '& .MuiSvgIcon-root': {
+                                        width: '100%',
+                                        position: 'relative',
+                                        // boxSizing: 'content-box',
+                                        // borderLeft: '4px solid #d23f57',
+
+                                        '&:hover': {
+                                            boxSizing: 'border-box',
+                                            boxShadow: '-5px 0px 0px 0px #d23f57',
                                             color: '#d23f57',
+                                            '& .MuiSvgIcon-root': {
+                                                color: '#d23f57',
+                                            }
                                         }
-                                    }
-                                }}
-                            >
-                                <FavoriteBorderOutlinedIcon sx={{ color: 'rgb(125, 135, 156)' }} fontSize='small' />
-                                <Typography component='p' variant='div' sx={{ fontSize: '15px', ml: 1 }}>Wishlist</Typography>
-                                <Box sx={{ flexGrow: 1 }} />
-                                <Typography component='p' variant='div' fontWeight={600}>15</Typography>
-                            </Box>
+                                    }}
+                                >
+                                    <FavoriteBorderOutlinedIcon sx={{ color: 'rgb(125, 135, 156)' }} fontSize='small' />
+                                    <Typography component='p' variant='div' sx={{ fontSize: '15px', ml: 1 }}>Wishlist</Typography>
+                                    <Box sx={{ flexGrow: 1 }} />
+                                    <Typography component='p' variant='div' fontWeight={600}>15</Typography>
+                                </Box>
+                            </Link>
                             <Box display='flex' alignItems='center' mb={2} px={2}
                                 sx={{
                                     cursor: 'pointer',
@@ -363,7 +367,7 @@ const Orders = () => {
 
                 <Grid item xs={7} sm={7.5} md={8.5} >
                     <Box>
-                        <Box display='flex' alignItems='center' my={{ xs: 2 }}>
+                        <Box display='flex' alignItems='center' my={{ xs: 2 }} position='relative'>
                             <Box display='flex' alignItems='center'>
                                 <ShoppingBagIcon sx={{ color: '#d23f57' }} />
                                 <Typography component='p' variant='h5' ml={2} sx={{ fontWeight: 700, fontFamily: 'sans-serif', fontSize: '25px' }}>My Orders</Typography>
@@ -375,6 +379,9 @@ const Orders = () => {
                                 anchor={"left"}
                                 open={state["left"]}
                                 onClose={toggleDrawer("left", false)}
+
+                                sx={{ position: 'relative', zIndex: 1 }}
+
                             >
                                 {list("left")}
                             </Drawer>
