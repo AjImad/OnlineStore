@@ -13,7 +13,7 @@ import isEmail from 'validator/lib/isEmail';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
-import { Button, Divider } from '@mui/material';
+import { Button, createTheme, Divider } from '@mui/material';
 import GoogleProvider from './GoogleProvider';
 import FacebookProvider from './FacebookProvider';
 import { Link, useNavigate } from "react-router-dom";
@@ -26,6 +26,18 @@ import db from '../../firebase';
 import { useDispatch } from 'react-redux';
 import { setUserLoginDetails } from '../../features/user/userSlice';
 
+const theme = createTheme({
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 900,
+      lg: 1200,
+      xl: 1536,
+    },
+  },
+});
+
 const style = {
   modal: {
     position: 'absolute',
@@ -34,6 +46,11 @@ const style = {
     transform: 'translate(-50%, -50%)',
     width: 400,
     height: '90vh',
+    [theme.breakpoints.down('sm')]: {
+      width: 350,
+      height: '65vh',
+      borderRadius: '10px'
+    },
     bgcolor: 'background.paper',
     boxShadow: 24,
     borderRadius: '8px',
@@ -88,6 +105,7 @@ const Login = props => {
   const navigate = useNavigate();
   const [isLoading, setLoading] = React.useState(false);
 
+
   React.useEffect(() => {
     if (user) {
       navigate("/");
@@ -95,11 +113,14 @@ const Login = props => {
         // console.log('user id: ',user.uid)
         const userInfo = await getDocs(collection(db, "users"));
         userInfo.docs.map(doc => {
-          if (doc.data().uid === user.uid)
-            dispatch(setUserLoginDetails({
-              name: doc.data().name,
-              email: doc.data().email,
-            }))
+          if (doc.data().authProvider === 'google') {
+            if (doc.data().uid === user.uid) {
+              dispatch(setUserLoginDetails({
+                name: doc.data().name,
+                email: doc.data().email,
+              }))
+            }
+          }
         })
       }
       getUserInfo();
@@ -160,6 +181,24 @@ const Login = props => {
         }
       }
       submit(email, values.password);
+      const getUserInfo = async () => {
+        // console.log('user id: ',user.uid)
+        const userInfo = await getDocs(collection(db, "users"));
+        userInfo.docs.map(doc => {
+          if (doc.data().authProvider === 'google') {
+            return;
+          } else {
+            if (doc.data().email === email) {
+              dispatch(setUserLoginDetails({
+                name: doc.data().name,
+                email: doc.data().email,
+              }))
+            }
+          }
+
+        })
+      }
+      getUserInfo();
     }
   }
 
