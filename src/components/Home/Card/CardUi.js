@@ -7,11 +7,15 @@ import Typography from '@mui/material/Typography';
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import StarIcon from '@mui/icons-material/Star';
 import AddIcon from '@mui/icons-material/Add';
-import { Button, Box } from '@mui/material';
+import { Button, Box, IconButton } from '@mui/material';
 import RemoveOutlinedIcon from '@mui/icons-material/RemoveOutlined';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { addToCart, decreaseProductQuantity } from '../../../features/cart/cartSlice';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import { addToWishlist } from '../../../features/wishlist/wishlistSlice';
+import { setProductData } from '../../../features/product/productSlice';
 
 const style = {
   '&.MuiButton-root': {
@@ -28,6 +32,8 @@ const style = {
 
 export default function RecipeReviewCard({ productName, cardImg, off, price, starN, starOff, productId }) {
 
+  const [isHeartIconClicked, setHeartIconClicked] = React.useState(false);
+
   const dispatch = useDispatch();
 
   const handleAddToCart = () => {
@@ -39,24 +45,40 @@ export default function RecipeReviewCard({ productName, cardImg, off, price, sta
   const productCart = useSelector(state => state.cart.cartItems);
   const itemIndex = productCart.findIndex(item => { return item.id === productId });
 
+  const handleClickOnHeartIcon = () => {
+    setHeartIconClicked(!isHeartIconClicked)
+
+    // dispatch(addToWishlist())
+  }
+
   return (
-    <Card sx={{ width: 290, height: 415, '&:hover': { boxShadow: 'rgba(149, 157, 165, 0.2) 0px 8px 24px' } }}>
+    <Card sx={{ width: 290, height: 440, '&:hover': { boxShadow: 'rgba(149, 157, 165, 0.2) 0px 8px 24px' } }}>
       <CardHeader
         title={
-          <Typography component='span' variant='div'
-            sx={{
-              background: '#d23f57',
-              color: '#f6f9fc',
-              pr: 1.5,
-              pl: 1.5,
-              pt: 0.5,
-              pb: 0.5,
-              borderRadius: '15px',
-              fontSize: '12px',
-            }}
-          >
-            {off}% off
-          </Typography>
+          <Box display='flex' justifyContent='space-between' alignItems='center'>
+            <Typography component='span' variant='div'
+              sx={{
+                background: '#d23f57',
+                color: '#f6f9fc',
+                pr: 1.5,
+                pl: 1.5,
+                pt: 0.5,
+                pb: 0.5,
+                borderRadius: '15px',
+                fontSize: '12px',
+              }}
+            >
+              {off}% off
+            </Typography>
+            <IconButton onClick={handleClickOnHeartIcon}>
+              {
+                !isHeartIconClicked ?
+                  <FavoriteBorderIcon fontSize='small' sx={{ color: '#0c0e30' }} />
+                  :
+                  <FavoriteIcon fontSize='small' sx={{ color: '#d23f57' }} />
+              }
+            </IconButton>
+          </Box>
         }
       />
       <Link to={`/product/` + productId}>
@@ -66,9 +88,10 @@ export default function RecipeReviewCard({ productName, cardImg, off, price, sta
           image={cardImg}
           alt="Paella dish"
           sx={{ cursor: 'pointer' }}
+          onClick={() => dispatch(setProductData({ id: productId, productName: productName, sold: off, price: price, productImg: cardImg, starNumber: starN, starNumberOff: starOff }))}
         />
       </Link>
-      <CardContent>
+      <CardContent >
         <Box
           sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}
         >
@@ -97,7 +120,7 @@ export default function RecipeReviewCard({ productName, cardImg, off, price, sta
               {(price).toFixed(2)}
             </Typography>
           </Box>
-          <Box>
+          <Box >
             {
               itemIndex === -1 ? null : productCart[itemIndex].cartQuantity
                 &&

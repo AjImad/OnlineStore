@@ -27,30 +27,22 @@ export default function Home() {
   const dispatch = useDispatch();
   const userName = useSelector(state => state.user.name);
 
+
+
   useEffect(() => {
-    // console.log(productInfo)
     const getProductData = async () => {
       const productData = await getDocs(collection(db, "ProductInfo"));
       if (productData) {
         setProductInfo(productData.docs.map(doc => ({ id: doc.id, ...doc.data() })))
-        // productData.docs.map( doc => { 
-        //   productInfo = [...productInfo, {id: doc.id, ...doc.data()}]
-        // })
-
       }
       else
         console.log("no such document")
     }
 
     getProductData();
+  }, [])
 
-    // console.log(productInfo)
-    // const timer = setTimeout(() => {
-    //   // console.log('productInfo: ', productInfo)
-    // }, 3000);
 
-    // return () => clearTimeout(timer);
-  }, [userName])
 
   return (
     <Box component="div" sx={{
@@ -74,9 +66,6 @@ export default function Home() {
         >
           {
             productInfo && productInfo.map((item, index) => {
-              dispatch(setProductData({
-                product: item,
-              }))
               return (
                 <Grid key={index} item xs={12} sm={3}>
                   <CardUi

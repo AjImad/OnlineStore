@@ -20,14 +20,14 @@ import {
 
 
 const firebaseConfig = {
-    apiKey: "AIzaSyB6DQ2tkQYL8J_FM76tQ06bRw1crTqPhIk",
-    authDomain: "olinestore-80cfa.firebaseapp.com",
-    projectId: "olinestore-80cfa",
-    storageBucket: "olinestore-80cfa.appspot.com",
-    messagingSenderId: "969040163211",
-    appId: "1:969040163211:web:a2267c8a93f08f1d9dff8e",
-    measurementId: "G-MBK7VYY02H"
-  };
+  apiKey: "AIzaSyB6DQ2tkQYL8J_FM76tQ06bRw1crTqPhIk",
+  authDomain: "olinestore-80cfa.firebaseapp.com",
+  projectId: "olinestore-80cfa",
+  storageBucket: "olinestore-80cfa.appspot.com",
+  messagingSenderId: "969040163211",
+  appId: "1:969040163211:web:a2267c8a93f08f1d9dff8e",
+  measurementId: "G-MBK7VYY02H"
+};
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
@@ -35,13 +35,12 @@ const db = getFirestore(app);
 
 const googleProvider = new GoogleAuthProvider();
 const signInWithGoogle = async () => {
-  try{
+  try {
     const res = await signInWithPopup(auth, googleProvider);
-    console.log(res)
     const user = res.user;
-    const q = query(collection(db,"users"), where("uid", "==", user.uid));
+    const q = query(collection(db, "users"), where("uid", "==", user.uid));
     const docs = await getDocs(q);
-    if(docs.docs.length === 0){
+    if (docs.docs.length === 0) {
       await addDoc(collection(db, "users"), {
         uid: user.uid,
         name: user.displayName,
@@ -49,7 +48,7 @@ const signInWithGoogle = async () => {
         email: user.email,
       });
     }
-  } catch(err){
+  } catch (err) {
     console.error(err);
     alert(err.message);
   }
@@ -61,9 +60,9 @@ const signInWithFacebook = async () => {
     const res = await signInWithPopup(auth, facebookProvider);
     const user = res.user;
     console.log(res)
-    const q = query( collection(db, "users"), where("uid", "==", user.uid));
+    const q = query(collection(db, "users"), where("uid", "==", user.uid));
     const docs = await getDocs(q);
-    if(docs.docs.length === 0){
+    if (docs.docs.length === 0) {
       await addDoc(collection(db, "users"), {
         uid: user.uid,
         name: user.displayName,
