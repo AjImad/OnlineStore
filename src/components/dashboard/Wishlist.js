@@ -8,8 +8,6 @@ import SupportAgentOutlinedIcon from '@mui/icons-material/SupportAgentOutlined';
 import PersonIcon from '@mui/icons-material/Person';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import PaymentIcon from '@mui/icons-material/Payment';
-import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
-import EastIcon from '@mui/icons-material/East';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -17,11 +15,12 @@ import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
 import Sidebar from './Sidebar';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import CardUi from '../Home/Card/CardUi'
+import WishProduct from './WishProduct';
 
 const Wishlist = () => {
 
-    // const products = useSelector(state => state.product)
+    const products = useSelector(state => state.product)
+    const wishlists = useSelector(state => state.wishlists.wishlists)
     // console.log(products.value)
     const [state, setState] = React.useState({
         top: false,
@@ -96,30 +95,32 @@ const Wishlist = () => {
                             <Typography component='p' variant='div' fontWeight={600}>15</Typography>
                         </Box>
                     </Link>
-                    <Box display='flex' alignItems='center' mb={2} px={2}
-                        sx={{
-                            cursor: 'pointer',
-                            boxSizing: 'border-box',
-                            width: '100%',
-                            position: 'relative',
-                            // boxSizing: 'content-box',
-                            // borderLeft: '4px solid #d23f57',
-
-                            '&:hover': {
+                    <Link to='/support-tickets/' style={{ textDecoration: 'none', color: 'black' }}>
+                        <Box display='flex' alignItems='center' mb={2} px={2}
+                            sx={{
+                                cursor: 'pointer',
                                 boxSizing: 'border-box',
-                                boxShadow: '-5px 0px 0px 0px #d23f57',
-                                color: '#d23f57',
-                                '& .MuiSvgIcon-root': {
+                                width: '100%',
+                                position: 'relative',
+                                // boxSizing: 'content-box',
+                                // borderLeft: '4px solid #d23f57',
+
+                                '&:hover': {
+                                    boxSizing: 'border-box',
+                                    boxShadow: '-5px 0px 0px 0px #d23f57',
                                     color: '#d23f57',
+                                    '& .MuiSvgIcon-root': {
+                                        color: '#d23f57',
+                                    }
                                 }
-                            }
-                        }}
-                    >
-                        <SupportAgentOutlinedIcon sx={{ color: 'rgb(125, 135, 156)' }} fontSize='small' />
-                        <Typography component='p' variant='div' sx={{ fontSize: '15px', ml: 1 }}>Support Tickets</Typography>
-                        <Box sx={{ flexGrow: 1 }} />
-                        <Typography component='p' variant='div' fontWeight={600}>1</Typography>
-                    </Box>
+                            }}
+                        >
+                            <SupportAgentOutlinedIcon sx={{ color: 'rgb(125, 135, 156)' }} fontSize='small' />
+                            <Typography component='p' variant='div' sx={{ fontSize: '15px', ml: 1 }}>Support Tickets</Typography>
+                            <Box sx={{ flexGrow: 1 }} />
+                            <Typography component='p' variant='div' fontWeight={600}>1</Typography>
+                        </Box>
+                    </Link>
                 </Box>
             </List>
             <Divider />
@@ -259,22 +260,41 @@ const Wishlist = () => {
                         </Box>
 
                         <Box my={4}>
-                            <Grid container justifyContent={{ xs: 'center', sm: 'start' }} rowSpacing={{ xs: 3, md: 3 }} columnSpacing={{ sm: 3, md: 4 }} columns={{ xs: 8, sm: 8, md: 12 }}>
-                                {/* {
-                                    products.value.map((item, index) => (
-                                        <Grid item xs={6} sm={4} md={4} key={item.id}>
-                                            <CardUi
-                                                productName={item.productName}
-                                                cardImg={item.productImg}
-                                                off={item.sold}
-                                                price={item.price}
-                                                starN={item.starNumber}
-                                                starOff={5 - item.starNumber}
-                                                productId={item.id}
-                                            />
-                                        </Grid>
-                                    ))
-                                } */}
+                            <Grid container justifyContent={{ xs: 'center', sm: 'start' }} rowSpacing={{ xs: 3, md: 3 }} columnSpacing={{ sm: 5, md: 6 }} columns={{ xs: 8, sm: 8, md: 12 }}>
+                                {
+                                    wishlists.length !== 0 ?
+                                        wishlists.map((item, index) => (
+                                            <Grid item xs={6} sm={3.5} md={4} key={index}>
+                                                <WishProduct
+                                                    productName={item.productName}
+                                                    cardImg={item.productImg}
+                                                    off={item.sold}
+                                                    price={item.price}
+                                                    starN={item.starNumber}
+                                                    starOff={5 - item.starNumber}
+                                                    productId={item.id}
+                                                // isFavorite={true}
+                                                />
+                                            </Grid>
+                                        ))
+                                        :
+                                        <Box
+                                            boxShadow='rgba(99, 99, 99, 0.1) 0px 2px 8px 0px'
+                                            borderRadius='8px'
+                                            backgroundColor='white' p={2} mb={2} mx={4}
+                                            width='100%'
+                                            textAlign='center'
+                                        >
+                                            <Typography component='p' variant sx={{ fontSize: '16px', mb: 2, color: '#0c2a4d', fontWeight: 600 }}>
+                                                Ops, There's no product in wishlist.
+                                            </Typography>
+                                            <Link to='/' style={{ textDecoration: 'none', color: '#777' }}>
+                                                <Typography component='p' variant='div' sx={{ fontSize: '15px', fontWeight: 600 }}>
+                                                    Go ahead and choose you Favorite Product
+                                                </Typography>
+                                            </Link>
+                                        </Box>
+                                }
                             </Grid>
                         </Box>
 

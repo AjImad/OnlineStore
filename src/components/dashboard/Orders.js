@@ -96,30 +96,32 @@ const Orders = () => {
                             <Typography component='p' variant='div' fontWeight={600}>15</Typography>
                         </Box>
                     </Link>
-                    <Box display='flex' alignItems='center' mb={2} px={2}
-                        sx={{
-                            cursor: 'pointer',
-                            boxSizing: 'border-box',
-                            width: '100%',
-                            position: 'relative',
-                            // boxSizing: 'content-box',
-                            // borderLeft: '4px solid #d23f57',
-
-                            '&:hover': {
+                    <Link to='/support-tickets/' style={{ textDecoration: 'none', color: 'black' }}>
+                        <Box display='flex' alignItems='center' mb={2} px={2}
+                            sx={{
+                                cursor: 'pointer',
                                 boxSizing: 'border-box',
-                                boxShadow: '-5px 0px 0px 0px #d23f57',
-                                color: '#d23f57',
-                                '& .MuiSvgIcon-root': {
+                                width: '100%',
+                                position: 'relative',
+                                // boxSizing: 'content-box',
+                                // borderLeft: '4px solid #d23f57',
+
+                                '&:hover': {
+                                    boxSizing: 'border-box',
+                                    boxShadow: '-5px 0px 0px 0px #d23f57',
                                     color: '#d23f57',
+                                    '& .MuiSvgIcon-root': {
+                                        color: '#d23f57',
+                                    }
                                 }
-                            }
-                        }}
-                    >
-                        <SupportAgentOutlinedIcon sx={{ color: 'rgb(125, 135, 156)' }} fontSize='small' />
-                        <Typography component='p' variant='div' sx={{ fontSize: '15px', ml: 1 }}>Support Tickets</Typography>
-                        <Box sx={{ flexGrow: 1 }} />
-                        <Typography component='p' variant='div' fontWeight={600}>1</Typography>
-                    </Box>
+                            }}
+                        >
+                            <SupportAgentOutlinedIcon sx={{ color: 'rgb(125, 135, 156)' }} fontSize='small' />
+                            <Typography component='p' variant='div' sx={{ fontSize: '15px', ml: 1 }}>Support Tickets</Typography>
+                            <Box sx={{ flexGrow: 1 }} />
+                            <Typography component='p' variant='div' fontWeight={600}>1</Typography>
+                        </Box>
+                    </Link>
                 </Box>
             </List>
             <Divider />

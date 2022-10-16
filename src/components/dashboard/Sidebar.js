@@ -89,31 +89,33 @@ const Sidebar = () => {
                         <Typography component='p' variant='div' fontWeight={600}>15</Typography>
                     </Box>
                 </Link>
-                <Box display='flex' alignItems='center' mb={2} px={2}
-                    sx={{
-                        cursor: 'pointer',
-                        boxSizing: 'border-box',
-                        position: 'relative',
-                        boxShadow: location.pathname === '/support-tickets/' ? '-5px 0px 0px 0px #d23f57' : 'none',
-                        color: location.pathname === '/support-tickets/' ? '#d23f57' : 'black',
-                        '& .MuiSvgIcon-root': {
-                            color: location.pathname === '/support-tickets/' ? '#d23f57' : 'rgb(125, 135, 156)',
-                        },
-                        '&:hover': {
-
-                            boxShadow: '-5px 0px 0px 0px #d23f57',
-                            color: location.pathname !== '/support-tickets/' ? '#d23f57' : 'none',
+                <Link to='/support-tickets/' style={{ textDecoration: 'none', color: 'black' }}>
+                    <Box display='flex' alignItems='center' mb={2} px={2}
+                        sx={{
+                            cursor: 'pointer',
+                            boxSizing: 'border-box',
+                            position: 'relative',
+                            boxShadow: location.pathname === '/support-tickets/' ? '-5px 0px 0px 0px #d23f57' : 'none',
+                            color: location.pathname === '/support-tickets/' ? '#d23f57' : 'black',
                             '& .MuiSvgIcon-root': {
+                                color: location.pathname === '/support-tickets/' ? '#d23f57' : 'rgb(125, 135, 156)',
+                            },
+                            '&:hover': {
+
+                                boxShadow: '-5px 0px 0px 0px #d23f57',
                                 color: location.pathname !== '/support-tickets/' ? '#d23f57' : 'none',
+                                '& .MuiSvgIcon-root': {
+                                    color: location.pathname !== '/support-tickets/' ? '#d23f57' : 'none',
+                                }
                             }
-                        }
-                    }}
-                >
-                    <SupportAgentOutlinedIcon sx={{ color: 'rgb(125, 135, 156)' }} fontSize='small' />
-                    <Typography component='p' variant='div' sx={{ fontSize: '15px', ml: 1 }}>Support Tickets</Typography>
-                    <Box sx={{ flexGrow: 1 }} />
-                    <Typography component='p' variant='div' fontWeight={600}>1</Typography>
-                </Box>
+                        }}
+                    >
+                        <SupportAgentOutlinedIcon sx={{ color: 'rgb(125, 135, 156)' }} fontSize='small' />
+                        <Typography component='p' variant='div' sx={{ fontSize: '15px', ml: 1 }}>Support Tickets</Typography>
+                        <Box sx={{ flexGrow: 1 }} />
+                        <Typography component='p' variant='div' fontWeight={600}>1</Typography>
+                    </Box>
+                </Link>
             </Box>
             <Divider />
             <Box my={2} mt={3} sx={{ boxSizing: 'border-box' }}>

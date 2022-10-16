@@ -14,7 +14,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { addToCart, decreaseProductQuantity } from '../../../features/cart/cartSlice';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import { addToWishlist } from '../../../features/wishlist/wishlistSlice';
+import { addToWishlist, removeFromWishlist } from '../../../features/wishlist/wishlistSlice';
 import { setProductData } from '../../../features/product/productSlice';
 
 const style = {
@@ -32,7 +32,9 @@ const style = {
 
 export default function RecipeReviewCard({ productName, cardImg, off, price, starN, starOff, productId }) {
 
+
   const [isHeartIconClicked, setHeartIconClicked] = React.useState(false);
+  let isHeartIconClickedReff = isHeartIconClicked
 
   const dispatch = useDispatch();
 
@@ -45,10 +47,18 @@ export default function RecipeReviewCard({ productName, cardImg, off, price, sta
   const productCart = useSelector(state => state.cart.cartItems);
   const itemIndex = productCart.findIndex(item => { return item.id === productId });
 
-  const handleClickOnHeartIcon = () => {
-    setHeartIconClicked(!isHeartIconClicked)
+  React.useEffect(() => {
+    isHeartIconClickedReff = isHeartIconClicked
+  }, [isHeartIconClicked])
 
-    // dispatch(addToWishlist())
+  const handleClickOnHeartIcon = () => {
+    if (isHeartIconClickedReff === false) {
+      dispatch(addToWishlist({ id: productId, productName: productName, sold: off, price: price, productImg: cardImg, starNumber: starN, starNumberOff: starOff }))
+      setHeartIconClicked(true)
+    } else {
+      dispatch(removeFromWishlist({ id: productId }))
+      setHeartIconClicked(false)
+    }
   }
 
   return (
@@ -72,7 +82,7 @@ export default function RecipeReviewCard({ productName, cardImg, off, price, sta
             </Typography>
             <IconButton onClick={handleClickOnHeartIcon}>
               {
-                !isHeartIconClicked ?
+                !isHeartIconClickedReff ?
                   <FavoriteBorderIcon fontSize='small' sx={{ color: '#0c0e30' }} />
                   :
                   <FavoriteIcon fontSize='small' sx={{ color: '#d23f57' }} />

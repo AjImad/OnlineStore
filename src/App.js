@@ -16,6 +16,8 @@ import Checkout from './components/cart/Checkout';
 import Payment from './components/cart/Payment';
 import Orders from './components/dashboard/Orders';
 import Wishlist from './components/dashboard/Wishlist';
+import WishProduct from './components/dashboard/WishProduct';
+import SupportTicket from './components/dashboard/SupportTicket';
 
 function App() {
 
@@ -40,10 +42,7 @@ function App() {
         }
 
         <Routes>
-          {/* <Route exact path="/home" element={<Home />} /> */}
           <Route exact path="/" element={<Home />} />
-          {/* <Route exact path="/" eglement={<Footer />} /> */}
-          {/* <Route exact path='/' element={open && <Login closeModal={handleClose} open={open} />} /> */}
           <Route exact path='/signup' element={<Signup closeModal={handleClose} />} />
           <Route exact path='/resetpwd' element={<Resetpwd />} />
           <Route exact path='/product/:id' element={<Product />} />
@@ -52,6 +51,8 @@ function App() {
           <Route exact path='/payment/' element={<Payment />} />
           <Route exact path='/orders/' element={<Orders />} />
           <Route exact path='/wishlist/' element={<Wishlist />} />
+          <Route exact path='/support-tickets/' element={<SupportTicket />} />
+          {/* <Route exact path='/' element={<WishProduct />} /> */}
         </Routes>
       </Provider>
       <Footer />
